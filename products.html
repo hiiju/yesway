@@ -1,0 +1,1688 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>產品介紹 — Yes Way 高位企業｜高速傳輸線材篩選</title>
+<meta name="description" content="高位企業 (Yes Way) 全產品目錄。Cable Assembly、PCB Assembly、AI/GPU Server、Server &amp; Storage、電纜 DIY 工具五大類，覆蓋 MCIO、PCIe Gen6 64 GT/s、SlimSAS、USB 等高速傳輸介面。" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+  /* ============================================================
+     Products page — catalog + filter
+     ============================================================ */
+
+  /* PAGE HEAD */
+  .catalog-head {
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+    padding: clamp(36px, 5vw, 60px) 0 0;
+  }
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--steel); margin-bottom: 22px;
+    display: flex; gap: 10px;
+  }
+  .breadcrumb a:hover { color: var(--green); }
+  .breadcrumb .sep { opacity: .5; }
+
+  .catalog-title-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 720px) { .catalog-title-row { grid-template-columns: 1fr; } }
+  .catalog-title {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-weight: 500;
+    font-size: clamp(40px, 5.5vw, 72px);
+    line-height: 1; letter-spacing: -.02em;
+    margin: 6px 0 0;
+  }
+  .catalog-title em { font-style: normal; color: var(--green); font-weight: 400; }
+  .catalog-meta {
+    display: flex; gap: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: .1em; color: var(--steel);
+    text-transform: uppercase;
+  }
+  .catalog-meta strong { color: var(--ink); font-weight: 600; }
+
+  /* Category cards — visual directory (thumbnail + label) */
+  .cat-tabs {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--hair);
+    border-left: 1px solid var(--hair);
+  }
+  @media (max-width: 1024px) { .cat-tabs { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px)  { .cat-tabs { grid-template-columns: repeat(2, 1fr); } }
+
+  .cat-tab {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    background: var(--paper);
+    border: none;
+    border-right: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+    cursor: pointer;
+    text-align: center;
+    transition: background .25s var(--easing);
+    position: relative;
+    overflow: hidden;
+  }
+  .cat-tab .cat-thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #f1f3f1;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--hair);
+  }
+  .cat-tab .cat-thumb img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    transition: transform .5s var(--easing);
+  }
+  .cat-tab:hover .cat-thumb img { transform: scale(1.06); }
+  .cat-tab .cat-label {
+    padding: 15px 12px 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    flex-grow: 1;
+    justify-content: center;
+  }
+  .cat-tab .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: .14em;
+    color: var(--steel-2);
+  }
+  .cat-tab .cat-name {
+    font-size: 13px; font-weight: 600;
+    color: var(--ink-2);
+    line-height: 1.35;
+    letter-spacing: -.01em;
+  }
+  .cat-tab .count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    background: var(--paper-2);
+    padding: 3px 8px;
+    border-radius: 999px;
+    color: var(--steel);
+  }
+  .cat-tab::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background: var(--green);
+    transform: scaleX(0);
+    transition: transform .3s var(--easing);
+  }
+  .cat-tab:hover { background: var(--paper-2); }
+  .cat-tab.active::after { transform: scaleX(1); }
+  .cat-tab.active .cat-thumb { background: #eef4ee; }
+  .cat-tab.active .num { color: var(--green); }
+  .cat-tab.active .cat-name { color: var(--ink); }
+  .cat-tab.active .count { background: var(--green-tint); color: var(--green-deep); font-weight: 600; }
+
+  /* ============================================================
+     Category Directory (page-1 style: main category → sub-items)
+     ============================================================ */
+  .cat-dir {
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--hair);
+    padding: clamp(48px, 6vw, 84px) 0;
+  }
+  .cat-dir-head {
+    max-width: var(--max-w);
+    margin: 0 auto 40px;
+    padding: 0 var(--gutter);
+  }
+  .cat-dir-head .eyebrow { color: var(--green); }
+  .cat-dir-head .eyebrow::before { background: var(--green); }
+  .cat-dir-head h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(28px, 3.2vw, 44px);
+    font-weight: 500;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    margin: 14px 0 0;
+    color: var(--ink);
+  }
+  .cat-dir-head h2 em { font-style: normal; font-weight: 400; color: var(--green); }
+  .cat-dir-grid {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .cat-dir-grid { grid-template-columns: 1fr; } }
+
+  .cat-dir-group {
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    padding: 26px 26px 14px;
+  }
+  .cat-dir-group .g-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .cat-dir-group .g-head .g-name {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: 19px; font-weight: 600;
+    letter-spacing: -.01em;
+    color: var(--ink);
+  }
+  .cat-dir-group .g-head .g-zh {
+    font-size: 12.5px;
+    color: var(--steel);
+  }
+  .cat-dir-group .g-head .g-cnt {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--green);
+    letter-spacing: .1em;
+  }
+  .cat-dir-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 18px;
+  }
+  @media (max-width: 480px) { .cat-dir-items { grid-template-columns: 1fr; } }
+  .cd-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 11px 4px;
+    border-bottom: 1px solid var(--hair);
+    text-decoration: none;
+    transition: padding-left .25s var(--easing);
+  }
+  .cd-item:hover { padding-left: 8px; }
+  .cd-thumb {
+    flex-shrink: 0;
+    width: 88px; height: 66px;
+    background: #f1f3f1;
+    border: 1px solid var(--hair);
+    display: grid; place-items: center;
+    overflow: hidden;
+  }
+  .cd-thumb img {
+    width: 88%; height: 88%;
+    object-fit: contain;
+    transition: transform .4s var(--easing);
+  }
+  .cd-item:hover .cd-thumb img { transform: scale(1.08); }
+  .cd-name {
+    font-size: 13px;
+    color: var(--ink-2);
+    line-height: 1.3;
+    font-weight: 500;
+  }
+  .cd-item:hover .cd-name { color: var(--green); }
+  .cd-name .cd-spec {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--steel);
+    letter-spacing: .04em;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  /* Catalog body */
+  .catalog-body {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 0;
+    background: var(--paper);
+    min-height: 80vh;
+  }
+  @media (max-width: 1000px) { .catalog-body { grid-template-columns: 1fr; } }
+
+  /* SIDEBAR */
+  .sidebar {
+    background: var(--paper-2);
+    border-right: 1px solid var(--hair);
+    padding: 36px 28px;
+  }
+  .sidebar h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin: 0 0 14px;
+  }
+  .sidebar h4 + h4 { margin-top: 36px; }
+  .sub-cat-list { list-style: none; padding: 0; margin: 0; }
+  .sub-cat-list li a {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 11px 0;
+    font-size: 14px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--hair);
+    transition: padding .25s var(--easing);
+  }
+  .sub-cat-list li a:hover { padding-left: 8px; color: var(--green); }
+  .sub-cat-list li a.active { color: var(--green); font-weight: 600; }
+  .sub-cat-list li a.active::before {
+    content: ""; width: 6px; height: 6px; background: var(--green); border-radius: 50%; margin-right: 10px;
+  }
+  .sub-cat-list .cnt {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--steel);
+  }
+
+  /* Filter section in sidebar */
+  .filter-block { margin-top: 30px; }
+  .filter-block h5 {
+    font-size: 13px; font-weight: 600;
+    margin: 0 0 12px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .filter-block h5 .clear {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; color: var(--steel);
+    cursor: pointer; text-transform: uppercase; letter-spacing: .1em;
+  }
+  .filter-block h5 .clear:hover { color: var(--green); }
+  .filter-options { display: flex; flex-direction: column; gap: 10px; }
+  .filter-opt {
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer;
+    font-size: 13.5px;
+  }
+  .filter-opt input { accent-color: var(--green); width: 16px; height: 16px; }
+  .filter-opt .label { flex-grow: 1; color: var(--ink-2); }
+  .filter-opt:hover .label { color: var(--ink); }
+  .filter-opt .sub-cnt { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--steel); }
+  .filter-opt input:checked + .label { color: var(--green); font-weight: 600; }
+
+  .range-input {
+    display: flex; gap: 8px; align-items: center;
+    margin-top: 10px;
+  }
+  .range-input input {
+    flex: 1;
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    padding: 8px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--ink);
+    border-radius: 0;
+  }
+  .range-input input:focus { outline: none; border-color: var(--green); }
+  .range-input span { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--steel); }
+
+  /* MAIN */
+  .main { padding: 28px clamp(20px, 3vw, 40px) 80px; }
+
+  /* Active filter chips bar */
+  .active-filters {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--hair);
+    margin-bottom: 24px;
+  }
+  .active-filters .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--steel); margin-right: 6px;
+  }
+  .filter-chip {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6px 8px 6px 12px;
+    font-size: 12px;
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer;
+  }
+  .filter-chip .x { font-size: 14px; opacity: .6; line-height: 1; }
+  .filter-chip:hover .x { opacity: 1; color: var(--signal); }
+  .clear-all {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--steel);
+    text-transform: uppercase; letter-spacing: .1em;
+    cursor: pointer; margin-left: auto;
+  }
+  .clear-all:hover { color: var(--signal); }
+
+  /* Toolbar */
+  .toolbar {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 24px;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .search-box {
+    position: relative;
+    flex-grow: 1;
+    max-width: 380px;
+  }
+  .search-box input {
+    width: 100%;
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    padding: 12px 14px 12px 40px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .search-box input:focus { outline: none; border-color: var(--green); }
+  .search-box .icon {
+    position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+    color: var(--steel);
+  }
+  .toolbar-right { display: flex; gap: 14px; align-items: center; }
+  .sort-select {
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 13.5px;
+    cursor: pointer;
+  }
+  .view-toggle {
+    display: flex;
+    border: 1px solid var(--hair);
+    background: var(--paper);
+  }
+  .view-toggle button {
+    padding: 10px 14px;
+    background: transparent;
+    border: none;
+    color: var(--steel);
+    transition: all .2s var(--easing);
+  }
+  .view-toggle button.active {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .view-toggle button:hover:not(.active) { color: var(--ink); background: var(--paper-2); }
+  .result-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--steel);
+    letter-spacing: .08em;
+  }
+  .result-count strong { color: var(--ink); font-weight: 600; }
+
+  /* GRID VIEW */
+  .product-grid-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--hair);
+    border: 1px solid var(--hair);
+  }
+  .product-tile {
+    background: var(--paper);
+    padding: 22px;
+    display: flex; flex-direction: column;
+    gap: 14px;
+    cursor: pointer;
+    transition: background .25s var(--easing);
+    position: relative;
+    aspect-ratio: 1 / 1.18;
+  }
+  .product-tile:hover { background: var(--paper-2); }
+  .product-tile .img-wrap {
+    flex-grow: 1;
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    display: grid; place-items: center;
+    overflow: hidden;
+    aspect-ratio: 1.4 / 1;
+    position: relative;
+  }
+  .product-tile .img-wrap img {
+    width: 80%; height: 80%;
+    object-fit: contain;
+    transition: transform .4s var(--easing);
+  }
+  .product-tile:hover .img-wrap img { transform: scale(1.05); }
+  .product-tile .placeholder-img {
+    width: 100%; height: 100%;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 12px, var(--hair) 12px, var(--hair) 13px),
+      var(--paper-2);
+    display: grid; place-items: center;
+    color: var(--steel);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .product-tile .badges {
+    position: absolute;
+    top: 18px; left: 18px;
+    display: flex; flex-direction: column; gap: 4px;
+    z-index: 1;
+  }
+  .badge-new {
+    background: var(--green);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    padding: 3px 7px;
+    letter-spacing: .14em;
+  }
+  .badge-stock {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    padding: 3px 7px;
+    letter-spacing: .14em;
+  }
+  .product-tile .info { padding-top: 4px; }
+  .product-tile .pn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--steel);
+    letter-spacing: .08em;
+  }
+  .product-tile .name {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: 16px; font-weight: 500;
+    line-height: 1.25; margin: 4px 0 8px;
+    letter-spacing: -.005em;
+  }
+  .product-tile .specs {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .product-tile .spec-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    background: var(--paper-2);
+    padding: 3px 7px;
+    color: var(--steel);
+    letter-spacing: .06em;
+  }
+  .product-tile .spec-pill.green {
+    background: var(--green-tint);
+    color: var(--green-deep);
+    font-weight: 600;
+  }
+  .product-tile .actions {
+    display: flex; gap: 10px;
+    border-top: 1px solid var(--hair);
+    padding-top: 12px;
+    margin-top: auto;
+  }
+  .product-tile .pdf-btn {
+    flex: 1;
+    background: var(--paper-2);
+    border: 1px solid var(--hair);
+    padding: 8px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    color: var(--ink);
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    transition: all .25s var(--easing);
+  }
+  .product-tile .pdf-btn:hover {
+    background: var(--ink); color: var(--paper); border-color: var(--ink);
+  }
+  .product-tile .view-btn {
+    background: var(--green);
+    color: var(--paper);
+    border: 1px solid var(--green);
+    padding: 8px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .1em;
+  }
+  .product-tile .view-btn:hover { background: var(--green-deep); border-color: var(--green-deep); }
+
+  /* TABLE VIEW (mirrors product-sorting.jpg) */
+  .product-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--hair);
+    background: var(--paper);
+  }
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .product-table thead {
+    background: var(--paper-2);
+    border-bottom: 1px solid var(--ink);
+  }
+  .product-table th {
+    text-align: left;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .product-table th .sortable {
+    display: inline-flex; align-items: center; gap: 6px;
+    cursor: pointer;
+  }
+  .product-table th .sortable::after {
+    content: "↕";
+    color: var(--steel);
+    font-size: 13px;
+  }
+  .product-table tbody tr {
+    border-bottom: 1px solid var(--hair);
+    transition: background .2s var(--easing);
+  }
+  .product-table tbody tr:hover { background: var(--paper-2); }
+  .product-table td {
+    padding: 14px 16px;
+    vertical-align: middle;
+  }
+  .product-table td.pn {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .product-table td.type {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    background: var(--green-tint);
+    border-radius: 0;
+  }
+  .product-table td.spec { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--ink-2); }
+  .product-table td.spec.highlight { color: var(--green); font-weight: 600; }
+  .product-table td.actions { white-space: nowrap; text-align: right; }
+  .table-pdf-btn, .table-view-btn {
+    padding: 6px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .08em;
+    border: 1px solid var(--hair);
+    background: var(--paper);
+    margin-left: 6px;
+    transition: all .2s var(--easing);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .table-pdf-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .table-view-btn { background: var(--green); color: var(--paper); border-color: var(--green); }
+  .table-view-btn:hover { background: var(--green-deep); border-color: var(--green-deep); }
+
+  /* Pagination */
+  .pagination {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--hair);
+    flex-wrap: wrap; gap: 16px;
+  }
+  .page-info {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--steel);
+    letter-spacing: .08em;
+  }
+  .page-controls { display: flex; gap: 4px; }
+  .page-btn {
+    min-width: 38px; height: 38px;
+    border: 1px solid var(--hair);
+    background: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all .2s var(--easing);
+    padding: 0 10px;
+  }
+  .page-btn:hover { border-color: var(--ink); }
+  .page-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  /* Mobile filter toggle */
+  .mobile-filter-btn { display: none; }
+  .sidebar-close { display: none; }
+  @media (max-width: 1000px) {
+    .sidebar { display: none; position: fixed; inset: 0; z-index: 100; overflow-y: auto; padding: 24px; background: var(--paper); }
+    .sidebar.open { display: block; }
+    .mobile-filter-btn {
+      display: inline-flex;
+      align-items: center; gap: 8px;
+      background: var(--ink); color: var(--paper); border: none;
+      padding: 10px 14px;
+      font-family: inherit; font-size: 13px;
+      flex-shrink: 0;
+    }
+    .sidebar-close {
+      display: inline-flex; align-items: center; gap: 6px;
+      position: sticky; top: 0;
+      width: 100%; justify-content: center;
+      background: var(--ink); color: var(--paper); border: none;
+      padding: 12px; margin-bottom: 18px;
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: .08em;
+    }
+  }
+
+  .hidden { display: none !important; }
+
+  /* ============================================================
+     Client feedback 0526 — prominent green section eyebrow ×1.5;
+     group count keeps its original size.
+     ============================================================ */
+  .cat-dir-head .eyebrow { font-size: 16.5px; }   /* 11 → 16.5 (×1.5 section eyebrow) */
+  /* green sub-labels ×1.2 */
+  .cat-dir-group .g-head .g-cnt { font-size: 12.6px; }   /* 10.5 → 12.6 */
+</style>
+</head>
+
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="container top-bar-track">
+    <div class="top-bar-left">
+      <span class="pulse"></span>
+      <span>COMPUTEX 2026 / 06.02 — 06.05</span>
+      <span class="sep">/</span>
+      <span>TPE 南港展覽館 2館 4F</span>
+      <span class="sep">/</span>
+      <a href="news.html#computex-2026">攤位 Q1334C →</a>
+    </div>
+    <div class="top-bar-right">
+      <span>EST. 1992</span>
+      <span class="sep">/</span>
+      <span>MADE IN TAIWAN · 三峽</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-track">
+    <a class="brand" href="index.html">
+      <img src="images/logo/logo-yesway-green.svg" alt="Yes Way 高位企業" />
+    </a>
+    <input type="checkbox" id="nav-cb" class="nav-cb" hidden />
+    <nav><ul class="nav">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="about.html">關於高位</a></li>
+      <li class="has-sub"><a href="quality.html">品質與技術</a></li>
+      <li class="has-sub"><a href="products.html" class="active">產品介紹</a></li>
+      <li><a href="news.html">最新消息</a></li>
+      <li><a href="esg.html">ESG</a></li>
+      <li><a href="contact.html">聯絡我們</a></li>
+    </ul></nav>
+    <div class="header-actions">
+      <button class="lang-switch"><span class="on">中</span><span>/</span><span>EN</span></button>
+      <button class="btn-cta">詢價 Inquiry <span class="arrow">→</span></button>
+      <label for="nav-cb" class="nav-toggle" aria-label="選單 Menu"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     CATALOG HEAD
+============================================================ -->
+<section class="catalog-head">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="index.html">HOME</a>
+      <span class="sep">/</span>
+      <span>產品介紹 / PRODUCTS</span>
+      <span class="sep">/</span>
+      <span style="color:var(--ink)">Cable Assembly</span>
+    </nav>
+
+    <div class="catalog-title-row">
+      <div>
+        <span class="eyebrow">CATEGORY 001 / CABLE ASSEMBLY</span>
+        <h1 class="catalog-title">Cable <em>Assembly</em></h1>
+      </div>
+      <div class="catalog-meta">
+        <span><strong>122</strong> SKUs</span>
+        <span>·</span>
+        <span><strong>6</strong> Categories</span>
+        <span>·</span>
+        <span><strong>PDF</strong> Spec Sheets</span>
+      </div>
+    </div>
+
+    <!-- Category cards (6 Categories — thumbnail + label) -->
+    <div class="cat-tabs">
+      <button class="cat-tab active" data-cat="pin-assignment-cad">
+        <span class="cat-thumb"><img src="images/product/202502071558.png" alt="PIN Assignment / CAD" loading="lazy" /></span>
+        <span class="cat-label">
+          <span class="num">001</span>
+          <span class="cat-name">PIN Assignment / CAD</span>
+          <span class="count">47</span>
+        </span>
+      </button>
+      <button class="cat-tab" data-cat="cable-assembly">
+        <span class="cat-thumb"><img src="images/product/cable-assembly/Key_A_20M_typeC_20G_Cable.png" alt="Cable Assembly 線束加工" loading="lazy" /></span>
+        <span class="cat-label">
+          <span class="num">002</span>
+          <span class="cat-name">Cable Assembly 線束加工</span>
+          <span class="count">62</span>
+        </span>
+      </button>
+      <button class="cat-tab" data-cat="pcb-assembly">
+        <span class="cat-thumb"><img src="images/product/pcb-assembly/PCB-Assembly-01.png" alt="PCB Assembly 電路板組裝" loading="lazy" /></span>
+        <span class="cat-label">
+          <span class="num">003</span>
+          <span class="cat-name">PCB Assembly 電路板組裝</span>
+          <span class="count">PCB</span>
+        </span>
+      </button>
+      <button class="cat-tab" data-cat="ai-gpu-servers">
+        <span class="cat-thumb"><img src="images/product/ai-gpu-servers/Gen6_M2_Cable.png" alt="AI / GPU Servers" loading="lazy" /></span>
+        <span class="cat-label">
+          <span class="num">004</span>
+          <span class="cat-name">AI / GPU Servers</span>
+          <span class="count">18</span>
+        </span>
+      </button>
+      <button class="cat-tab" data-cat="server-storage-pc">
+        <span class="cat-thumb"><img src="images/product/server-storage-pc/PCIe_Gen5.png" alt="Server & Storage / PC" loading="lazy" /></span>
+        <span class="cat-label">
+          <span class="num">005</span>
+          <span class="cat-name">Server &amp; Storage / PC</span>
+          <span class="count">28</span>
+        </span>
+      </button>
+      <button class="cat-tab" data-cat="cable-diy-tooling">
+        <span class="cat-thumb"><img src="images/product/cable-diy-tooling/DIY-Tooling-Accessories-01.png" alt="電纜 DIY 工具" loading="lazy" /></span>
+        <span class="cat-label">
+          <span class="num">006</span>
+          <span class="cat-name">電纜 DIY 工具</span>
+          <span class="count">14</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CATEGORY DIRECTORY (page-1 style: 大分類 → 小分類 + 連接器圖)
+============================================================ -->
+<section class="cat-dir">
+  <div class="cat-dir-head">
+    <span class="eyebrow">PRODUCT CATEGORIES · 產品分類總覽</span>
+    <h2>從<em>線束加工</em>到 <em>AI 伺服器</em>連接<br/>依連接器類型快速瀏覽</h2>
+  </div>
+
+  <div class="cat-dir-grid">
+
+    <!-- Cable Assembly -->
+    <div class="cat-dir-group">
+      <div class="g-head">
+        <span class="g-name">Cable Assembly</span>
+        <span class="g-zh">線束加工</span>
+        <span class="g-cnt">06</span>
+      </div>
+      <div class="cat-dir-items">
+        <a class="cd-item" href="products.html?cat=cable-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/cable-external-dac.png" alt="External / DAC" loading="lazy" /></span>
+          <span class="cd-name">External / DAC<span class="cd-spec">Direct Attach Cable</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=cable-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/cable-internal.png" alt="Internal Connection" loading="lazy" /></span>
+          <span class="cd-name">Internal Connection<span class="cd-spec">內接連線</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=cable-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/cable-int-to-ext.png" alt="Int. to Ext." loading="lazy" /></span>
+          <span class="cd-name">Int. to Ext.<span class="cd-spec">內轉外連線</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=cable-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/cable-acc.png" alt="ACC Active Copper Cable" loading="lazy" /></span>
+          <span class="cd-name">ACC<span class="cd-spec">Active Copper · Redriver</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=cable-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/cable-aec.png" alt="AEC Active Electrical Cable" loading="lazy" /></span>
+          <span class="cd-name">AEC<span class="cd-spec">Active Electrical · Retimer</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=cable-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/cable-aoc.png" alt="Active Optical Cable" loading="lazy" /></span>
+          <span class="cd-name">AOC<span class="cd-spec">Active Optical Cable</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- PCB Assembly -->
+    <div class="cat-dir-group">
+      <div class="g-head">
+        <span class="g-name">PCB Assembly</span>
+        <span class="g-zh">電路板組裝</span>
+        <span class="g-cnt">06</span>
+      </div>
+      <div class="cat-dir-items">
+        <a class="cd-item" href="products.html?cat=pcb-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/pcb-adapter.png" alt="Adapter" loading="lazy" /></span>
+          <span class="cd-name">Adapter<span class="cd-spec">轉接板</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=pcb-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/pcb-paddle-card.png" alt="Paddle Card" loading="lazy" /></span>
+          <span class="cd-name">Paddle Card<span class="cd-spec">訊號轉板</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=pcb-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/pcb-loopback.png" alt="Loopback" loading="lazy" /></span>
+          <span class="cd-name">Loopback<span class="cd-spec">回環測試</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=pcb-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/pcb-odm-oem.png" alt="ODM / OEM" loading="lazy" /></span>
+          <span class="cd-name">ODM / OEM<span class="cd-spec">客製設計</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=pcb-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/pcb-backplane.png" alt="Backplane" loading="lazy" /></span>
+          <span class="cd-name">Backplane<span class="cd-spec">背板</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=pcb-assembly">
+          <span class="cd-thumb"><img src="images/product/catalog/pcb-terminator.png" alt="Terminator" loading="lazy" /></span>
+          <span class="cd-name">Terminator<span class="cd-spec">終端器</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- AI / GPU Servers -->
+    <div class="cat-dir-group">
+      <div class="g-head">
+        <span class="g-name">AI / GPU Servers</span>
+        <span class="g-zh">AI 伺服器連接</span>
+        <span class="g-cnt">10</span>
+      </div>
+      <div class="cat-dir-items">
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-mcio.png" alt="MCIO" loading="lazy" /></span>
+          <span class="cd-name">MCIO<span class="cd-spec">SFF-TA-1016</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-slimline.png" alt="SlimLINE" loading="lazy" /></span>
+          <span class="cd-name">SlimLINE<span class="cd-spec">SFF-8654</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-minisas-hd.png" alt="miniSAS HD" loading="lazy" /></span>
+          <span class="cd-name">miniSAS HD<span class="cd-spec">SFF-8643</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-mini-sas.png" alt="mini SAS" loading="lazy" /></span>
+          <span class="cd-name">mini SAS<span class="cd-spec">SFF-8087</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-genz.png" alt="Gen.Z" loading="lazy" /></span>
+          <span class="cd-name">Gen.Z<span class="cd-spec">SFF-TA-1002</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-oculink.png" alt="OcuLink" loading="lazy" /></span>
+          <span class="cd-name">OcuLink<span class="cd-spec">SFF-8611</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-minipcie.png" alt="miniPCIe" loading="lazy" /></span>
+          <span class="cd-name">miniPCIe<span class="cd-spec">Mini PCI Express</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-pcie.png" alt="PCIe" loading="lazy" /></span>
+          <span class="cd-name">PCIe<span class="cd-spec">PCI Express</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-multitrak.png" alt="Multi Trak" loading="lazy" /></span>
+          <span class="cd-name">Multi Trak<span class="cd-spec">SFF-TA-1033</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=ai-gpu-servers">
+          <span class="cd-thumb"><img src="images/product/catalog/ai-mxm.png" alt="MXM" loading="lazy" /></span>
+          <span class="cd-name">MXM<span class="cd-spec">Mobile PCIe Module</span></span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Server & Storage / PC -->
+    <div class="cat-dir-group">
+      <div class="g-head">
+        <span class="g-name">Server &amp; Storage / PC</span>
+        <span class="g-zh">伺服器 / 儲存 / PC</span>
+        <span class="g-cnt">10</span>
+      </div>
+      <div class="cat-dir-items">
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-u2.png" alt="U.2" loading="lazy" /></span>
+          <span class="cd-name">U.2<span class="cd-spec">SFF-8639</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-u3.png" alt="U.3" loading="lazy" /></span>
+          <span class="cd-name">U.3<span class="cd-spec">SFF-TA-1001</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-sas29.png" alt="SAS29" loading="lazy" /></span>
+          <span class="cd-name">SAS29<span class="cd-spec">SFF-8482</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-m2.png" alt="M.2" loading="lazy" /></span>
+          <span class="cd-name">M.2<span class="cd-spec">NGFF</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-sata-data.png" alt="SATA DATA" loading="lazy" /></span>
+          <span class="cd-name">SATA<span class="cd-spec">DATA</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-sata-data-power.png" alt="SATA DATA+POWER" loading="lazy" /></span>
+          <span class="cd-name">SATA<span class="cd-spec">DATA + POWER</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-sata-power.png" alt="SATA POWER" loading="lazy" /></span>
+          <span class="cd-name">SATA<span class="cd-spec">POWER</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-slimline-sata.png" alt="Slimline SATA" loading="lazy" /></span>
+          <span class="cd-name">Slimline SATA<span class="cd-spec">薄型 SATA</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-microsata.png" alt="microSATA" loading="lazy" /></span>
+          <span class="cd-name">microSATA<span class="cd-spec">微型 SATA</span></span>
+        </a>
+        <a class="cd-item" href="products.html?cat=server-storage-pc">
+          <span class="cd-thumb"><img src="images/product/catalog/srv-esata.png" alt="eSATA" loading="lazy" /></span>
+          <span class="cd-name">eSATA<span class="cd-spec">External SATA</span></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     CATALOG BODY
+============================================================ -->
+<div class="container" style="max-width: var(--max-w); padding: 0;">
+  <div class="catalog-body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+      <button class="sidebar-close" id="sidebar-close" type="button" aria-label="關閉篩選">✕ 關閉篩選</button>
+
+      <h4>子分類 / Sub-Category</h4>
+      <ul class="sub-cat-list">
+        <li><a href="#" class="active" data-subcat="all">所有商品 <span class="cnt" data-count-all></span></a></li>
+        <li><a href="#" data-subcat="stock">現貨專區 <span class="cnt" data-count-stock></span></a></li>
+        <li><a href="#" data-subcat="hispeed">高速傳輸線組 <span class="cnt" data-count-hispeed></span></a></li>
+        <li><a href="#" data-subcat="internal">伺服器內接線 <span class="cnt" data-count-internal></span></a></li>
+        <li><a href="#" data-subcat="circuit">電路電纜 <span class="cnt" data-count-circuit></span></a></li>
+        <li><a href="#" data-subcat="custom">客製化專區 <span class="cnt">ODM</span></a></li>
+      </ul>
+
+      <div class="filter-block" data-block="type">
+        <h5>傳輸介面 Type <span class="clear">CLEAR</span></h5>
+        <div class="filter-options">
+          <label class="filter-opt"><input type="checkbox" data-key="type" data-value="MCIO i4 / i8" /><span class="label">MCIO i4 / i8</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="type" data-value="PCIe Gen6" /><span class="label">PCIe Gen6 (64 GT/s)</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="type" data-value="PCIe Gen5" /><span class="label">PCIe Gen5</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="type" data-value="SlimSAS SFF-8654" /><span class="label">SlimSAS SFF-8654</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="type" data-value="miniSAS HD" /><span class="label">miniSAS HD</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="type" data-value="OCuLink SFF-8611" /><span class="label">OCuLink SFF-8611</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="type" data-value="SATA / SAS" /><span class="label">SATA / SAS</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="type" data-value="USB / Thunderbolt" /><span class="label">USB / Thunderbolt</span><span class="sub-cnt"></span></label>
+        </div>
+      </div>
+
+      <div class="filter-block" data-block="speed">
+        <h5>傳輸速度 Speed <span class="clear">CLEAR</span></h5>
+        <div class="filter-options">
+          <label class="filter-opt"><input type="checkbox" data-key="speed" data-value="64 GT/s · Gen6" /><span class="label">64 GT/s · Gen6</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="speed" data-value="32 GT/s · Gen5" /><span class="label">32 GT/s · Gen5</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="speed" data-value="16 GT/s · Gen4" /><span class="label">16 GT/s · Gen4</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="speed" data-value="8 GT/s · Gen3" /><span class="label">8 GT/s · Gen3</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="speed" data-value="≤ 6 GT/s" /><span class="label">5 GT/s 以下</span><span class="sub-cnt"></span></label>
+        </div>
+      </div>
+
+      <div class="filter-block" data-block="lanes">
+        <h5>通道數 Lanes <span class="clear">CLEAR</span></h5>
+        <div class="filter-options">
+          <label class="filter-opt"><input type="checkbox" data-key="lanes" data-value="x1" /><span class="label">x1</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="lanes" data-value="x4" /><span class="label">x4</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="lanes" data-value="x8" /><span class="label">x8</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="lanes" data-value="x16" /><span class="label">x16</span><span class="sub-cnt"></span></label>
+        </div>
+      </div>
+
+      <div class="filter-block" data-block="length">
+        <h5>線長 Length (mm) <span class="clear">CLEAR</span></h5>
+        <div class="range-input">
+          <input type="number" id="length-min" placeholder="MIN" value="" />
+          <span>—</span>
+          <input type="number" id="length-max" placeholder="MAX" value="" />
+        </div>
+      </div>
+
+      <div class="filter-block" data-block="application">
+        <h5>應用 Application <span class="clear">CLEAR</span></h5>
+        <div class="filter-options">
+          <label class="filter-opt"><input type="checkbox" data-key="application" data-value="AI Server" /><span class="label">AI Server</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="application" data-value="Data Center" /><span class="label">資料中心 Data Center</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="application" data-value="Workstation" /><span class="label">工作站 Workstation</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="application" data-value="Storage" /><span class="label">儲存系統 Storage</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="application" data-value="IPC" /><span class="label">工業電腦 IPC</span><span class="sub-cnt"></span></label>
+        </div>
+      </div>
+
+      <div class="filter-block" data-block="status">
+        <h5>狀態 Status <span class="clear">CLEAR</span></h5>
+        <div class="filter-options">
+          <label class="filter-opt"><input type="checkbox" data-key="status" data-value="In Stock" /><span class="label">現貨 In Stock</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="status" data-value="New" /><span class="label">新品 New</span><span class="sub-cnt"></span></label>
+          <label class="filter-opt"><input type="checkbox" data-key="status" data-value="Custom" /><span class="label">客製化 Custom</span><span class="sub-cnt"></span></label>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- Active filter chips (JS 動態填充) -->
+      <div class="active-filters" id="active-filters">
+        <span class="lbl">篩選條件 ·</span>
+        <!-- chips here -->
+      </div>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <button class="mobile-filter-btn" id="mobile-filter-open" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+          篩選 Filter
+        </button>
+        <div class="search-box">
+          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="search-input" placeholder="搜尋 Part No、規格、應用..." />
+        </div>
+        <div class="toolbar-right">
+          <span class="result-count" id="result-count">—</span>
+          <select class="sort-select" id="sort-select">
+            <option value="newest">排序：最新優先</option>
+            <option value="partno">排序：Part No A → Z</option>
+            <option value="speed-desc">排序：傳輸速度 高 → 低</option>
+            <option value="length-asc">排序：線長 短 → 長</option>
+          </select>
+          <div class="view-toggle">
+            <button id="grid-view" class="active" title="Grid">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            </button>
+            <button id="table-view" title="Table">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID VIEW (JS 動態渲染) -->
+      <div id="grid-list" class="product-grid-list">
+        <!-- product tiles injected by JS -->
+      </div>
+
+      <!-- Empty state -->
+      <div id="empty-state" class="hidden" style="padding: 80px 24px; text-align: center; border: 1px dashed var(--hair); background: var(--paper);">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--steel); margin-bottom: 14px;">NO RESULTS / 沒有結果</div>
+        <div style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 24px; font-weight: 500; letter-spacing: -.01em; color: var(--ink); margin-bottom: 18px;">找不到符合條件的產品</div>
+        <p style="color: var(--ink-2); margin: 0 0 20px; font-size: 14.5px;">請試著放寬篩選條件，或聯絡我們提供 ODM 客製化方案。</p>
+        <button onclick="clearAllFilters()" style="background: var(--green); color: var(--paper); border: none; padding: 12px 22px; font-size: 13.5px; font-weight: 500; cursor: pointer;">清除全部篩選</button>
+      </div>
+
+        
+
+      <!-- TABLE VIEW (hidden by default, like product-sorting.jpg) -->
+      <div id="table-list" class="product-table-wrap hidden">
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th><span class="sortable">Part No</span></th>
+              <th>Standard</th>
+              <th><span class="sortable">Speed</span></th>
+              <th>Lanes</th>
+              <th><span class="sortable">Length</span></th>
+              <th>Application</th>
+              <th>Status</th>
+              <th style="text-align:right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="table-tbody"><!-- rows injected by JS --></tbody>
+        </table>
+      </div>
+
+      <!-- Pagination (JS 動態渲染) -->
+      <div class="pagination" id="pagination">
+        <span class="page-info" id="page-info">—</span>
+        <div class="page-controls" id="page-controls"></div>
+      </div>
+
+    </main>
+
+  </div>
+</div>
+
+<!-- ============================================================
+     CTA STRIP — 客製需求
+============================================================ -->
+<section style="padding: 80px 0; background: var(--green); color: var(--paper); position: relative;">
+  <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+    <div>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(247,246,241,.8);">ODM / CUSTOM</span>
+      <h2 style="font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif; font-size: clamp(32px, 4vw, 56px); font-weight: 500; line-height: 1.05; letter-spacing: -.02em; margin: 14px 0 0;">
+        找不到完全合適的規格？<br/>
+        <em style="font-style: normal; color: var(--paper); opacity: .9;">高位提供 ODM 設計</em>
+      </h2>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 18px;">
+      <p style="font-size: 16px; line-height: 1.7; margin: 0; color: rgba(247,246,241,.95);">
+        從 PCB layout 到精密線束加工，
+        我們的研發團隊將協助您設計符合需求的客製化線材，
+        包含 BIRT 訊號驗證與小批量試樣。
+      </p>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+        <button style="background: var(--ink); color: var(--paper); border: none; padding: 16px 24px; font-size: 14px; font-weight: 500; display: inline-flex; align-items: center; gap: 10px;">
+          ODM 諮詢 → 工程團隊
+          <span>→</span>
+        </button>
+        <a href="contact.html" style="border-bottom: 1px solid var(--paper); padding-bottom: 4px; font-size: 14px; align-self: center;">下載完整型錄 ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo/logo-yesway-white.svg" alt="Yes Way" />
+        <p>高位企業有限公司<br/>Yes Way Enterprise Corporation</p>
+        <p style="margin-top:14px; font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(247,246,241,.5);letter-spacing:.06em;">
+          新北市三峽區介壽路一段318巷21號<br/>
+          T &nbsp;886-2-2673-5492<br/>
+          F &nbsp;886-2-2673-3904
+        </p>
+      </div>
+      <div>
+        <h5>SITE MAP</h5>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="about.html">關於高位</a></li>
+          <li><a href="quality.html">品質與技術</a></li>
+          <li><a href="products.html">產品介紹</a></li>
+          <li><a href="news.html">最新消息</a></li>
+          <li><a href="esg.html">ESG</a></li>
+          <li><a href="contact.html">聯絡我們</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>PRODUCT LINES</h5>
+        <ul>
+          <li><a href="products.html?cat=pin-assignment-cad">PIN Assignment / CAD</a></li>
+          <li><a href="products.html?cat=cable-assembly">Cable Assembly 線束加工</a></li>
+          <li><a href="products.html?cat=pcb-assembly">PCB Assembly 電路板組裝</a></li>
+          <li><a href="products.html?cat=ai-gpu-servers">AI / GPU Servers</a></li>
+          <li><a href="products.html?cat=server-storage-pc">Server & Storage / PC</a></li>
+          <li><a href="products.html?cat=cable-diy-tooling">電纜 DIY 工具</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>CONTACT</h5>
+        <ul>
+          <li>銷售諮詢 <a href="mailto:sales@yesway.com.tw">sales@yesway.com.tw</a></li>
+          <li>生產據點：新北 · 三峽</li>
+          <li><a href="contact.html">在線詢問表單 →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 YES WAY ENTP. CORP. — ALL RIGHTS RESERVED</span>
+      <div class="seo">
+        <span>高速傳輸線材</span><span>·</span>
+        <span>Cable Assembly</span><span>·</span>
+        <span>PCB Assembly</span><span>·</span>
+        <span>AI / GPU Server</span><span>·</span>
+        <span>PCIe Gen6</span><span>·</span>
+        <span>MCIO 線材</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =============================================================
+   Yes Way Products — 真實篩選 / 排序 / 搜尋 / 分頁邏輯
+   --------------------------------------------------------------
+   PRODUCTS 之後可改成 fetch('/api/products') 從後端載入
+   ============================================================ */
+
+const PRODUCTS = [
+  { partNo: 'YW-MC8-PCG6-074',  name: 'MCIO i8 / PCIe Gen6 64GT/s 高速線組', type: 'MCIO i4 / i8', standard: 'PCIe Gen6',  speed: '64 GT/s · Gen6', lanes: 'x8', length: 750,  application: 'AI Server',   status: 'New',      image: 'images/product/202502071624.png', subcat: ['hispeed','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-SS86-074-1000', name: 'SlimSAS SFF-8654 內接線',      type: 'SlimSAS SFF-8654', standard: 'SFF-8654',   speed: '16 GT/s · Gen4', lanes: 'x8', length: 1000, application: 'Storage',     status: 'In Stock', image: 'images/product/202502071630.png', subcat: ['stock','hispeed','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-MC4-PCG5-038',  name: 'MCIO i4 / PCIe Gen5 GPU 線組', type: 'MCIO i4 / i8',     standard: 'PCIe Gen5',  speed: '32 GT/s · Gen5', lanes: 'x4', length: 380,  application: 'AI Server',   status: 'New',      image: 'images/product/202502071581.png', subcat: ['hispeed','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-MSAS-HD43-500', name: 'miniSAS HD SFF-8643 內接',     type: 'miniSAS HD',       standard: 'SFF-8643',   speed: '16 GT/s · Gen4', lanes: 'x4', length: 500,  application: 'Storage',     status: 'In Stock', image: 'images/product/202502071617.png', subcat: ['stock','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-OCL-SFF11-650', name: 'OCuLink SFF-8611 線組',        type: 'OCuLink SFF-8611', standard: 'SFF-8611',   speed: '8 GT/s · Gen3',  lanes: 'x4', length: 650,  application: 'Workstation', status: 'In Stock', image: 'images/product/202502071613.png', subcat: ['stock','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-MC8-PCG5-105',  name: 'MCIO i8 GPU 高密度佈線',       type: 'MCIO i4 / i8',     standard: 'PCIe Gen5',  speed: '32 GT/s · Gen5', lanes: 'x8', length: 1050, application: 'AI Server',   status: 'New',      image: 'images/product/202502071612.png', subcat: ['hispeed','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-SATA3-300',     name: 'SATA III 6Gb/s 內接線',        type: 'SATA / SAS',       standard: 'SATA Rev. 3', speed: '≤ 6 GT/s',     lanes: 'x1', length: 300,  application: 'IPC',         status: 'In Stock', image: 'images/product/202502071605.png', subcat: ['stock','circuit'], cat: 'cable-assembly' },
+  { partNo: 'YW-USB4C-200',     name: 'USB 4.0 Type-C 線組',          type: 'USB / Thunderbolt', standard: 'USB-C',     speed: '32 GT/s · Gen5', lanes: 'x1', length: 200,  application: 'Workstation', status: 'In Stock', image: 'images/product/202502071597.png', subcat: ['stock'], cat: 'cable-assembly' },
+  { partNo: 'YW-BP-PCIE6-X16',  name: 'PCIe Gen6 64GT/s x16 背板互連', type: 'PCIe Gen6',        standard: 'PCIe Gen6',  speed: '64 GT/s · Gen6', lanes: 'x16', length: 450, application: 'Data Center', status: 'Custom',   image: 'images/product/202502071593.png', subcat: ['custom','hispeed','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-PWR-12VHP-150', name: '12VHPWR GPU 電源線',           type: 'PCIe Gen5',        standard: '12VHPWR',    speed: '≤ 6 GT/s',      lanes: 'x1', length: 150,  application: 'AI Server',   status: 'In Stock', image: 'images/product/202502071585.png', subcat: ['stock','circuit'], cat: 'cable-assembly' },
+  { partNo: 'YW-DP21-EMI-500',  name: 'DisplayPort 2.1 EMI 屏蔽線',   type: 'USB / Thunderbolt', standard: 'DP 2.1 UHBR20', speed: '32 GT/s · Gen5', lanes: 'x1', length: 500, application: 'Workstation', status: 'In Stock', image: 'images/product/202502071578.png', subcat: ['stock'], cat: 'cable-assembly' },
+  { partNo: 'YW-GENZ-1033-300', name: 'GenZ TFF-1033 高頻線組',       type: 'PCIe Gen5',        standard: 'GenZ',       speed: '32 GT/s · Gen5', lanes: 'x16', length: 300, application: 'AI Server',   status: 'New',      image: 'images/product/202502071558.png', subcat: ['hispeed','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-MC8-PCG5-1500', name: 'MCIO i8 長距客製化線組',       type: 'MCIO i4 / i8',     standard: 'PCIe Gen5',  speed: '32 GT/s · Gen5', lanes: 'x8', length: 1500, application: 'Data Center', status: 'Custom',   image: 'images/product/202502071624.png', subcat: ['custom','hispeed','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-SS86-04-380',   name: 'SlimSAS x4 短距內接線',        type: 'SlimSAS SFF-8654', standard: 'SFF-8654',   speed: '16 GT/s · Gen4', lanes: 'x4', length: 380,  application: 'Storage',     status: 'In Stock', image: 'images/product/202502071630.png', subcat: ['stock','hispeed','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-MSAS-HD43-1200',name: 'miniSAS HD 1.2m 機箱線',       type: 'miniSAS HD',       standard: 'SFF-8643',   speed: '16 GT/s · Gen4', lanes: 'x8', length: 1200, application: 'Storage',     status: 'In Stock', image: 'images/product/202502071617.png', subcat: ['stock','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-PCIE4-X4-220',  name: 'PCIe Gen4 x4 短距內接',        type: 'PCIe Gen5',        standard: 'PCIe Gen4',  speed: '16 GT/s · Gen4', lanes: 'x4', length: 220,  application: 'Workstation', status: 'In Stock', image: 'images/product/202502071593.png', subcat: ['stock','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-OCL-X8-450',    name: 'OCuLink x8 雙連接器',          type: 'OCuLink SFF-8611', standard: 'SFF-8611',   speed: '8 GT/s · Gen3',  lanes: 'x8', length: 450,  application: 'Storage',     status: 'In Stock', image: 'images/product/202502071613.png', subcat: ['stock','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-USB4C-08-1000', name: 'USB 4.0 PD 100W 1m 客製',      type: 'USB / Thunderbolt', standard: 'USB-C',     speed: '32 GT/s · Gen5', lanes: 'x1', length: 1000, application: 'Workstation', status: 'Custom',   image: 'images/product/202502071597.png', subcat: ['custom'], cat: 'cable-assembly' },
+  { partNo: 'YW-SAS-12G-600',   name: 'SAS 12Gbps 內接線 SFF-8087',   type: 'SATA / SAS',       standard: 'SAS-3',      speed: '8 GT/s · Gen3',  lanes: 'x4', length: 600,  application: 'Storage',     status: 'In Stock', image: 'images/product/202502071605.png', subcat: ['stock','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-MC4-PCG4-650',  name: 'MCIO i4 PCIe Gen4 中距',       type: 'MCIO i4 / i8',     standard: 'PCIe Gen4',  speed: '16 GT/s · Gen4', lanes: 'x4', length: 650,  application: 'IPC',         status: 'In Stock', image: 'images/product/202502071612.png', subcat: ['stock','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-MSAS-X16-380',  name: 'miniSAS HD x16 雙列線組',      type: 'miniSAS HD',       standard: 'SFF-8643',   speed: '16 GT/s · Gen4', lanes: 'x16', length: 380, application: 'Data Center', status: 'New',      image: 'images/product/202502071617.png', subcat: ['hispeed','internal'], cat: 'cable-assembly' },
+  { partNo: 'YW-SATA-X1-150',   name: 'SATA L 型短距內接',            type: 'SATA / SAS',       standard: 'SATA Rev. 3', speed: '≤ 6 GT/s',     lanes: 'x1', length: 150,  application: 'IPC',         status: 'In Stock', image: 'images/product/202502071605.png', subcat: ['stock','circuit'], cat: 'cable-assembly' },
+  { partNo: '5G05B03-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G05B03-1xxxx.pdf' },
+  { partNo: '5G164B02-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G164B02-1xxxx.pdf' },
+  { partNo: '5G164F10-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G164F10-1xxxx.pdf' },
+  { partNo: '5G164F19-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G164F19-1xxxx.pdf' },
+  { partNo: '5G164F20-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G164F20-1xxxx.pdf' },
+  { partNo: '5G19A05-Bxxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G19A05-Bxxxx.pdf' },
+  { partNo: '5G20A11-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G20A11-1xxxx.pdf' },
+  { partNo: '5G20A20-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G20A20-1xxxx.pdf' },
+  { partNo: '5G20A23-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G20A23-1xxxx.pdf' },
+  { partNo: '5G20A35-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G20A35-1xxxx.pdf' },
+  { partNo: '5G20A40-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G20A40-1xxxx.pdf' },
+  { partNo: '5G20A42-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G20A42-1xxxx.pdf' },
+  { partNo: '5G24A12-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G24A12-1xxxx.pdf' },
+  { partNo: '5G24A15-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G24A15-1xxxx.pdf' },
+  { partNo: '5G24A17-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G24A17-1xxxx.pdf' },
+  { partNo: '5G24A33-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G24A33-1xxxx.pdf' },
+  { partNo: '5G24A36-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G24A36-1xxxx.pdf' },
+  { partNo: '5G36A72-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G36A72-1xxxx.pdf' },
+  { partNo: '5G36B08-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G36B08-1xxxx.pdf' },
+  { partNo: '5G36B33-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G36B33-1xxxx.pdf' },
+  { partNo: '5G38A02-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G38A02-1xxxx.pdf' },
+  { partNo: '5G38F01-1xxxx-W01', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G38F01-1xxxx-W01.pdf' },
+  { partNo: '5G42A01-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G42A01-1xxxx.pdf' },
+  { partNo: '5G56F02-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G56F02-1xxxx.pdf' },
+  { partNo: '5G64B02-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G64B02-1xxxx.pdf' },
+  { partNo: '5G64F03-1xxxx-M01', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G64F03-1xxxx-M01.pdf' },
+  { partNo: '5G68A06-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G68A06-1xxxx.pdf' },
+  { partNo: '5G68A11-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G68A11-1xxxx.pdf' },
+  { partNo: '5G74A01-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G74A01-1xxxx.pdf' },
+  { partNo: '5G74F01-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G74F01-1xxxx.pdf' },
+  { partNo: '5G74F06-1xxxx-W01', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G74F06-1xxxx-W01.pdf' },
+  { partNo: '5G74F31-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G74F31-1xxxx.pdf' },
+  { partNo: '5G75A01-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G75A01-1xxxx.pdf' },
+  { partNo: '5G75A16-10325', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G75A16-10325.pdf' },
+  { partNo: '5G75C02-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G75C02-1xxxx.pdf' },
+  { partNo: '5G75F01-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G75F01-1xxxx.pdf' },
+  { partNo: '5G80A02-1xxxx', name: 'High Speed Connector - PIN Assignment', type: 'PIN Assignment', standard: 'Connector', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Connector', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G80A02-1xxxx.pdf' },
+  { partNo: '5G98B09-1xxxx', name: 'High Speed Flat Cable - PIN Assignment', type: 'PIN Assignment', standard: 'FPC / Flat Cable', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'High Speed Flat Cable', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5G98B09-1xxxx.pdf' },
+  { partNo: '5R10A09', name: 'Accessory / Tool - PIN Assignment', type: 'PIN Assignment', standard: 'Accessory', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'Accessory / Tool', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5R10A09.pdf' },
+  { partNo: '5R22A04-A', name: 'Accessory / Tool - PIN Assignment', type: 'PIN Assignment', standard: 'Accessory', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'Accessory / Tool', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5R22A04-A.pdf' },
+  { partNo: '5R24A02-A', name: 'Accessory / Tool - PIN Assignment', type: 'PIN Assignment', standard: 'Accessory', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'Accessory / Tool', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5R24A02-A.pdf' },
+  { partNo: '5R29A01-A', name: 'Accessory / Tool - PIN Assignment', type: 'PIN Assignment', standard: 'Accessory', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'Accessory / Tool', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5R29A01-A.pdf' },
+  { partNo: '5R36A09-A', name: 'Accessory / Tool - PIN Assignment', type: 'PIN Assignment', standard: 'Accessory', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'Accessory / Tool', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5R36A09-A.pdf' },
+  { partNo: '5R40A13-C', name: 'Accessory / Tool - PIN Assignment', type: 'PIN Assignment', standard: 'Accessory', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'Accessory / Tool', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5R40A13-C.pdf' },
+  { partNo: '5R68A01-A', name: 'Accessory / Tool - PIN Assignment', type: 'PIN Assignment', standard: 'Accessory', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'Accessory / Tool', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5R68A01-A.pdf' },
+  { partNo: '5R68A02-5A', name: 'Accessory / Tool - PIN Assignment', type: 'PIN Assignment', standard: 'Accessory', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'Accessory / Tool', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/5R68A02-5A.pdf' },
+  { partNo: 'G07A47-Xxxxx', name: 'Other - PIN Assignment', type: 'PIN Assignment', standard: 'Other', speed: 'High Frequency', lanes: 'N/A', length: 0, application: 'Other', status: 'CAD', image: 'images/product/cad-placeholder.png', subcat: ['cad'], cat: 'pin-assignment-cad', pdfPath: 'pdf/CAD/G07A47-Xxxxx.pdf' },
+
+  /* ===== AI / GPU Servers (產品圖) ===== */
+  { partNo: 'YW-AIG-MC8-G6-075', name: 'MCIO i8 PCIe Gen6 GPU 高速線組', type: 'MCIO i4 / i8', standard: 'SFF-TA-1016', speed: '64 GT/s · Gen6', lanes: 'x8',  length: 750,  application: 'AI Server',   status: 'New',      image: 'images/product/ai-gpu-servers/AI-GPU-Servers-01.png', subcat: ['hispeed','internal'], cat: 'ai-gpu-servers' },
+  { partNo: 'YW-AIG-MC4-G5-038', name: 'MCIO i4 PCIe Gen5 GPU 互連線', type: 'MCIO i4 / i8', standard: 'SFF-TA-1016', speed: '32 GT/s · Gen5', lanes: 'x4',  length: 380,  application: 'AI Server',   status: 'New',      image: 'images/product/ai-gpu-servers/AI-GPU-Servers-02.png', subcat: ['hispeed','internal'], cat: 'ai-gpu-servers' },
+  { partNo: 'YW-AIG-SS8-G5-050', name: 'SlimSAS SFF-8654 AI 伺服器線', type: 'SlimSAS SFF-8654', standard: 'SFF-8654', speed: '32 GT/s · Gen5', lanes: 'x8',  length: 500,  application: 'AI Server',   status: 'In Stock', image: 'images/product/ai-gpu-servers/AI-GPU-Servers-03.png', subcat: ['stock','hispeed','internal'], cat: 'ai-gpu-servers' },
+  { partNo: 'YW-AIG-PG6-X16-045', name: 'PCIe Gen6 64GT/s x16 GPU 背板線', type: 'PCIe Gen6', standard: 'PCIe Gen6', speed: '64 GT/s · Gen6', lanes: 'x16', length: 450, application: 'Data Center', status: 'Custom',   image: 'images/product/ai-gpu-servers/AI-GPU-Servers-04.png', subcat: ['custom','hispeed','internal'], cat: 'ai-gpu-servers' },
+
+  /* ===== PCB Assembly (產品圖) ===== */
+  { partNo: 'YW-PCB-PADDLE-G6', name: 'PCIe Gen6 Paddle Card 訊號轉板', type: 'PCIe Gen6', standard: 'PCIe Gen6', speed: '64 GT/s · Gen6', lanes: 'x16', length: 0, application: 'Data Center', status: 'New',      image: 'images/product/pcb-assembly/PCB-Assembly-01.png', subcat: ['hispeed','circuit'], cat: 'pcb-assembly' },
+  { partNo: 'YW-PCB-BP-8639-25', name: 'SFF-8639 NVMe 2.5"×4 背板', type: 'SlimSAS SFF-8654', standard: 'SFF-8639', speed: '16 GT/s · Gen4', lanes: 'x4', length: 0, application: 'Storage', status: 'In Stock', image: 'images/product/pcb-assembly/PCB-Assembly-02.png', subcat: ['stock','circuit'], cat: 'pcb-assembly' },
+
+  /* ===== Server & Storage / PC (產品圖) ===== */
+  { partNo: 'YW-SRV-U2-8639-050', name: 'U.2 SFF-8639 NVMe 內接線組', type: 'SATA / SAS', standard: 'SFF-8639', speed: '16 GT/s · Gen4', lanes: 'x4', length: 500, application: 'Storage', status: 'In Stock', image: 'images/product/server-storage-pc/Server-Storage_PC-01.png', subcat: ['stock','internal'], cat: 'server-storage-pc' },
+  { partNo: 'YW-SRV-SATA3-030', name: 'SATA III 6Gb/s 內接資料線', type: 'SATA / SAS', standard: 'SATA Rev. 3', speed: '≤ 6 GT/s', lanes: 'x1', length: 300, application: 'IPC', status: 'In Stock', image: 'images/product/server-storage-pc/Server-Storage_PC-02.png', subcat: ['stock','circuit'], cat: 'server-storage-pc' },
+  { partNo: 'YW-SRV-MSAS43-080', name: 'miniSAS HD SFF-8643 儲存線', type: 'miniSAS HD', standard: 'SFF-8643', speed: '16 GT/s · Gen4', lanes: 'x8', length: 800, application: 'Storage', status: 'In Stock', image: 'images/product/server-storage-pc/Server-Storage_PC-03.png', subcat: ['stock','internal'], cat: 'server-storage-pc' },
+
+  /* ===== 電纜 DIY 工具 (產品圖) ===== */
+  { partNo: 'YW-DIY-TOOLKIT-01', name: '電纜 DIY 壓接工具與配件組', type: 'SATA / SAS', standard: 'DIY Tooling', speed: '≤ 6 GT/s', lanes: 'N/A', length: 0, application: 'DIY / Maintenance', status: 'In Stock', image: 'images/product/cable-diy-tooling/DIY-Tooling-Accessories-01.png', subcat: ['stock'], cat: 'cable-diy-tooling' },
+];
+
+const state = {
+  filters: { type: new Set(), speed: new Set(), lanes: new Set(), application: new Set(), status: new Set() },
+  search: '', sort: 'newest', view: 'grid',
+  page: 1, perPage: 12,
+  lengthMin: null, lengthMax: null,
+  subcat: 'all',
+  currentCat: 'pin-assignment-cad',
+};
+
+/* ---------- FILTER + SORT ---------- */
+function applyFilters() {
+  let result = PRODUCTS.filter(p => {
+    if (p.cat !== state.currentCat) return false;
+    if (state.filters.type.size && !state.filters.type.has(p.type)) return false;
+    if (state.filters.speed.size && !state.filters.speed.has(p.speed)) return false;
+    if (state.filters.lanes.size && !state.filters.lanes.has(p.lanes)) return false;
+    if (state.filters.application.size && !state.filters.application.has(p.application)) return false;
+    if (state.filters.status.size && !state.filters.status.has(p.status)) return false;
+    if (state.lengthMin !== null && p.length < state.lengthMin) return false;
+    if (state.lengthMax !== null && p.length > state.lengthMax) return false;
+    if (state.subcat !== 'all' && !p.subcat.includes(state.subcat)) return false;
+    if (state.search) {
+      const hay = `${p.partNo} ${p.name} ${p.type} ${p.standard} ${p.speed} ${p.application}`.toLowerCase();
+      if (!hay.includes(state.search)) return false;
+    }
+    return true;
+  });
+  const speedRank = s => parseInt(s) || 0;
+  switch (state.sort) {
+    case 'partno':     result.sort((a,b) => a.partNo.localeCompare(b.partNo)); break;
+    case 'speed-desc': result.sort((a,b) => speedRank(b.speed) - speedRank(a.speed)); break;
+    case 'length-asc': result.sort((a,b) => a.length - b.length); break;
+  }
+  return result;
+}
+
+/* ---------- RENDERERS ---------- */
+function renderActiveChips() {
+  const wrap = document.getElementById('active-filters');
+  const chips = [];
+  Object.keys(state.filters).forEach(key => {
+    state.filters[key].forEach(val => {
+      chips.push(`<span class="filter-chip" data-key="${key}" data-value="${esc(val)}">${esc(val)} <span class="x">×</span></span>`);
+    });
+  });
+  if (state.lengthMin !== null || state.lengthMax !== null) {
+    chips.push(`<span class="filter-chip" data-len="1">線長 ${state.lengthMin ?? '0'}—${state.lengthMax ?? '∞'} mm <span class="x">×</span></span>`);
+  }
+  if (state.search) chips.push(`<span class="filter-chip" data-search="1">"${esc(state.search)}" <span class="x">×</span></span>`);
+  if (state.subcat !== 'all') {
+    const labels = { stock: '現貨專區', hispeed: '高速傳輸線組', internal: '伺服器內接線', circuit: '電路電纜', custom: '客製化專區' };
+    chips.push(`<span class="filter-chip" data-subcat="1">${labels[state.subcat] || state.subcat} <span class="x">×</span></span>`);
+  }
+  wrap.innerHTML = `<span class="lbl">篩選條件 ·</span>${chips.join('')}${chips.length ? '<span class="clear-all" id="clear-all">清除全部 ×</span>' : '<span style="font-size:12.5px;color:var(--steel);">無 · 顯示全部產品</span>'}`;
+  wrap.querySelectorAll('.filter-chip .x').forEach(x => x.addEventListener('click', e => {
+    e.stopPropagation();
+    const c = x.parentElement;
+    if (c.dataset.key) {
+      state.filters[c.dataset.key].delete(c.dataset.value);
+      const cb = document.querySelector(`input[data-key="${c.dataset.key}"][data-value="${cssEsc(c.dataset.value)}"]`);
+      if (cb) cb.checked = false;
+    } else if (c.dataset.len) {
+      state.lengthMin = state.lengthMax = null;
+      document.getElementById('length-min').value = '';
+      document.getElementById('length-max').value = '';
+    } else if (c.dataset.search) {
+      state.search = ''; document.getElementById('search-input').value = '';
+    } else if (c.dataset.subcat) {
+      state.subcat = 'all';
+      document.querySelectorAll('.sub-cat-list a').forEach(a => a.classList.toggle('active', a.dataset.subcat === 'all'));
+    }
+    state.page = 1; update();
+  }));
+  const clr = document.getElementById('clear-all');
+  if (clr) clr.addEventListener('click', clearAllFilters);
+}
+
+function renderGrid(products) {
+  const grid = document.getElementById('grid-list');
+  grid.innerHTML = products.map(p => {
+    const badges = [
+      p.status === 'New' ? '<span class="badge-new">NEW</span>' : '',
+      p.status === 'In Stock' ? '<span class="badge-stock">IN STOCK</span>' : '',
+      p.status === 'Custom' ? '<span class="badge-stock" style="background:var(--steel);">CUSTOM</span>' : '',
+      p.status === 'CAD' ? '<span class="badge-stock" style="background:var(--green);">CAD</span>' : '',
+    ].filter(Boolean).join('');
+    const speedShort = p.speed.split(' · ')[0];
+    const specsHtml = p.cat === 'pin-assignment-cad'
+      ? `<span class="spec-pill green">${p.standard}</span>`
+      : `<span class="spec-pill green">${speedShort}</span><span class="spec-pill">${p.lanes}</span><span class="spec-pill">${p.length} mm</span>`;
+    const pdfAction = p.pdfPath
+      ? `<a href="${p.pdfPath}" download class="pdf-btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>DOWNLOAD</a>`
+      : `<button class="pdf-btn" onclick="alert('下載 ${p.partNo} 規格書 PDF (範例)')"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>SPEC PDF</button>`;
+    return `<article class="product-tile" data-partno="${p.partNo}">
+      <div class="badges">${badges}</div>
+      <div class="img-wrap">
+        <img src="${p.image}" alt="${esc(p.name)}" loading="lazy"
+             onerror="this.outerHTML='<div class=&quot;placeholder-img&quot;>YESWAY · ${p.partNo}</div>'"/>
+      </div>
+      <div class="info">
+        <div class="pn">${p.partNo}</div>
+        <div class="name">${esc(p.name)}</div>
+        <div class="specs">
+          ${specsHtml}
+        </div>
+      </div>
+      <div class="actions">
+        ${pdfAction}
+        <button class="view-btn" onclick="alert('進入 ${p.partNo} 詳情頁 (範例)')">VIEW</button>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function renderTable(products) {
+  const tbody = document.getElementById('table-tbody');
+  tbody.innerHTML = products.map(p => {
+    let badge = '—';
+    if (p.status === 'In Stock') badge = `<span style="background:var(--green-tint);color:var(--green-deep);font-weight:600;font-family:'JetBrains Mono';font-size:10px;padding:3px 7px;letter-spacing:.06em;">IN STOCK</span>`;
+    else if (p.status === 'New') badge = `<span style="background:var(--green);color:#fff;font-weight:600;font-family:'JetBrains Mono';font-size:10px;padding:3px 7px;letter-spacing:.06em;">NEW</span>`;
+    else if (p.status === 'Custom') badge = `<span style="background:var(--steel);color:#fff;font-weight:600;font-family:'JetBrains Mono';font-size:10px;padding:3px 7px;letter-spacing:.06em;">CUSTOM</span>`;
+    else if (p.status === 'CAD') badge = `<span style="background:var(--green);color:#fff;font-weight:600;font-family:'JetBrains Mono';font-size:10px;padding:3px 7px;letter-spacing:.06em;">CAD</span>`;
+    const hi = p.speed.startsWith('32') ? 'spec highlight' : 'spec';
+    const pdfBtn = p.pdfPath
+      ? `<a href="${p.pdfPath}" download class="table-pdf-btn" style="border:none;background:var(--paper);color:var(--ink);text-decoration:none;">PDF ↓</a>`
+      : `<button class="table-pdf-btn" onclick="alert('下載 ${p.partNo} 規格書 PDF')">PDF ↓</button>`;
+    return `<tr data-partno="${p.partNo}">
+      <td><span class="type">${esc(p.type.replace(' i4 / i8','').replace(' SFF-8654','').replace(' SFF-8611','').replace(' / Thunderbolt','').replace(' / SAS',''))}</span></td>
+      <td class="pn">${p.partNo}</td>
+      <td class="spec">${esc(p.standard)}</td>
+      <td class="${hi}">${esc(p.speed.split(' · ')[0])}</td>
+      <td class="spec">${p.lanes}</td>
+      <td class="spec">${p.length} mm</td>
+      <td class="spec">${esc(p.application)}</td>
+      <td>${badge}</td>
+      <td class="actions">
+        ${pdfBtn}
+        <button class="table-view-btn" onclick="alert('進入 ${p.partNo} 詳情頁')">VIEW →</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function renderResultCount(total, s, e) {
+  const el = document.getElementById('result-count');
+  if (total === 0) { el.innerHTML = '<strong>0</strong> 筆 · 沒有符合條件'; return; }
+  el.innerHTML = `顯示 <strong>${s} - ${e}</strong> / 共 <strong>${total}</strong> 筆`;
+}
+
+function renderPagination(total) {
+  const totalPages = Math.max(1, Math.ceil(total / state.perPage));
+  if (state.page > totalPages) state.page = totalPages;
+  document.getElementById('page-info').innerHTML = `第 ${state.page} 頁 / 共 ${totalPages} 頁 · 顯示 ${total === 0 ? 0 : (state.page-1)*state.perPage + 1} — ${Math.min(state.page * state.perPage, total)} / ${total} 筆`;
+  const ctrls = document.getElementById('page-controls');
+  const btns = [`<button class="page-btn" data-page="prev" ${state.page === 1 ? 'disabled' : ''}>← PREV</button>`];
+  for (let i = 1; i <= totalPages; i++) btns.push(`<button class="page-btn ${i === state.page ? 'active' : ''}" data-page="${i}">${i}</button>`);
+  btns.push(`<button class="page-btn" data-page="next" ${state.page === totalPages ? 'disabled' : ''}>NEXT →</button>`);
+  ctrls.innerHTML = btns.join('');
+  ctrls.querySelectorAll('.page-btn').forEach(b => b.addEventListener('click', () => {
+    const p = b.dataset.page;
+    if (p === 'prev' && state.page > 1) state.page--;
+    else if (p === 'next' && state.page < totalPages) state.page++;
+    else if (parseInt(p)) state.page = parseInt(p);
+    update();
+    window.scrollTo({ top: document.querySelector('.toolbar').offsetTop - 100, behavior: 'smooth' });
+  }));
+}
+
+function renderSubcatCounts() {
+  const counts = { all: PRODUCTS.length, stock: 0, hispeed: 0, internal: 0, circuit: 0 };
+  PRODUCTS.forEach(p => p.subcat.forEach(s => { if (counts[s] !== undefined) counts[s]++; }));
+  const setIfExists = (sel, val) => { const el = document.querySelector(sel); if (el) el.textContent = val; };
+  setIfExists('[data-count-all]', counts.all);
+  setIfExists('[data-count-stock]', counts.stock);
+  setIfExists('[data-count-hispeed]', counts.hispeed);
+  setIfExists('[data-count-internal]', counts.internal);
+  setIfExists('[data-count-circuit]', counts.circuit);
+}
+
+function renderFilterCounts() {
+  document.querySelectorAll('input[data-key]').forEach(cb => {
+    const count = PRODUCTS.filter(p => p[cb.dataset.key] === cb.dataset.value).length;
+    const span = cb.closest('.filter-opt').querySelector('.sub-cnt');
+    if (span && !span.textContent.trim()) span.textContent = count;
+  });
+}
+
+/* ---------- MAIN UPDATE ---------- */
+function readFiltersFromDOM() {
+  Object.keys(state.filters).forEach(key => {
+    state.filters[key] = new Set([...document.querySelectorAll(`input[data-key="${key}"]:checked`)].map(i => i.dataset.value));
+  });
+  const minV = document.getElementById('length-min').value;
+  const maxV = document.getElementById('length-max').value;
+  state.lengthMin = minV === '' ? null : parseInt(minV);
+  state.lengthMax = maxV === '' ? null : parseInt(maxV);
+  state.search = document.getElementById('search-input').value.trim().toLowerCase();
+  state.sort = document.getElementById('sort-select').value;
+}
+
+function update() {
+  readFiltersFromDOM();
+  const filtered = applyFilters();
+  const start = (state.page - 1) * state.perPage;
+  const paged = filtered.slice(start, start + state.perPage);
+  renderActiveChips();
+  renderGrid(paged);
+  renderTable(paged);
+  renderResultCount(filtered.length, filtered.length === 0 ? 0 : start + 1, start + paged.length);
+  renderPagination(filtered.length);
+
+  const empty = document.getElementById('empty-state');
+  const grid = document.getElementById('grid-list');
+  const table = document.getElementById('table-list');
+  const pagination = document.getElementById('pagination');
+  if (filtered.length === 0) {
+    empty.classList.remove('hidden');
+    grid.classList.add('hidden');
+    table.classList.add('hidden');
+    pagination.classList.add('hidden');
+  } else {
+    empty.classList.add('hidden');
+    pagination.classList.remove('hidden');
+    if (state.view === 'grid') { grid.classList.remove('hidden'); table.classList.add('hidden'); }
+    else { grid.classList.add('hidden'); table.classList.remove('hidden'); }
+  }
+}
+
+function clearAllFilters() {
+  document.querySelectorAll('.sidebar input[type="checkbox"]').forEach(i => i.checked = false);
+  document.getElementById('length-min').value = '';
+  document.getElementById('length-max').value = '';
+  document.getElementById('search-input').value = '';
+  state.subcat = 'all';
+  document.querySelectorAll('.sub-cat-list a').forEach(a => a.classList.toggle('active', a.dataset.subcat === 'all'));
+  state.page = 1; update();
+}
+
+/* ---------- HELPERS ---------- */
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function cssEsc(s) { return String(s).replace(/(["\\])/g, '\\$1'); }
+
+/* ---------- BIND ---------- */
+const gridBtn = document.getElementById('grid-view');
+const tableBtn = document.getElementById('table-view');
+gridBtn.addEventListener('click', () => { state.view = 'grid'; gridBtn.classList.add('active'); tableBtn.classList.remove('active'); update(); });
+tableBtn.addEventListener('click', () => { state.view = 'table'; tableBtn.classList.add('active'); gridBtn.classList.remove('active'); update(); });
+
+/* Mobile filter drawer toggle */
+(function () {
+  const sidebar = document.getElementById('sidebar');
+  const openBtn = document.getElementById('mobile-filter-open');
+  const closeBtn = document.getElementById('sidebar-close');
+  if (openBtn) openBtn.addEventListener('click', () => { sidebar.classList.add('open'); document.body.style.overflow = 'hidden'; });
+  if (closeBtn) closeBtn.addEventListener('click', () => { sidebar.classList.remove('open'); document.body.style.overflow = ''; });
+})();
+
+document.querySelectorAll('.sidebar input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', () => { state.page = 1; update(); });
+});
+['length-min','length-max'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => { state.page = 1; update(); });
+});
+let st;
+document.getElementById('search-input').addEventListener('input', () => {
+  clearTimeout(st); st = setTimeout(() => { state.page = 1; update(); }, 200);
+});
+document.getElementById('sort-select').addEventListener('change', update);
+
+document.querySelectorAll('.filter-block .clear').forEach(c => {
+  c.addEventListener('click', () => {
+    const blk = c.closest('.filter-block');
+    blk.querySelectorAll('input[type="checkbox"]').forEach(i => i.checked = false);
+    if (blk.dataset.block === 'length') {
+      document.getElementById('length-min').value = '';
+      document.getElementById('length-max').value = '';
+    }
+    state.page = 1; update();
+  });
+});
+
+document.querySelectorAll('.sub-cat-list a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.sub-cat-list a').forEach(x => x.classList.remove('active'));
+    a.classList.add('active');
+    state.subcat = a.dataset.subcat || 'all';
+    state.page = 1; update();
+  });
+});
+
+document.querySelectorAll('.cat-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.cat-tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    state.currentCat = t.dataset.cat;
+    state.page = 1;
+    // Clear all filters from UI
+    document.querySelectorAll('.sidebar input[type="checkbox"]').forEach(i => i.checked = false);
+    document.getElementById('length-min').value = '';
+    document.getElementById('length-max').value = '';
+    document.getElementById('search-input').value = '';
+    // Clear state
+    state.filters = { type: new Set(), speed: new Set(), lanes: new Set(), application: new Set(), status: new Set() };
+    state.search = '';
+    state.subcat = 'all';
+    state.lengthMin = null;
+    state.lengthMax = null;
+    // Update UI
+    document.querySelectorAll('.sub-cat-list a').forEach(a => a.classList.toggle('active', a.dataset.subcat === 'all'));
+    update();
+  });
+});
+
+/* ---------- INIT ---------- */
+renderFilterCounts();
+renderSubcatCounts();
+update();
+</script>
+
+</body>
+</html>

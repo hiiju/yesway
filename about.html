@@ -1,0 +1,1888 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>關於高位 — Yes Way 高位企業｜30 年高速傳輸線材製造</title>
+<meta name="description" content="高位企業 (Yes Way) 自 1992 年成立，深耕電腦周邊高速傳輸介面產品設計與製造，從 SCSI 演進至今日 AI 伺服器 MCIO / PCIe Gen6 (64 GT/s) 線材。" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+  /* ============================================================
+     About-specific styles
+     ============================================================ */
+
+  /* HERO BANNER — full-bleed (same pattern as esg.html) */
+  .about-banner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    min-height: 420px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #11221a 0%, #0E1410 60%, #1a3026 100%);
+    color: var(--paper);
+    isolation: isolate;
+  }
+  .about-banner img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: .85;
+  }
+  .about-banner::before {
+    /* Dark gradient overlay for headline contrast */
+    content: "";
+    position: absolute; inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(14,20,16,.25) 0%, rgba(14,20,16,.10) 45%, rgba(14,20,16,.65) 100%),
+      linear-gradient(95deg, rgba(14,20,16,.70) 0%, rgba(14,20,16,.25) 55%, rgba(14,20,16,0) 85%);
+    pointer-events: none;
+  }
+  .about-banner::after {
+    /* Subtle technical grid */
+    content: "";
+    position: absolute; inset: 0;
+    z-index: 1;
+    background-image:
+      linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse at 30% 100%, #000 25%, transparent 70%);
+            mask-image: radial-gradient(ellipse at 30% 100%, #000 25%, transparent 70%);
+    pointer-events: none;
+  }
+  .about-banner .overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(40px, 5vw, 80px) var(--gutter) clamp(36px, 4.5vw, 70px);
+    max-width: var(--max-w);
+    margin: 0 auto;
+    width: 100%;
+  }
+  .about-banner .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.7);
+    display: flex;
+    gap: 10px;
+    margin: 0 0 auto 0;
+    padding-top: 8px;
+  }
+  .about-banner .breadcrumb a { color: rgba(247,246,241,.7); }
+  .about-banner .breadcrumb a:hover { color: #6BFF6E; }
+  .about-banner .breadcrumb .sep { opacity: .5; }
+
+  .about-banner .overlay-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    align-items: flex-end;
+    gap: 50px;
+    margin-top: 40px;
+  }
+  @media (max-width: 760px) {
+    .about-banner .overlay-grid { grid-template-columns: 1fr; gap: 22px; }
+  }
+  .about-banner .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #6BFF6E;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .about-banner .lbl::before {
+    content: ""; width: 28px; height: 1px; background: #6BFF6E;
+  }
+  .about-banner h1,
+  .about-banner h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    color: var(--paper);
+    font-size: clamp(32px, 5vw, 72px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin: 0;
+    text-shadow: 0 2px 24px rgba(0,0,0,.45);
+  }
+  .about-banner h1 em,
+  .about-banner h2 em { color: #6BFF6E; font-style: normal; font-weight: 400; }
+  .about-banner h1 .nowrap { white-space: nowrap; }
+  .about-banner .specs {
+    border-left: 1px solid rgba(247,246,241,.2);
+    padding-left: 24px;
+    color: rgba(247,246,241,.85);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .08em;
+    line-height: 1.9;
+  }
+  @media (max-width: 760px) {
+    .about-banner .specs {
+      border-left: 0; padding-left: 0;
+      border-top: 1px solid rgba(247,246,241,.2);
+      padding-top: 14px;
+    }
+  }
+  .about-banner .specs strong { color: #6BFF6E; font-weight: 600; }
+
+  /* Legacy hooks (kept for compatibility — no longer rendered) */
+  .page-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+    gap: clamp(40px, 6vw, 100px);
+    align-items: end;
+    position: relative; z-index: 1;
+  }
+  @media (max-width: 900px) { .page-hero-grid { grid-template-columns: 1fr; } }
+  .page-hero h1 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-weight: 500;
+    font-size: clamp(48px, 7vw, 110px);
+    line-height: .98;
+    letter-spacing: -.025em;
+    margin: 0;
+  }
+  .page-hero h1 em { font-style: normal; font-weight: 400; color: var(--green); }
+  .page-hero .lead {
+    font-size: clamp(16px, 1.3vw, 18px);
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 480px;
+  }
+  .page-hero .lead strong { color: var(--green); }
+
+  /* INTRO 雙欄 */
+  .intro-section {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--paper);
+  }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(0,1.3fr);
+    gap: clamp(40px, 6vw, 100px);
+    align-items: start;
+  }
+  .intro-grid .left { position: sticky; top: 110px; }
+  @media (max-width: 900px) {
+    .intro-grid { grid-template-columns: 1fr; }
+    /* On mobile the grid is a single column — disable sticky so the
+       left block doesn't stay pinned and overlap the right content. */
+    .intro-grid .left { position: static; top: auto; }
+  }
+  .intro-grid h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-weight: 500;
+    font-size: clamp(32px, 3.6vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    margin: 16px 0 32px;
+  }
+  .intro-grid h2 em { font-style: normal; color: var(--green); font-weight: 400; }
+  .intro-grid h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 19px; font-weight: 600;
+    margin: 0 0 10px;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .intro-grid h3::before {
+    content: ""; width: 8px; height: 8px; background: var(--green);
+    display: inline-block;
+  }
+  .intro-block + .intro-block { margin-top: 36px; padding-top: 36px; border-top: 1px solid var(--hair); }
+  .intro-block p { font-size: 15.5px; line-height: 1.7; color: var(--ink-2); margin: 0; }
+  .intro-block .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: .1em;
+    color: var(--steel); margin-bottom: 8px; display: block;
+  }
+
+  /* TIMELINE 公司沿革 */
+  .timeline-section {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--paper-2);
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+  }
+  .timeline-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: end;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 760px) { .timeline-head { grid-template-columns: 1fr; } }
+  .timeline-head p { max-width: 460px; margin: 0 0 0 auto; font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+  @media (max-width: 760px) { .timeline-head p { margin: 0; } }
+
+  .timeline { position: relative; }
+  /* Top marker (LATEST / NOW) */
+  .timeline-marker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 0 4px 36px;
+    position: relative;
+  }
+  .timeline-marker::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 9px; height: 9px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px rgba(0,127,2,.12);
+  }
+  .timeline-marker .mk-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    color: var(--green);
+    font-weight: 600;
+  }
+  .timeline-marker .mk-line {
+    flex: 1;
+    height: 1px;
+    background: var(--hair);
+  }
+  .timeline-marker .mk-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--steel);
+    letter-spacing: .08em;
+  }
+
+  .timeline-track {
+    position: relative;
+    padding-left: 36px;
+  }
+  /* Vertical timeline line */
+  .timeline-track::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--ink);
+  }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0 40px;
+    padding: 22px 0 26px;
+    border-bottom: 1px solid var(--hair);
+    position: relative;
+    align-items: start;
+  }
+  .tl-item:last-child { border-bottom: 0; }
+  /* Green dot — sits on the vertical line */
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -36px;
+    top: 30px;
+    width: 9px; height: 9px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px var(--paper-2);
+  }
+  /* Slightly emphasise first (most recent) item */
+  .tl-item:first-child::before {
+    background: var(--green);
+    box-shadow: 0 0 0 5px var(--paper-2), 0 0 0 6px var(--green);
+  }
+  .tl-year {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(22px, 2vw, 32px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    padding-top: 6px;
+    position: sticky;
+    top: 108px;
+  }
+  .tl-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 10px; display: block;
+  }
+  .tl-list {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+  .tl-list li {
+    font-size: 13.5px; line-height: 1.7; color: var(--ink-2);
+    padding: 3px 0 3px 20px;
+    position: relative;
+  }
+  .tl-list li::before {
+    content: "—";
+    position: absolute; left: 0;
+    color: var(--green);
+  }
+  /* Founding marker at the bottom */
+  .timeline-end {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 0 0 36px;
+    position: relative;
+  }
+  .timeline-end::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 9px; height: 9px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px var(--paper-2);
+  }
+  .timeline-end .mk-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .18em;
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .timeline-end .mk-line {
+    flex: 1;
+    height: 1px;
+    background: var(--hair);
+  }
+  @media (max-width: 600px) {
+    .tl-item { grid-template-columns: 1fr; gap: 6px; }
+    .tl-year { font-size: 22px; padding-top: 0; position: static; }
+  }
+
+  /* VALUES 三大核心 (mobile + desktop) */
+  .values-section {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    position: relative;
+  }
+  .values-section::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+  }
+  .values-section .h-section { color: var(--paper); position: relative; z-index: 1; }
+  .values-section .h-section em { color: #6BFF6E; }
+  .values-section .eyebrow { color: var(--steel-2); }
+  .values-section .eyebrow::before { background: #6BFF6E; }
+  .values-head { margin-bottom: 60px; max-width: 720px; position: relative; z-index: 1; }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(247,246,241,.15);
+    position: relative; z-index: 1;
+    border: 1px solid rgba(247,246,241,.15);
+  }
+  @media (max-width: 800px) { .values-grid { grid-template-columns: 1fr; } }
+  .value-card {
+    background: var(--ink);
+    padding: 40px 32px;
+    min-height: 320px;
+    display: flex; flex-direction: column;
+    transition: background .35s var(--easing);
+  }
+  .value-card:hover { background: #11221a; }
+  .value-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .14em;
+    color: rgba(247,246,241,.5);
+    margin-bottom: auto;
+  }
+  .value-card h3 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(24px, 2.4vw, 32px);
+    font-weight: 500;
+    line-height: 1.2; letter-spacing: -.01em;
+    margin: 32px 0 14px;
+  }
+  .value-card h3 em { font-style: normal; color: #6BFF6E; font-weight: 400; }
+  .value-card p {
+    font-size: 14.5px; line-height: 1.65;
+    color: rgba(247,246,241,.72);
+    margin: 0;
+  }
+
+  /* COMPANY GALLERY 公司/工廠圖 */
+  .gallery-section {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--paper);
+  }
+  .gallery-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: end;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 760px) { .gallery-head { grid-template-columns: 1fr; } }
+  .gallery-head p { max-width: 460px; margin: 0 0 0 auto; font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+  @media (max-width: 760px) { .gallery-head p { margin: 0; } }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+  .gallery-item {
+    border: 1px solid var(--hair);
+    background: var(--paper-2);
+    overflow: hidden;
+    position: relative;
+  }
+  .gallery-item.large { grid-column: span 5; aspect-ratio: 3/4; }
+  .gallery-item.med { grid-column: span 7; aspect-ratio: 4/3; }
+  .gallery-item.tall { grid-column: span 4; aspect-ratio: 3/4; }
+  .gallery-item.wide { grid-column: span 8; aspect-ratio: 16/9; }
+  @media (max-width: 760px) {
+    .gallery-item.large, .gallery-item.med, .gallery-item.tall, .gallery-item.wide { grid-column: span 12; aspect-ratio: 4/3; }
+  }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+  .gallery-item .label {
+    position: absolute;
+    left: 16px; bottom: 16px;
+    background: rgba(14,20,16,.85);
+    color: var(--paper);
+    backdrop-filter: blur(6px);
+    padding: 8px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .gallery-item .label .green { color: #6BFF6E; }
+
+  /* CTA STRIP (與首頁相同樣式延伸) */
+  .cta {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::after {
+    content: "ABOUT";
+    position: absolute;
+    bottom: -40px; left: 50%; transform: translateX(-50%);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(120px, 22vw, 320px);
+    color: rgba(247,246,241,.04);
+    letter-spacing: -.05em;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .cta-inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  @media (max-width: 800px) { .cta-inner { grid-template-columns: 1fr; } }
+  .cta h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(40px, 5.5vw, 80px);
+    font-weight: 500; line-height: 1; letter-spacing: -.02em;
+    margin: 18px 0 0;
+  }
+  .cta h2 em { font-style: normal; font-weight: 400; color: #6BFF6E; }
+  .cta-side p { color: rgba(247,246,241,.78); font-size: 16px; line-height: 1.7; margin: 0 0 32px; }
+  .cta-actions { display: flex; flex-direction: column; gap: 0; }
+  .cta-action-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(247,246,241,.15); padding: 18px 0; transition: padding-left .3s var(--easing); }
+  .cta-action-row:last-child { border-bottom: 1px solid rgba(247,246,241,.15); }
+  .cta-action-row:hover { padding-left: 12px; color: #6BFF6E; }
+  .cta-action-row .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(247,246,241,.6); }
+  .cta-action-row .val { font-size: 17px; font-weight: 500; margin-top: 4px; }
+  .cta-action-row .arrow { font-size: 22px; }
+
+  /* ============================================================
+     INTRO sub-items (used inside .intro-block)
+     ============================================================ */
+  .intro-block p { font-size: 14.5px; line-height: 1.75; color: var(--ink-2); margin: 0 0 16px; }
+  .intro-block p:last-child { margin: 0; }
+  .sub-items { margin-top: 16px; display: grid; gap: 12px; }
+  .sub-item {
+    padding: 14px 18px;
+    background: var(--paper-2);
+    border-left: 2px solid var(--green);
+  }
+  .sub-item .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .1em;
+    color: var(--green); display: block; margin-bottom: 6px;
+  }
+  .sub-item p { font-size: 13.5px; line-height: 1.7; color: var(--ink-2); margin: 0; }
+  .intro-vision {
+    margin-top: 40px;
+    padding: 24px 22px;
+    background: var(--ink);
+    color: var(--paper);
+    border-left: 3px solid var(--green);
+  }
+  .intro-vision .mono {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .14em;
+    color: #6BFF6E; display: block; margin-bottom: 10px;
+  }
+  .intro-vision p { font-size: 14px; line-height: 1.75; color: rgba(247,246,241,.86); margin: 0; }
+
+  /* ============================================================
+     SERVICE FLOW / Accordion (moved from index.html)
+     ============================================================ */
+  .service-flow {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--paper);
+  }
+  .service-flow-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 760px) { .service-flow-head { grid-template-columns: 1fr; } }
+  .service-flow-head p {
+    max-width: 460px;
+    margin: 0 0 0 auto;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  @media (max-width: 760px) { .service-flow-head p { margin: 0; } }
+  /* ── Service Flow: visual step track ── */
+  .sf-flow-track {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    margin-bottom: 56px;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+  }
+  .sf-flow-track::-webkit-scrollbar { display: none; }
+
+  .sf-chip {
+    flex: 1;
+    min-width: 130px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    text-align: center;
+  }
+  .sf-chip-box {
+    width: 80px; height: 80px;
+    background: var(--ink);
+    color: var(--paper);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-shrink: 0;
+    transition: background .25s var(--easing);
+  }
+  .sf-chip-box:hover { background: var(--green); }
+  .sf-chip.is-first .sf-chip-box { background: var(--green); }
+  .sf-chip-n {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px; font-weight: 600;
+    line-height: 1; letter-spacing: -.02em;
+  }
+  .sf-chip-icon { opacity: .75; }
+  .sf-chip-lbl {
+    font-size: 13px; font-weight: 500;
+    line-height: 1.4; color: var(--ink);
+    max-width: 110px;
+  }
+
+  .sf-connector {
+    flex-shrink: 0;
+    width: 28px;
+    margin-top: 40px;   /* align with centre of 80px box */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--steel-2);
+  }
+  .sf-connector svg { display: block; }
+
+  /* ── Step detail cards ── */
+  .sf-cards {
+    border: 1px solid var(--hair);
+    display: flex;
+    flex-direction: column;
+  }
+  .sf-card {
+    display: grid;
+    grid-template-columns: 90px 1fr 100px;
+    border-bottom: 1px solid var(--hair);
+    transition: background .3s var(--easing);
+  }
+  .sf-card:last-child { border-bottom: 0; }
+  .sf-card:hover { background: var(--paper-2); }
+
+  .sf-card-left {
+    padding: 28px 20px;
+    border-right: 1px solid var(--hair);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    text-align: center;
+  }
+  .sf-card-num {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(28px, 3vw, 40px);
+    font-weight: 500;
+    color: var(--green);
+    line-height: 1;
+    letter-spacing: -.025em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .sf-card-num .step-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    font-weight: 500;
+    color: var(--steel);
+    line-height: 1;
+  }
+
+  .sf-card-body {
+    padding: 28px 32px;
+  }
+  .sf-card-title {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: clamp(17px, 1.6vw, 21px);
+    font-weight: 600;
+    letter-spacing: -.01em;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .sf-card-desc {
+    font-size: 14.5px;
+    line-height: 1.72;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  .sf-card-right {
+    padding: 28px 20px;
+    border-left: 1px solid var(--hair);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+  }
+  .sf-card-time-lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--steel);
+  }
+  .sf-card-time {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 15px; font-weight: 600;
+    color: var(--ink); line-height: 1.3;
+  }
+
+  @media (max-width: 700px) {
+    .sf-card {
+      grid-template-columns: 1fr;
+    }
+    .sf-card-left {
+      flex-direction: row;
+      border-right: 0;
+      border-bottom: 1px solid var(--hair);
+      justify-content: flex-start;
+      padding: 18px 24px;
+    }
+    .sf-card-right {
+      flex-direction: row;
+      border-left: 0;
+      border-top: 1px solid var(--hair);
+      justify-content: flex-start;
+      gap: 10px;
+      padding: 14px 24px;
+    }
+    .sf-card-body { padding: 20px 24px; }
+  }
+
+  /* ============================================================
+     COMMITMENT 高位承諾
+     ============================================================ */
+  .commitment-section {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--paper-2);
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+  }
+  .commitment-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: end;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 760px) { .commitment-head { grid-template-columns: 1fr; } }
+  .commitment-head p { max-width: 460px; margin: 0 0 0 auto; font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+  @media (max-width: 760px) { .commitment-head p { margin: 0; } }
+  .commitment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--hair);
+    border: 1px solid var(--hair);
+  }
+  @media (max-width: 900px) { .commitment-grid { grid-template-columns: 1fr; } }
+  .commit-card {
+    background: var(--paper);
+    padding: 40px 32px 44px;
+    position: relative;
+    transition: background .35s var(--easing);
+  }
+  .commit-card:hover { background: #f7fbf6; }
+  .commit-card::before {
+    content: ""; position: absolute;
+    top: 0; left: 0; width: 4px; height: 64px;
+    background: var(--green);
+  }
+  .commit-card .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .14em;
+    color: var(--green); margin-bottom: 22px;
+  }
+  .commit-card h3 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(22px, 2.2vw, 28px);
+    font-weight: 500;
+    letter-spacing: -.01em; line-height: 1.2;
+    margin: 0 0 16px;
+    color: var(--ink);
+  }
+  .commit-card p { font-size: 14.5px; line-height: 1.75; color: var(--ink-2); margin: 0; }
+
+  /* ============================================================
+     ADVANTAGES 高位優勢
+     ============================================================ */
+  .advantages-section {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--paper);
+  }
+  .adv-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: end;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 760px) { .adv-head { grid-template-columns: 1fr; } }
+  .adv-head p { max-width: 460px; margin: 0 0 0 auto; font-size: 16px; line-height: 1.65; color: var(--ink-2); }
+  @media (max-width: 760px) { .adv-head p { margin: 0; } }
+
+  /* 3-col image-led grid */
+  .adv-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--hair);
+    border: 1px solid var(--hair);
+  }
+  @media (max-width: 900px) { .adv-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 540px)  { .adv-grid { grid-template-columns: 1fr; } }
+
+  .adv-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    transition: background .35s var(--easing);
+    overflow: hidden;
+  }
+  .adv-card:hover { background: var(--paper-2); }
+
+  /* Image block */
+  .adv-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .adv-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform .7s var(--easing);
+    display: block;
+  }
+  .adv-card:hover .adv-img img { transform: scale(1.04); }
+
+  /* Text block */
+  .adv-body {
+    padding: 26px 26px 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .adv-body .en {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--green);
+  }
+  .adv-body h4 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(16px, 1.4vw, 19px);
+    font-weight: 600;
+    letter-spacing: -.01em;
+    line-height: 1.25;
+    margin: 0;
+    color: var(--ink);
+  }
+  .adv-body p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0;
+    flex: 1;
+  }
+
+
+  /* ============================================================
+     Client feedback 0526 — enlarge only the prominent green
+     banner label ×1.5; card sub-labels keep their original size.
+     ============================================================ */
+  .about-banner .lbl { font-size: 16.5px; }   /* 11 → 16.5 (×1.5 banner label) */
+  /* green sub-labels ×1.2 */
+  .timeline-marker .mk-tag { font-size: 13.2px; }  /* 11 → 13.2 */
+  .tl-tag                  { font-size: 12.6px; }  /* 10.5 → 12.6 */
+  .sub-item .mono          { font-size: 13.2px; }  /* 11 → 13.2 */
+  .intro-vision .mono      { font-size: 13.2px; }  /* 11 → 13.2 */
+  .sf-chip-lbl             { font-size: 14.3px; }  /* 13 → 14.3 */
+  .commit-card .num        { font-size: 13.2px; }  /* 11 → 13.2 */
+  .adv-body .en            { font-size: 12.6px; }  /* 10.5 → 12.6 */
+</style>
+</head>
+
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="container top-bar-track">
+    <div class="top-bar-left">
+      <span class="pulse"></span>
+      <span>COMPUTEX 2026 / 06.02 — 06.05</span>
+      <span class="sep">/</span>
+      <span>TPE 南港展覽館 2館 4F</span>
+      <span class="sep">/</span>
+      <a href="news.html#computex-2026">攤位 Q1334C →</a>
+    </div>
+    <div class="top-bar-right">
+      <span>EST. 1992</span>
+      <span class="sep">/</span>
+      <span>MADE IN TAIWAN · 三峽</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-track">
+    <a class="brand" href="index.html">
+      <img src="images/logo/logo-yesway-green.svg" alt="Yes Way 高位企業" />
+    </a>
+    <input type="checkbox" id="nav-cb" class="nav-cb" hidden />
+    <nav><ul class="nav">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="about.html" class="active">關於高位</a></li>
+      <li class="has-sub"><a href="quality.html">品質與技術</a></li>
+      <li class="has-sub"><a href="products.html">產品介紹</a></li>
+      <li><a href="news.html">最新消息</a></li>
+      <li><a href="esg.html">ESG</a></li>
+      <li><a href="contact.html">聯絡我們</a></li>
+    </ul></nav>
+    <div class="header-actions">
+      <button class="lang-switch"><span class="on">中</span><span>/</span><span>EN</span></button>
+      <button class="btn-cta">詢價 Inquiry <span class="arrow">→</span></button>
+      <label for="nav-cb" class="nav-toggle" aria-label="選單 Menu"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO BANNER — full-bleed (same pattern as esg.html)
+============================================================ -->
+<section class="about-banner">
+  <img src="images/banner/about.png" alt="從 SCSI 到 AI Server — 高位 30 年傳輸技術演進" />
+  <div class="overlay">
+    <nav class="breadcrumb">
+      <a href="index.html">HOME</a>
+      <span class="sep">/</span>
+      <span>關於高位 / ABOUT</span>
+    </nav>
+    <div class="overlay-grid">
+      <div>
+        <span class="lbl">ABOUT YES WAY · 1992 — NOW</span>
+        <h1>
+          從 SCSI 到 <em>AI Server</em>，<br/>
+          高位 <em>30 年</em>&nbsp;走過<br/>
+          傳輸技術的<br/>
+          <span class="nowrap">每一次<em>演進</em>。</span>
+        </h1>
+      </div>
+      <div class="specs">
+        <strong>EST.</strong> 1992<br/>
+        <strong>HQ.</strong> 新北 · 三峽<br/>
+        <strong>線別.</strong> Cable Assembly · PCB Assembly<br/>
+        <strong>應用.</strong> AI / GPU Server · Storage · PC<br/>
+        <strong>認證.</strong> ISO 9001 / 14001 / 45001
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INTRO / 公司簡介 (側邊 sticky 雙欄)
+============================================================ -->
+<section class="intro-section">
+  <div class="container intro-grid">
+    <div class="left">
+      <span class="eyebrow">01 / WHO WE ARE</span>
+      <h2>逾三十載<br/><em>精密傳輸專家</em>。</h2>
+      <p>
+        高位企業有限公司（Yesway Corporation）成立於 1992 年，總部位於台灣新北三峽區，
+        為領先的高速傳輸線材加工專家（Cable Assembly Manufacturer）。
+        自 SCSI、IEEE 1394 時代起步，高位憑藉逾三十年的精密加工與研發經驗，
+        成功轉型並深耕於 AI 伺服器、雲端資料中心及高效能運算（HPC）領域。
+      </p>
+      <p>
+        我們致力於提供穩定、可靠且具備極致性能的連接方案，
+        以「精密製造、技術領先、客戶導向」為核心價值，
+        成為全球科技品牌背後最堅實的技術夥伴。
+      </p>
+
+      <div class="intro-vision">
+        <span class="mono">VISION · 願景與未來展望</span>
+        <p>
+          高位企業將持續精進高頻模擬與自動化測試技術，深化 AI 伺服器供應鏈的技術合作，
+          致力於成為全球客戶在高速傳輸領域中最值得信賴的長期策略夥伴。
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="intro-block">
+        <h3>技術研發與產品版圖</h3>
+        <span class="mono">PCIE GEN6 · MCIO · SLIMSAS · CXL</span>
+        <p>
+          我們專注於極速傳輸領域，產品線全面覆蓋最新世代傳輸規格。
+          憑藉豐富的 PCB 設計與線材加工經驗，不僅提供標準化產品，
+          更具備背板（Backplane）與轉接板（Adapter Card）的高度客製化 ODM / OEM 研發實力。
+        </p>
+        <div class="sub-items">
+          <div class="sub-item">
+            <span class="mono">01 · AI 與伺服器方案</span>
+            <p>MCIO（i4 / i8）、PCIe Gen5 / Gen6、SlimSAS（SFF-8654）、CXL 高速連接，針對次世代 AI 晶片的高頻需求，提供低損耗的訊號通道。</p>
+          </div>
+          <div class="sub-item">
+            <span class="mono">02 · 高速存儲與周邊</span>
+            <p>miniSAS HD、SATA、SFF-8611、USB 4.0 傳輸方案，確保大數據讀取與寫入的高效能表現。</p>
+          </div>
+          <div class="sub-item">
+            <span class="mono">03 · 客製化研發</span>
+            <p>專業 PCB 電路設計與機構件開發，靈活對應各類複雜線束加工（Cable Harness）需求。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-block">
+        <h3>品質保證 · 訊號完整性檢測</h3>
+        <span class="mono">TDR · VNA · BIRT · MIT</span>
+        <p>
+          在高頻傳輸環境中，加工精度直接決定訊號品質。
+          高位企業堅持台灣製造（MIT），建立具備國際標準的檢測實驗室，
+          運用三大關鍵技術確保每條線材符合最高規格要求。
+        </p>
+        <div class="sub-items">
+          <div class="sub-item">
+            <span class="mono">TDR · 時域反射儀</span>
+            <p>Time Domain Reflectometry 阻抗測試：精確量測特性阻抗，確保阻抗連續性，將訊號反射降至最低，達成阻抗匹配最佳化。</p>
+          </div>
+          <div class="sub-item">
+            <span class="mono">VNA · 向量網路分析儀</span>
+            <p>Vector Network Analyzer：針對插入損耗（IL）、回波損耗（RL）與近端串音（NEXT）進行深度測試，確保在 PCIe Gen5 超高頻環境下的表現穩定。</p>
+          </div>
+          <div class="sub-item">
+            <span class="mono">BIRT · 批次自動化測試</span>
+            <p>Batch Intelligent Reliable Test：每批出貨均經過自動化資料驗證，建立完整品質履歷，提供客戶具備數據支撐的品質信任。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-block">
+        <h3>專業製造與設備實力</h3>
+        <span class="mono">LASER STRIP · ISO · RoHS · REACH</span>
+        <p>
+          為實現極致工藝，高位企業持續投入資源於設備升級與製程管理，
+          確保每一項產品都具備極高的穩定性。
+        </p>
+        <div class="sub-items">
+          <div class="sub-item">
+            <span class="mono">01 · 自動化精密加工</span>
+            <p>採用雷射剝皮機、自動熱錫機，針對極細同軸線（Fine Coaxial Cable）與高速排線進行高精度加工，避免人工操作導致的訊號不穩。</p>
+          </div>
+          <div class="sub-item">
+            <span class="mono">02 · 嚴謹流程管控</span>
+            <p>建立從原料入庫到成品出貨的全程品質追蹤機制，確保穩定高品質與可靠交期。</p>
+          </div>
+          <div class="sub-item">
+            <span class="mono">03 · 國際體系認證</span>
+            <p>生產體系符合 ISO 品質管理規範，產品通過嚴格的環境與機械性測試，符合 RoHS / REACH 環保規範，並提供無鹵素線材方案，滿足全球一線系統大廠的供應鏈標準。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TIMELINE 公司沿革
+============================================================ -->
+<section class="timeline-section">
+  <div class="container">
+    <div class="timeline-head">
+      <div>
+        <span class="eyebrow">02 / MILESTONES</span>
+        <h2 class="h-section" style="margin-top:18px;">
+          公司<em>沿革</em>
+        </h2>
+      </div>
+      <p>
+        三十年技術累積，從周邊介面到 AI 伺服器——
+        每一個里程碑，都是高位對精密傳輸的堅持。
+      </p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-marker">
+        <span class="mk-tag">LATEST</span>
+        <span class="mk-line"></span>
+        <span class="mk-meta">2026 · NOW</span>
+      </div>
+
+      <div class="timeline-track">
+
+        <div class="tl-item">
+          <div class="tl-year">2026</div>
+          <div class="tl-content">
+            <span class="tl-tag">PCIe GEN.6 · MCIO · MARVELL</span>
+            <ul class="tl-list">
+              <li>開發 PCIe Gen.6 64G Active Paddle Card，應用於 M.2 &amp; PCIe 線材</li>
+              <li>開發 PCIe Gen.6 64G &amp; 無側牆 (No Flange) 之 MCIO (SFF-TA-1016) 線材，可相容 Multi-Trak (SFF-TA-1033)</li>
+              <li>開發 OSFP-XD 1.6T AEC Paddle Card</li>
+              <li>NO-FLANGE MCIO CABLE 獲得 Marvell Cable List</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2025</div>
+          <div class="tl-content">
+            <span class="tl-tag">PCIe GEN.5 ACTIVE · OSFP · BROADCOM</span>
+            <ul class="tl-list">
+              <li>開發 PCIe Gen.5 32G Active Paddle Card，應用於 M.2 Extension Cable</li>
+              <li>開發 OSFP 800G Paddle Card</li>
+              <li>開發 PCIe 32G / 64G CopperLink DAC Paddle Card</li>
+              <li>獲得 BROADCOM QSFP-DD DAC Cable List</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2023</div>
+          <div class="tl-content">
+            <span class="tl-tag">QSFP-DD · MCIO · GEN Z · ISO</span>
+            <ul class="tl-list">
+              <li>開發 QSFP-DD 400G Paddle Card</li>
+              <li>應用 Gen.5 32G 之 Gen Z (SFF-TA-1002)、MCIO (SFF-TA-1016) 介面投入市場</li>
+              <li>開發 QSFP-DD 400G Thermal Loopback</li>
+              <li>開發 PCIe Gen.4 SATA / SAS / NVMe 2.5"×4 ports SFF-8639 Backplane</li>
+              <li>導入 ISO 14000、ISO 45001</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2022</div>
+          <div class="tl-content">
+            <span class="tl-tag">PCIe GEN.5 · USB4 AEC · ISO 45001</span>
+            <ul class="tl-list">
+              <li>購入高頻儀器 53G ENA</li>
+              <li>開發第 3 代 PCIe Gen.5 32 Gbps 扁平高速排線，應用於 AI SERVER &amp; CXL 連接</li>
+              <li>開發 USB 4.0 ACC (Active Copper Cable, Redriver) &amp; AEC (Active Electrical Cable, Retimer) &amp; ThunderBolt 內外接線材</li>
+              <li>導入 ISO 45001，預防工作場所傷害與職業病</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2020</div>
+          <div class="tl-content">
+            <span class="tl-tag">PCIe GEN.4 ACTIVE · FAKRA</span>
+            <ul class="tl-list">
+              <li>開發 PCIe Gen.4 Active 扁平高速排線，應用於 PCIe &amp; M.2 介面</li>
+              <li>生產 FAKRA 線材</li>
+              <li>取得 SFF-8654 專利授權</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2019</div>
+          <div class="tl-content">
+            <span class="tl-tag">USB 4.0 · ThunderBolt · PCIe GEN.4</span>
+            <ul class="tl-list">
+              <li>開發 USB 4.0 &amp; ThunderBolt 內外接線材</li>
+              <li>購入高頻儀器 26.5G ENA &amp; 68 Ports Switch，開發 PCIe Gen.4</li>
+              <li>組裝 SAS TWINAX COAXIAL 線材</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2017</div>
+          <div class="tl-content">
+            <span class="tl-tag">TYPE-C · SAS-4 · PCIe GEN.4</span>
+            <ul class="tl-list">
+              <li>開發 Type-C 10G 內外接線材</li>
+              <li>開發 SAS-4 24G 內接線材，應用於 GPU SERVER RAID</li>
+              <li>開發第 2 代 PCIe Gen.4 16 Gbps 扁平高速排線，彎折後高頻特性不變</li>
+              <li>開發 SFF-8654 &amp; M.2 &amp; U.2 (SFF-8639)、U.3 扁平高速排線</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2016</div>
+          <div class="tl-content">
+            <span class="tl-tag">MINISAS HD · OCuLink · LICENSE</span>
+            <ul class="tl-list">
+              <li>與國內上市公司簽訂「扁平高速排線」市場授權</li>
+              <li>開發 miniSAS HD (SFF-8643) 扁平高速排線</li>
+              <li>開發 OCuLink (SFF-8611) 扁平高速排線</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2013</div>
+          <div class="tl-content">
+            <span class="tl-tag">USB 3.2 · SAS-3 · BACKPLANE</span>
+            <ul class="tl-list">
+              <li>開發 USB 3.2 10G 內外接線材</li>
+              <li>開發 SAS-3 12G 內接線材，應用於 SERVER RAID</li>
+              <li>開發 4-port miniSAS (SFF-8087) BACKPLANE，應用於 SECURITY SERVER</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2010</div>
+          <div class="tl-content">
+            <span class="tl-tag">SATA 3.0 · SAS-2 · PCIe GEN.3</span>
+            <ul class="tl-list">
+              <li>導入全自動 SATA 3.0 6G CABLE 生產設備</li>
+              <li>開發 SAS-2 6G 內接線材，應用於 SAS RAID</li>
+              <li>開發 PCIe Gen.3 8 Gbps 扁平高速排線，應用於 Server Rack &amp; GPU Card</li>
+              <li>提供 26AWG / 28AWG / 30AWG 高速扁平排線，間距 0.5mm、0.635mm、0.8mm、1.0mm</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2009</div>
+          <div class="tl-content">
+            <span class="tl-tag">HALOGEN-FREE · PATENT · MINISAS</span>
+            <ul class="tl-list">
+              <li>開發無鹵素 (Halogen-free) / RoHS 扁平高速排線，陸續取得台歐美日中發明專利，獲選政府 SBIR 專案</li>
+              <li>開發 miniSAS (SFF-8087) 內接線材，應用於 RAID</li>
+              <li>開發 SATA IDC 連接器，生產無廢料，因應綠色環保趨勢</li>
+              <li>與工研院合作，開始 3D 電磁模擬設計，預判產品之 Impedance、Crosstalk、Return Attenuation</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2008</div>
+          <div class="tl-content">
+            <span class="tl-tag">USB 3.1 · SATA</span>
+            <ul class="tl-list">
+              <li>開發 USB 3.1 5G 內外接線材</li>
+              <li>開發 SATA 轉 ATA Adapter，可應用於新舊設備轉換</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2003</div>
+          <div class="tl-content">
+            <span class="tl-tag">SATA · ISO 9000 · UL</span>
+            <ul class="tl-list">
+              <li>購入高頻儀器 TDR VNA，開發新一代 SATA 線材，應用於 HDD</li>
+              <li>開發 ATA-7 133 Mbps 內接線材</li>
+              <li>開發 SATA-1 1.5 Gbps 內接線材，應用於 RAID</li>
+              <li>開發 SCSI-3 320 Mbps 內接線材</li>
+              <li>導入 ISO 9000</li>
+              <li>取得 UL 認證</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">2000</div>
+          <div class="tl-content">
+            <span class="tl-tag">USB 2.0 · ATA-5 · SCSI</span>
+            <ul class="tl-list">
+              <li>開發 USB 2.0 0.48G 內外接線材，應用於電腦機殼</li>
+              <li>開發 ATA-5 66 Mbps 內接線材</li>
+              <li>開發 SCSI-3 160 Mbps 內接線材</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1998</div>
+          <div class="tl-content">
+            <span class="tl-tag">ATA-4 · SCSI-3</span>
+            <ul class="tl-list">
+              <li>開發 ATA-4 33 Mbps 內接線材，應用於 HDD</li>
+              <li>開發 SCSI-3 40 Mbps 內接線材，應用於 WORK-STATION</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-year">1992</div>
+          <div class="tl-content">
+            <span class="tl-tag">FOUNDED</span>
+            <ul class="tl-list">
+              <li>高位企業有限公司成立</li>
+              <li>專精於 SCSI &amp; ATA 線材加工</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="timeline-end">
+        <span class="mk-tag">EST. 1992</span>
+        <span class="mk-line"></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICE FLOW — 服務流程 (moved from index, after Timeline)
+============================================================ -->
+<section class="service-flow" id="service-flow">
+  <div class="container">
+    <div class="service-flow-head">
+      <div>
+        <span class="eyebrow">03 / SERVICE FLOW</span>
+        <h2 class="h-section" style="margin-top:18px;">
+          高位<em>服務流程</em>
+        </h2>
+      </div>
+      <p>
+        從第一次需求對焦到量產交貨，高位 (Yes Way) 將每一步驟透明化，
+        讓您清楚掌握每張 OEM / ODM 訂單的進度與品質節點。
+      </p>
+    </div>
+
+    <!-- ── Visual flow tracker (ref06 inspired) ── -->
+    <div class="sf-flow-track" aria-label="服務流程圖示">
+
+      <div class="sf-chip is-first">
+        <div class="sf-chip-box">
+          <span class="sf-chip-n">01</span>
+          <svg class="sf-chip-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <span class="sf-chip-lbl">需求諮詢<br/>規格對焦</span>
+      </div>
+
+      <div class="sf-connector" aria-hidden="true">
+        <svg width="28" height="14" viewBox="0 0 28 14" fill="none"><path d="M0 7h22M16 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="sf-chip">
+        <div class="sf-chip-box">
+          <span class="sf-chip-n">02</span>
+          <svg class="sf-chip-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a7 7 0 0 1 7 7c0 4-7 13-7 13S5 13 5 9a7 7 0 0 1 7-7z"/><circle cx="12" cy="9" r="2.5"/>
+          </svg>
+        </div>
+        <span class="sf-chip-lbl">設計與打樣<br/>PCB / Layout</span>
+      </div>
+
+      <div class="sf-connector" aria-hidden="true">
+        <svg width="28" height="14" viewBox="0 0 28 14" fill="none"><path d="M0 7h22M16 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="sf-chip">
+        <div class="sf-chip-box">
+          <span class="sf-chip-n">03</span>
+          <svg class="sf-chip-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v6m0 8v6M2 12h6m8 0h6"/><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/>
+          </svg>
+        </div>
+        <span class="sf-chip-lbl">小批量試產<br/>BIRT 驗證</span>
+      </div>
+
+      <div class="sf-connector" aria-hidden="true">
+        <svg width="28" height="14" viewBox="0 0 28 14" fill="none"><path d="M0 7h22M16 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="sf-chip">
+        <div class="sf-chip-box">
+          <span class="sf-chip-n">04</span>
+          <svg class="sf-chip-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-2.82 1V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </div>
+        <span class="sf-chip-lbl">量產與<br/>品質管控</span>
+      </div>
+
+      <div class="sf-connector" aria-hidden="true">
+        <svg width="28" height="14" viewBox="0 0 28 14" fill="none"><path d="M0 7h22M16 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+
+      <div class="sf-chip">
+        <div class="sf-chip-box">
+          <span class="sf-chip-n">05</span>
+          <svg class="sf-chip-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <span class="sf-chip-lbl">出貨、保固<br/>長期供應</span>
+      </div>
+
+    </div>
+
+    <!-- ── Always-visible step detail cards ── -->
+    <div class="sf-cards">
+
+      <div class="sf-card">
+        <div class="sf-card-left">
+          <div class="sf-card-num"><span class="step-lbl">STEP</span>1</div>
+        </div>
+        <div class="sf-card-body">
+          <h4 class="sf-card-title">需求諮詢與規格對焦</h4>
+          <p class="sf-card-desc">客戶提供應用情境、傳輸介面 (MCIO / PCIe Gen6 / SlimSAS / SATA / USB)、線長、通道數與訊號完整性需求；高位工程團隊將於 24 小時內回覆規格建議與報價框架。</p>
+        </div>
+        <div class="sf-card-right">
+          <span class="sf-card-time-lbl">耗時</span>
+          <span class="sf-card-time">1 — 2 天</span>
+        </div>
+      </div>
+
+      <div class="sf-card">
+        <div class="sf-card-left">
+          <div class="sf-card-num"><span class="step-lbl">STEP</span>2</div>
+        </div>
+        <div class="sf-card-body">
+          <h4 class="sf-card-title">設計與打樣 (PCB / Cable Layout)</h4>
+          <p class="sf-card-desc">研發團隊進行 PCB 線路、背板與精密線束 layout，產出 3D / 2D 工程圖與規格書。打樣品先行 TDR、VNA 阻抗檢測，確保訊號完整性合格後再進入下一階段。</p>
+        </div>
+        <div class="sf-card-right">
+          <span class="sf-card-time-lbl">耗時</span>
+          <span class="sf-card-time">5 — 10 天</span>
+        </div>
+      </div>
+
+      <div class="sf-card">
+        <div class="sf-card-left">
+          <div class="sf-card-num"><span class="step-lbl">STEP</span>3</div>
+        </div>
+        <div class="sf-card-body">
+          <h4 class="sf-card-title">小批量試產與 BIRT 驗證</h4>
+          <p class="sf-card-desc">在三峽廠完成小批量試產，安排 PCIe Gen6 BIRT (Bit Error Rate) 驗證、UL / ISO 規範檢測，並提供完整測試報告供客戶內部 review。</p>
+        </div>
+        <div class="sf-card-right">
+          <span class="sf-card-time-lbl">耗時</span>
+          <span class="sf-card-time">7 — 14 天</span>
+        </div>
+      </div>
+
+      <div class="sf-card">
+        <div class="sf-card-left">
+          <div class="sf-card-num"><span class="step-lbl">STEP</span>4</div>
+        </div>
+        <div class="sf-card-body">
+          <h4 class="sf-card-title">量產與品質管控</h4>
+          <p class="sf-card-desc">導入自動化雷射剝皮、熱錫機與 IPC 工藝標準，每批生產 100% 線材皆通過 TDR / VNA 阻抗檢測。生產進度透過 ERP 系統即時同步給客戶 PM。</p>
+        </div>
+        <div class="sf-card-right">
+          <span class="sf-card-time-lbl">耗時</span>
+          <span class="sf-card-time">依數量</span>
+        </div>
+      </div>
+
+      <div class="sf-card">
+        <div class="sf-card-left">
+          <div class="sf-card-num"><span class="step-lbl">STEP</span>5</div>
+        </div>
+        <div class="sf-card-body">
+          <h4 class="sf-card-title">出貨、保固與長期供應</h4>
+          <p class="sf-card-desc">出貨包含完整檢測報告與規格書 (PDF)。提供 12 個月品質保固，並支援後續客戶端工程驗證、規格升級、長期 EOL 替代方案。</p>
+        </div>
+        <div class="sf-card-right">
+          <span class="sf-card-time-lbl">售後</span>
+          <span class="sf-card-time">長期<br/>支援</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VALUES — 經營理念 (updated)
+============================================================ -->
+<section class="values-section">
+  <div class="container">
+    <div class="values-head">
+      <span class="eyebrow">04 / OUR VALUES · 經營理念</span>
+      <h2 class="h-section" style="margin-top:18px; max-width:840px;">
+        以<em>科技</em>為動力，<br/>
+        以<em>品質</em>為生命。
+      </h2>
+      <p style="margin-top:24px; color:rgba(247,246,241,.72); font-size:15.5px; line-height:1.75; max-width:680px;">
+        高位企業擁有超過 30 年的專業線材技術底蘊，致力於將「精密製造」與「深度客製」轉化為客戶的競爭優勢。
+      </p>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="num">001 · QUALITY FIRST</div>
+        <h3>品質<em>至上</em></h3>
+        <p>品質是企業的生命線，每一條線材都必須經過嚴格的訊號完整性驗證，確保穩定可靠的傳輸表現。</p>
+      </div>
+      <div class="value-card">
+        <div class="num">002 · TECHNOLOGY DRIVEN</div>
+        <h3>技術<em>驅動</em></h3>
+        <p>持續投入先進研發與自動化設備，在高速傳輸時代保持技術領先，引領產業規格演進。</p>
+      </div>
+      <div class="value-card">
+        <div class="num">003 · CUSTOMER ORIENTED</div>
+        <h3>客戶<em>導向</em></h3>
+        <p>提供靈活的客製化電纜組裝解決方案，幫助客戶快速實現產品開發與市場佈局。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMMITMENT — 高位承諾 (NEW)
+============================================================ -->
+<section class="commitment-section" id="commitment">
+  <div class="container">
+    <div class="commitment-head">
+      <div>
+        <span class="eyebrow">05 / OUR COMMITMENT · 高位承諾</span>
+        <h2 class="h-section" style="margin-top:18px;">
+          以<em>精密技術</em><br/>連結<em>智慧未來</em>。
+        </h2>
+      </div>
+      <p>
+        高位企業以三十多年的電纜組裝製造為基石，持續精進製程與技術，
+        為全球科技品牌提供穩定可信任的高速傳輸解決方案。
+      </p>
+    </div>
+
+    <div class="commitment-grid">
+      <div class="commit-card">
+        <div class="num">01 · PROFESSIONAL INTEGRITY</div>
+        <h3>專業誠信</h3>
+        <p>
+          高位企業以三十多年的電纜組裝製造為基石，秉持嚴謹的製程管控與透明的溝通原則，
+          提供採購商與研發夥伴高品質、高可靠性的高速傳輸線材解決方案。
+          我們相信，技術實力與誠信經營是建立長久合作的根本。
+        </p>
+      </div>
+      <div class="commit-card">
+        <div class="num">02 · CUSTOMER SATISFACTION</div>
+        <h3>客戶滿意度</h3>
+        <p>
+          從規格確認、快速打樣到準時量產交付，高位以客戶需求為核心，
+          確保每一個 OEM / ODM 專案均準確符合技術規格與交期要求。
+          透過專業售前技術諮詢與完整品質履歷，讓合作夥伴獲得超越期待的服務。
+        </p>
+      </div>
+      <div class="commit-card">
+        <div class="num">03 · CONTINUOUS IMPROVEMENT</div>
+        <h3>持續精進</h3>
+        <p>
+          持續導入 TDR / VNA / BIRT 訊號完整性偵測技術與雷射剝皮自動化設備，
+          不斷精進製程能力與產品一致性。
+          透過系統性的品質回饋機制，確保每一代產品在高頻寬、低延遲的嚴格環境要求下穩定表現。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ADVANTAGES — 高位優勢 (NEW)
+============================================================ -->
+<section class="advantages-section" id="advantages">
+  <div class="container">
+    <div class="adv-head">
+      <div>
+        <span class="eyebrow">06 / OUR ADVANTAGES · 高位優勢</span>
+        <h2 class="h-section" style="margin-top:18px;">
+          六大<em>核心優勢</em>，<br/>客戶為什麼選擇高位。
+        </h2>
+      </div>
+      <p>從品質管控到綠色製造，每一項優勢都是高位三十年技術積累的具體實踐。</p>
+    </div>
+
+    <div class="adv-grid">
+
+      <!-- 01 · Quality Assurance -->
+      <div class="adv-card">
+        <div class="adv-img">
+          <img src="images/about/1-QUALITY-ASSURANCE.png" alt="全層級品質把關 — Yes Way 高位企業" loading="lazy" />
+        </div>
+        <div class="adv-body">
+          <span class="en">QUALITY ASSURANCE</span>
+          <h4>全層級品質把關</h4>
+          <p>從原料入庫到成品出貨，每道製程嚴格管控，每條線材均通過訊號完整性測試，符合 RoHS / REACH 國際環保規範，確保產品穩定耐用，讓顧客用得安心。</p>
+        </div>
+      </div>
+
+      <!-- 02 · Custom OEM/ODM (swapped — green tones between silver & blue) -->
+      <div class="adv-card">
+        <div class="adv-img">
+          <img src="images/about/3-CUSTOM-CABLE-ASSEMBLY-OEM.png" alt="全方位電纜組裝客製化服務 — Yes Way 高位企業" loading="lazy" />
+        </div>
+        <div class="adv-body">
+          <span class="en">CUSTOM CABLE ASSEMBLY OEM / ODM</span>
+          <h4>全方位電纜組裝客製化服務</h4>
+          <p>專精於背板 (Backplane)、轉接板 (Adapter Card) 及特殊規格線材開發。針對客戶的空間限制與傳輸規範，提供精準的客製化設計，靈活對應多元應用場景，實現從快速打樣到大規模量產的高效整合。</p>
+        </div>
+      </div>
+
+      <!-- 03 · Signal Integrity (swapped — blue tones at position 3) -->
+      <div class="adv-card">
+        <div class="adv-img">
+          <img src="images/about/2-SIGNAL-INTEGRITY-EXPERTISE.png" alt="三十年高速傳輸技術實力 — Yes Way 高位企業" loading="lazy" />
+        </div>
+        <div class="adv-body">
+          <span class="en">SIGNAL INTEGRITY EXPERTISE</span>
+          <h4>三十年高速傳輸技術實力</h4>
+          <p>研發團隊深耕高速傳輸介面逾三十年，從 SCSI 時代演進至 MCIO、PCIe Gen5 / Gen6 等世代規格，持續精進生產工藝，精準應對 AI 伺服器與資料中心的高規格技術挑戰。</p>
+        </div>
+      </div>
+
+      <!-- 04 · Reliable Partnership -->
+      <div class="adv-card">
+        <div class="adv-img">
+          <img src="images/about/4-RELIABLE-PARTNERSHIP.png" alt="誠信透明的長期合作 — Yes Way 高位企業" loading="lazy" />
+        </div>
+        <div class="adv-body">
+          <span class="en">RELIABLE PARTNERSHIP</span>
+          <h4>誠信透明的長期合作</h4>
+          <p>站在客戶角度提供專業技術建議與售前諮詢，以透明溝通、負責到底的態度建立信任，成為客戶長期信賴的電纜組裝製造夥伴。</p>
+        </div>
+      </div>
+
+      <!-- 05 · On-Time Delivery -->
+      <div class="adv-card">
+        <div class="adv-img">
+          <img src="images/about/5-ON-TIME-DELIVERY.png" alt="準時交付，加速市場佈局 — Yes Way 高位企業" loading="lazy" />
+        </div>
+        <div class="adv-body">
+          <span class="en">ON-TIME DELIVERY</span>
+          <h4>準時交付，加速市場佈局</h4>
+          <p>導入先進自動化設備與數位化製造流程管理，有效縮短生產時程，確保準時交付，協助客戶在競爭激烈的科技市場中加速產品上市時程。</p>
+        </div>
+      </div>
+
+      <!-- 06 · Sustainability -->
+      <div class="adv-card">
+        <div class="adv-img">
+          <img src="images/about/6-SUSTAINABILITY-COMPLIANCE.png" alt="綠色製造，符合永續供應鏈標準 — Yes Way 高位企業" loading="lazy" />
+        </div>
+        <div class="adv-body">
+          <span class="en">SUSTAINABILITY &amp; COMPLIANCE</span>
+          <h4>綠色製造，符合永續供應鏈標準</h4>
+          <p>主動採用無鹵素環保材質，生產符合 ISO 品質規範及 RoHS / REACH 標準，積極支持客戶實現 ESG 永續目標，順利接軌全球一線大廠供應鏈審計要求。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY — 公司/工廠介紹
+============================================================ -->
+<section class="gallery-section">
+  <div class="container">
+    <div class="gallery-head">
+      <div>
+        <span class="eyebrow">07 / FACILITY</span>
+        <h2 class="h-section" style="margin-top:18px;">
+          公司與<em>工廠</em>
+        </h2>
+      </div>
+      <p>
+        位於新北三峽的總部與生產基地，
+        從研發辦公室到自動化產線，
+        是高位 30 年精密工藝的實體呈現。
+      </p>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item large">
+        <img src="images/about/company1.png" alt="高位企業總部" />
+        <div class="label">FACILITY 01 · <span class="green">HEADQUARTERS</span></div>
+      </div>
+      <div class="gallery-item med">
+        <img src="images/about/company2.png" alt="高位企業大樓" />
+        <div class="label">FACILITY 02 · <span class="green">SAN-XIA · TAIPEI</span></div>
+      </div>
+      <div class="gallery-item wide" style="background: linear-gradient(135deg, #11221a 0%, #0E1410 100%); display:grid; place-items:center;">
+        <div style="text-align:center; padding:40px;">
+          <div class="mono" style="font-size:11px; letter-spacing:.16em; color:rgba(107,255,110,.7); margin-bottom:14px;">FACILITY 03 · PRODUCTION LINE</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(28px,3.5vw,48px); color:var(--paper); font-weight:500; line-height:1.1; letter-spacing:-.01em;">
+            自動化精密<em style="color:#6BFF6E;font-style:normal;">線材加工</em>產線
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:rgba(247,246,241,.55); margin-top:14px; letter-spacing:.08em;">
+            PHOTO COMING SOON
+          </div>
+        </div>
+      </div>
+      <div class="gallery-item tall" style="grid-column: span 4; background: var(--green); display:grid; place-items:center;">
+        <div style="text-align:center; padding:32px;">
+          <div class="mono" style="font-size:11px; letter-spacing:.16em; color:rgba(247,246,241,.8); margin-bottom:14px;">FACILITY 04 · QC LAB</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif; font-size:clamp(22px,2.5vw,32px); color:var(--paper); font-weight:500; line-height:1.15; letter-spacing:-.01em;">
+            訊號完整性<br/>實驗室
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; color:rgba(247,246,241,.7); margin-top:18px; letter-spacing:.1em;">
+            TDR · VNA · BIRT
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container cta-inner">
+    <div>
+      <span class="eyebrow" style="color:rgba(247,246,241,.6);">08 / GET IN TOUCH</span>
+      <h2>
+        想了解高位的<em>製造能力</em>？<br/>
+        歡迎預約參觀。
+      </h2>
+    </div>
+    <div class="cta-side">
+      <p>從規格諮詢到工廠參觀，我們的工程團隊樂意為您提供深入的技術交流。</p>
+      <div class="cta-actions">
+        <a class="cta-action-row" href="mailto:sales@yesway.com.tw">
+          <div><div class="lbl">MAIL</div><div class="val">sales@yesway.com.tw</div></div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="cta-action-row" href="tel:+886226735492">
+          <div><div class="lbl">TEL</div><div class="val">+886-2-2673-5492</div></div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="cta-action-row" href="contact.html">
+          <div><div class="lbl">INQUIRY FORM</div><div class="val">在線詢問表單 →</div></div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo/logo-yesway-white.svg" alt="Yes Way" />
+        <p>高位企業有限公司<br/>Yes Way Enterprise Corporation</p>
+        <p style="margin-top:14px; font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(247,246,241,.5);letter-spacing:.06em;">
+          新北市三峽區介壽路一段318巷21號<br/>
+          T &nbsp;886-2-2673-5492<br/>
+          F &nbsp;886-2-2673-3904<br/>
+          統編 &nbsp;86973811
+        </p>
+      </div>
+      <div>
+        <h5>SITE MAP</h5>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="about.html">關於高位</a></li>
+          <li><a href="quality.html">品質與技術</a></li>
+          <li><a href="products.html">產品介紹</a></li>
+          <li><a href="news.html">最新消息</a></li>
+          <li><a href="esg.html">ESG</a></li>
+          <li><a href="contact.html">聯絡我們</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>PRODUCT LINES</h5>
+        <ul>
+          <li><a href="products.html?cat=cable-assembly">Cable Assembly 線束加工</a></li>
+          <li><a href="products.html?cat=pcb-assembly">PCB Assembly 電路板組裝</a></li>
+          <li><a href="products.html?cat=ai-gpu-servers">AI / GPU Servers</a></li>
+          <li><a href="products.html?cat=server-storage-pc">Server & Storage / PC</a></li>
+          <li><a href="products.html?cat=cable-diy-tooling">電纜 DIY 工具</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>CONTACT</h5>
+        <ul>
+          <li>銷售諮詢 <a href="mailto:sales@yesway.com.tw">sales@yesway.com.tw</a></li>
+          <li>生產據點：新北 · 三峽</li>
+          <li><a href="contact.html">在線詢問表單 →</a></li>
+        </ul>
+        <h5 style="margin-top:24px;">FOLLOW</h5>
+        <ul style="display:flex;gap:14px;">
+          <li><a href="#">FB</a></li>
+          <li><a href="#">IG</a></li>
+          <li><a href="#">LINE</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 YES WAY ENTP. CORP. — ALL RIGHTS RESERVED</span>
+      <div class="seo">
+        <span>高速傳輸線材</span><span>·</span>
+        <span>Cable Assembly</span><span>·</span>
+        <span>PCB Assembly</span><span>·</span>
+        <span>AI / GPU Server</span><span>·</span>
+        <span>PCIe Gen6</span><span>·</span>
+        <span>MCIO 線材</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- HowTo schema for Google search rich result (Service Flow) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "高位 Yes Way OEM / ODM 服務流程",
+  "description": "高位企業 Yes Way 從需求諮詢、設計打樣、BIRT 驗證、量產到長期供應的完整 OEM/ODM 高速傳輸線材服務流程。",
+  "totalTime": "P21D",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "需求諮詢與規格對焦",
+      "text": "客戶提供應用情境、傳輸介面 (MCIO / PCIe Gen6 / SlimSAS / SATA / USB)、線長與訊號完整性需求；高位工程團隊於 24 小時內回覆規格建議與報價框架。",
+      "url": "https://www.yesway.com.tw/about.html#service-flow"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "設計與打樣 (PCB / Cable Layout)",
+      "text": "進行 PCB 線路、背板與精密線束 layout，產出工程圖與規格書，並於打樣階段以 TDR / VNA 完成阻抗檢測。",
+      "url": "https://www.yesway.com.tw/about.html#service-flow"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "小批量試產與 BIRT 驗證",
+      "text": "於三峽廠完成試產，安排 PCIe Gen6 BIRT (Bit Error Rate)、UL / ISO 規範檢測，提供完整測試報告。",
+      "url": "https://www.yesway.com.tw/about.html#service-flow"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "量產與品質管控",
+      "text": "導入自動化雷射剝皮、熱錫機與 IPC 工藝標準，每批生產 100% 線材通過 TDR / VNA 阻抗檢測，進度即時同步客戶。",
+      "url": "https://www.yesway.com.tw/about.html#service-flow"
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "出貨、保固與長期供應",
+      "text": "出貨附完整檢測報告與規格書 PDF，提供 12 個月保固與後續工程驗證、長期 EOL 替代方案支援。",
+      "url": "https://www.yesway.com.tw/about.html#service-flow"
+    }
+  ]
+}
+</script>
+
+<script>
+  // Service-flow accordion
+  document.querySelectorAll('.acc-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.acc-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.acc-item').forEach(i => {
+        i.classList.remove('open');
+        const t = i.querySelector('.acc-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

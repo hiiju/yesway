@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>ESG 永續與責任 — Yes Way 高位企業｜綠色製造與供應鏈責任</title>
+<meta name="description" content="高位企業 (Yes Way) ESG 永續與責任：環保材料遵循 (RoHS / REACH)、衝突礦產調查、ESG 持續落實、綠色製造流程，打造低碳生產環境。" />
+<meta name="keywords" content="ESG, 永續, 綠色製造, RoHS, REACH, 衝突礦產, 節能減碳, 高位企業, Yes Way" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+  /* ============================================================
+     ESG page — specific styles
+     ============================================================ */
+
+  /* HERO BANNER (esg.png 大圖) */
+  .esg-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--paper);
+    isolation: isolate;
+  }
+  .esg-hero-img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    min-height: 380px;
+    background: linear-gradient(135deg, #0E2E1A 0%, #0E1410 60%, #11221a 100%);
+    overflow: hidden;
+  }
+  .esg-hero-img img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: .8;
+  }
+  .esg-hero-img::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(14,20,16,.25) 0%, rgba(14,20,16,.15) 50%, rgba(14,20,16,.85) 100%),
+      linear-gradient(95deg, rgba(14,20,16,.4) 0%, rgba(14,20,16,0) 50%);
+    pointer-events: none;
+  }
+  .esg-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(40px, 6vw, 90px) var(--gutter);
+    max-width: var(--max-w);
+    margin: 0 auto;
+    width: 100%;
+  }
+  .esg-hero-overlay .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.7);
+    display: flex; gap: 10px;
+    margin-bottom: 28px;
+  }
+  .esg-hero-overlay .breadcrumb a { color: rgba(247,246,241,.7); }
+  .esg-hero-overlay .breadcrumb a:hover { color: #6BFF6E; }
+  .esg-hero-overlay .breadcrumb .sep { opacity: .5; }
+  .esg-hero-overlay .eyebrow {
+    color: #6BFF6E;
+    margin-bottom: 18px;
+  }
+  .esg-hero-overlay .eyebrow::before { background: #6BFF6E; }
+  .esg-hero-overlay h1 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -.025em;
+    color: var(--paper);
+    margin: 0;
+    max-width: 960px;
+  }
+  .esg-hero-overlay h1 em { color: #6BFF6E; font-style: normal; font-weight: 400; }
+  .esg-hero-overlay .lead {
+    margin: 24px 0 0;
+    max-width: 640px;
+    font-size: clamp(15px, 1.15vw, 17px);
+    line-height: 1.7;
+    color: rgba(247,246,241,.85);
+  }
+  .esg-hero-overlay .lead strong { color: #6BFF6E; }
+
+  /* Stat strip */
+  .esg-stats {
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
+  .esg-stats-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  @media (max-width: 800px) { .esg-stats-track { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .esg-stats-track { grid-template-columns: 1fr; } }
+  .esg-stat {
+    padding: 36px clamp(20px, 3vw, 36px);
+    border-right: 1px solid var(--hair);
+  }
+  .esg-stat:last-child { border-right: 0; }
+  @media (max-width: 800px) {
+    .esg-stat:nth-child(2n) { border-right: 0; }
+    .esg-stat { border-bottom: 1px solid var(--hair); }
+  }
+  .esg-stat .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 10px;
+  }
+  .esg-stat .val {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(26px, 3vw, 38px);
+    font-weight: 500;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .esg-stat .val em { font-style: normal; color: var(--green); font-weight: 400; }
+  .esg-stat .desc {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 240px;
+  }
+
+  /* Pillars (4 ESG commitments) */
+  .esg-pillars {
+    padding: clamp(70px, 9vw, 130px) 0;
+    background: var(--paper);
+  }
+  .esg-pillars-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 760px) { .esg-pillars-head { grid-template-columns: 1fr; } }
+  .esg-pillars-head p {
+    max-width: 460px;
+    margin: 0 0 0 auto;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  @media (max-width: 760px) { .esg-pillars-head p { margin: 0; } }
+
+  .esg-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--hair);
+    border: 1px solid var(--hair);
+  }
+  @media (max-width: 760px) { .esg-grid { grid-template-columns: 1fr; } }
+
+  .esg-card {
+    background: var(--paper);
+    padding: 44px 40px 40px;
+    display: flex; flex-direction: column;
+    gap: 22px;
+    transition: background .35s var(--easing);
+  }
+  .esg-card:hover { background: var(--paper-2); }
+  .esg-card.dark {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .esg-card.dark:hover { background: #11221a; }
+
+  .esg-card .top { display: flex; align-items: center; gap: 16px; }
+  .esg-card .icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--green-tint);
+    color: var(--green);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+  }
+  .esg-card.dark .icon {
+    background: rgba(107,255,110,.12);
+    color: #6BFF6E;
+  }
+  .esg-card .num {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--steel);
+    letter-spacing: .14em;
+  }
+  .esg-card.dark .num { color: rgba(247,246,241,.5); }
+  .esg-card .tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--steel);
+  }
+  .esg-card.dark .tagline { color: rgba(247,246,241,.6); }
+  .esg-card h3 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: clamp(22px, 2.3vw, 30px);
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -.01em;
+    margin: 6px 0 0;
+    color: var(--ink);
+  }
+  .esg-card.dark h3 { color: var(--paper); }
+  .esg-card h3 em { font-style: normal; color: var(--green); font-weight: 400; }
+  .esg-card.dark h3 em { color: #6BFF6E; }
+  .esg-card p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .esg-card.dark p { color: rgba(247,246,241,.82); }
+  .esg-card .meta-tags {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-top: auto; padding-top: 8px;
+  }
+  .esg-card .meta-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    border: 1px solid var(--hair);
+    padding: 5px 9px;
+    color: var(--ink-2);
+  }
+  .esg-card.dark .meta-tag {
+    border-color: rgba(247,246,241,.18);
+    color: rgba(247,246,241,.85);
+  }
+
+  /* Compliance band */
+  .compliance-band {
+    background: var(--green);
+    color: var(--paper);
+    padding: clamp(60px, 8vw, 100px) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .compliance-band::after {
+    content: "ESG · 2026";
+    position: absolute;
+    bottom: -20px; right: 24px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(80px, 14vw, 200px);
+    color: rgba(247,246,241,.08);
+    letter-spacing: -.05em;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .compliance-inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 60px;
+    align-items: start;
+  }
+  @media (max-width: 800px) { .compliance-inner { grid-template-columns: 1fr; } }
+  .compliance-inner h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 500;
+    letter-spacing: -.02em;
+    line-height: 1.05;
+    margin: 14px 0 0;
+    color: var(--paper);
+  }
+  .compliance-inner h2 em { font-style: normal; color: rgba(247,246,241,.85); font-weight: 400; }
+  .compliance-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 28px;
+  }
+  @media (max-width: 600px) { .compliance-list { grid-template-columns: 1fr; } }
+  .compliance-list .item {
+    border-top: 1px solid rgba(247,246,241,.25);
+    padding: 16px 0 4px;
+  }
+  .compliance-list .item .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.7);
+    margin-bottom: 8px;
+  }
+  .compliance-list .item .v {
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--paper);
+    line-height: 1.4;
+  }
+
+  /* CTA */
+  .cta {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::after {
+    content: "ESG";
+    position: absolute;
+    bottom: -40px; left: 50%; transform: translateX(-50%);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(120px, 22vw, 320px);
+    color: rgba(247,246,241,.04);
+    letter-spacing: -.05em;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .cta-inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  @media (max-width: 800px) { .cta-inner { grid-template-columns: 1fr; } }
+  .cta h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(40px, 5.5vw, 80px);
+    font-weight: 500; line-height: 1; letter-spacing: -.02em;
+    margin: 18px 0 0;
+  }
+  .cta h2 em { font-style: normal; font-weight: 400; color: #6BFF6E; }
+  .cta-side p { color: rgba(247,246,241,.78); font-size: 16px; line-height: 1.7; margin: 0 0 32px; }
+  .cta-actions { display: flex; flex-direction: column; gap: 0; }
+  .cta-action-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(247,246,241,.15); padding: 18px 0; transition: padding-left .3s var(--easing); }
+  .cta-action-row:last-child { border-bottom: 1px solid rgba(247,246,241,.15); }
+  .cta-action-row:hover { padding-left: 12px; color: #6BFF6E; }
+  .cta-action-row .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(247,246,241,.6); }
+  .cta-action-row .val { font-size: 17px; font-weight: 500; margin-top: 4px; }
+  .cta-action-row .arrow { font-size: 22px; }
+
+  /* ============================================================
+     Client feedback 0526 — prominent green eyebrow ×1.5
+     ============================================================ */
+  .esg-hero-overlay .eyebrow { font-size: 16.5px; }   /* 11 → 16.5 (×1.5) */
+</style>
+</head>
+
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="container top-bar-track">
+    <div class="top-bar-left">
+      <span class="pulse"></span>
+      <span>COMPUTEX 2026 / 06.02 — 06.05</span>
+      <span class="sep">/</span>
+      <span>TPE 南港展覽館 2館 4F</span>
+      <span class="sep">/</span>
+      <a href="news.html#computex-2026">攤位 Q1334C →</a>
+    </div>
+    <div class="top-bar-right">
+      <span>EST. 1992</span>
+      <span class="sep">/</span>
+      <span>MADE IN TAIWAN · 三峽</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-track">
+    <a class="brand" href="index.html">
+      <img src="images/logo/logo-yesway-green.svg" alt="Yes Way 高位企業" />
+    </a>
+    <input type="checkbox" id="nav-cb" class="nav-cb" hidden />
+    <nav><ul class="nav">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="about.html">關於高位</a></li>
+      <li class="has-sub"><a href="quality.html">品質與技術</a></li>
+      <li class="has-sub"><a href="products.html">產品介紹</a></li>
+      <li><a href="news.html">最新消息</a></li>
+      <li><a href="esg.html" class="active">ESG</a></li>
+      <li><a href="contact.html">聯絡我們</a></li>
+    </ul></nav>
+    <div class="header-actions">
+      <button class="lang-switch"><span class="on">中</span><span>/</span><span>EN</span></button>
+      <button class="btn-cta">詢價 Inquiry <span class="arrow">→</span></button>
+      <label for="nav-cb" class="nav-toggle" aria-label="選單 Menu"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     ESG HERO BANNER
+============================================================ -->
+<section class="esg-hero">
+  <div class="esg-hero-img">
+    <img src="images/banner/esg.png" alt="Yes Way ESG 永續與責任" />
+    <div class="esg-hero-overlay">
+      <nav class="breadcrumb">
+        <a href="index.html">HOME</a>
+        <span class="sep">/</span>
+        <span>ESG · 永續與責任</span>
+      </nav>
+      <span class="eyebrow">ESG · SUSTAINABILITY &amp; RESPONSIBILITY</span>
+      <h1>
+        永續與<em>責任</em>，<br/>
+        是製造業的<em>第二條訊號</em>。
+      </h1>
+      <p class="lead">
+        高位 (Yes Way) 從<strong>環保材料、衝突礦產調查、ESG 持續落實到綠色製造</strong>，
+        以四項承諾驅動低碳生產與供應鏈責任，
+        為下一代電子製造業立下可被檢驗的標準。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STAT STRIP
+============================================================ -->
+<section class="esg-stats">
+  <div class="esg-stats-track">
+    <div class="esg-stat">
+      <div class="lbl">COMPLIANCE · 法規遵循</div>
+      <div class="val">100<em>%</em></div>
+      <div class="desc">RoHS / REACH 全產品線符合環保規範</div>
+    </div>
+    <div class="esg-stat">
+      <div class="lbl">SUPPLY CHAIN · 供應鏈</div>
+      <div class="val">3<em>TG</em>+</div>
+      <div class="desc">3TG 衝突礦產調查 (錫/鎢/鉭/金)</div>
+    </div>
+    <div class="esg-stat">
+      <div class="lbl">CERT · 國際認證</div>
+      <div class="val">ISO 14001</div>
+      <div class="desc">環境管理系統 + 45001 職安認證</div>
+    </div>
+    <div class="esg-stat">
+      <div class="lbl">FOOTPRINT · 製造碳足跡</div>
+      <div class="val">100% <em>TW</em></div>
+      <div class="desc">三峽自有產線，運輸碳排可控可追溯</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ESG 4 PILLARS
+============================================================ -->
+<section class="esg-pillars">
+  <div class="container">
+    <div class="esg-pillars-head">
+      <div>
+        <span class="eyebrow">02 / OUR COMMITMENTS</span>
+        <h2 class="h-section" style="margin-top:18px;">
+          四項<em>永續承諾</em>
+        </h2>
+      </div>
+      <p>
+        我們相信：好的訊號完整性，源自好的環境責任。
+        這四項承諾，是高位三十年製造文化向下一代的延續。
+      </p>
+    </div>
+
+    <div class="esg-grid">
+
+      <!-- 01 · 環保材料遵循 -->
+      <div class="esg-card">
+        <div class="top">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.96c.8 3.36.42 6.24-1.34 9.04A7 7 0 0 1 11 20z"/>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6"/>
+            </svg>
+          </div>
+          <span class="num">01</span>
+        </div>
+        <div>
+          <span class="tagline">ECO MATERIALS</span>
+          <h3>環保材料<em>遵循</em></h3>
+        </div>
+        <p>全面符合 <strong>RoHS、REACH</strong> 等環保規範，從原料端到成品出貨皆可追溯，降低對環境與下游客戶的衝擊。</p>
+        <div class="meta-tags">
+          <span class="meta-tag">RoHS</span>
+          <span class="meta-tag">REACH</span>
+          <span class="meta-tag">SVHC</span>
+        </div>
+      </div>
+
+      <!-- 02 · 衝突礦產調查 (dark) -->
+      <div class="esg-card dark">
+        <div class="top">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/>
+              <path d="M12 2a15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10"/>
+              <path d="M2 12h20"/>
+            </svg>
+          </div>
+          <span class="num">02</span>
+        </div>
+        <div>
+          <span class="tagline">CONFLICT MINERALS</span>
+          <h3>衝突礦產<em>調查</em></h3>
+        </div>
+        <p>落實供應鏈管理，確保 <strong>3TG（錫、鉭、鎢、金）</strong>等原料來源合法透明，要求供應商簽署 CMRT 並定期審查。</p>
+        <div class="meta-tags">
+          <span class="meta-tag">CMRT</span>
+          <span class="meta-tag">3TG</span>
+          <span class="meta-tag">RMI</span>
+        </div>
+      </div>
+
+      <!-- 03 · ESG 持續落實 (dark) -->
+      <div class="esg-card dark">
+        <div class="top">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 7h-9"/><path d="M14 17H5"/>
+              <circle cx="17" cy="17" r="3"/>
+              <circle cx="7" cy="7" r="3"/>
+            </svg>
+          </div>
+          <span class="num">03</span>
+        </div>
+        <div>
+          <span class="tagline">ESG IN ACTION</span>
+          <h3>ESG <em>持續落實</em></h3>
+        </div>
+        <p>推動<strong>節能減碳、員工關懷與社會責任</strong>，每年檢視營運碳排與社會貢獻指標，將 ESG 從口號落為可量測的長期承諾。</p>
+        <div class="meta-tags">
+          <span class="meta-tag">Net-Zero Path</span>
+          <span class="meta-tag">Employee Care</span>
+          <span class="meta-tag">CSR</span>
+        </div>
+      </div>
+
+      <!-- 04 · 綠色製造流程 -->
+      <div class="esg-card">
+        <div class="top">
+          <div class="icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v6"/>
+              <path d="M5 8h14l-1 12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 8z"/>
+              <path d="M9 12c1.5 1.5 4.5 1.5 6 0"/>
+            </svg>
+          </div>
+          <span class="num">04</span>
+        </div>
+        <div>
+          <span class="tagline">GREEN MANUFACTURING</span>
+          <h3>綠色<em>製造流程</em></h3>
+        </div>
+        <p>採用<strong>節能設備與減廢工法</strong>，從雷射剝皮到自動化產線優化，打造低碳生產環境，將每一條線材的環境足跡降到最低。</p>
+        <div class="meta-tags">
+          <span class="meta-tag">Energy-Saving</span>
+          <span class="meta-tag">Waste-Reduction</span>
+          <span class="meta-tag">Low-Carbon</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMPLIANCE BAND
+============================================================ -->
+<section class="compliance-band">
+  <div class="container compliance-inner">
+    <div>
+      <span class="eyebrow" style="color:rgba(247,246,241,.85);">03 / COMPLIANCE FRAMEWORK</span>
+      <h2>
+        從原料到出貨<br/>
+        <em>可被檢驗的承諾</em>
+      </h2>
+    </div>
+    <div class="compliance-list">
+      <div class="item">
+        <div class="k">Environmental</div>
+        <div class="v">RoHS · REACH · SVHC<br/>ISO 14001</div>
+      </div>
+      <div class="item">
+        <div class="k">Social</div>
+        <div class="v">ISO 45001 職業安全<br/>員工關懷與多元尊重</div>
+      </div>
+      <div class="item">
+        <div class="k">Governance</div>
+        <div class="v">CMRT 衝突礦產申報<br/>供應商行為準則</div>
+      </div>
+      <div class="item">
+        <div class="k">Quality &amp; Safety</div>
+        <div class="v">UL Listed · ISO 9001<br/>IATF 16949</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+============================================================ -->
+<section class="cta">
+  <div class="container cta-inner">
+    <div>
+      <span class="eyebrow" style="color:rgba(247,246,241,.6);">GET IN TOUCH</span>
+      <h2>
+        永續是<em>選擇</em>，<br/>
+        也是承諾。
+      </h2>
+    </div>
+    <div class="cta-side">
+      <p>
+        若您需要客戶端 ESG 問卷、CMRT 報告、RoHS / REACH 聲明書，
+        歡迎聯繫高位永續團隊，我們將提供完整的合規文件。
+      </p>
+      <div class="cta-actions">
+        <a class="cta-action-row" href="mailto:sales@yesway.com.tw">
+          <div><div class="lbl">MAIL</div><div class="val">sales@yesway.com.tw</div></div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="cta-action-row" href="tel:+886226735492">
+          <div><div class="lbl">TEL</div><div class="val">+886-2-2673-5492</div></div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="cta-action-row" href="contact.html">
+          <div><div class="lbl">INQUIRY FORM</div><div class="val">在線詢問表單 →</div></div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo/logo-yesway-white.svg" alt="Yes Way" />
+        <p>高位企業有限公司<br/>Yes Way Enterprise Corporation</p>
+        <p style="margin-top:14px; font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(247,246,241,.5);letter-spacing:.06em;">
+          新北市三峽區介壽路一段318巷21號<br/>
+          T &nbsp;886-2-2673-5492<br/>
+          F &nbsp;886-2-2673-3904<br/>
+          統編 &nbsp;86973811
+        </p>
+      </div>
+      <div>
+        <h5>SITE MAP</h5>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="about.html">關於高位</a></li>
+          <li><a href="quality.html">品質與技術</a></li>
+          <li><a href="products.html">產品介紹</a></li>
+          <li><a href="news.html">最新消息</a></li>
+          <li><a href="esg.html">ESG</a></li>
+          <li><a href="contact.html">聯絡我們</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>PRODUCT LINES</h5>
+        <ul>
+          <li><a href="products.html?cat=cable-assembly">Cable Assembly 線束加工</a></li>
+          <li><a href="products.html?cat=pcb-assembly">PCB Assembly 電路板組裝</a></li>
+          <li><a href="products.html?cat=ai-gpu-servers">AI / GPU Servers</a></li>
+          <li><a href="products.html?cat=server-storage-pc">Server &amp; Storage / PC</a></li>
+          <li><a href="products.html?cat=cable-diy-tooling">電纜 DIY 工具</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>CONTACT</h5>
+        <ul>
+          <li>銷售諮詢 <a href="mailto:sales@yesway.com.tw">sales@yesway.com.tw</a></li>
+          <li>生產據點：新北 · 三峽</li>
+          <li><a href="contact.html">在線詢問表單 →</a></li>
+        </ul>
+        <h5 style="margin-top:24px;">FOLLOW</h5>
+        <ul style="display:flex;gap:14px;">
+          <li><a href="#">FB</a></li>
+          <li><a href="#">IG</a></li>
+          <li><a href="#">LINE</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 YES WAY ENTP. CORP. — ALL RIGHTS RESERVED</span>
+      <div class="seo">
+        <span>ESG 永續</span><span>·</span>
+        <span>RoHS</span><span>·</span>
+        <span>REACH</span><span>·</span>
+        <span>綠色製造</span><span>·</span>
+        <span>衝突礦產</span><span>·</span>
+        <span>ISO 14001</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

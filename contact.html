@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>聯絡我們 — Yes Way 高位企業｜高速傳輸線材諮詢與詢價</title>
+<meta name="description" content="聯絡高位企業 (Yes Way)：台灣三峽自有產線，提供高速傳輸線材 OEM/ODM 客製化諮詢。填寫在線表單或直接來電，工程團隊 24 小時內回覆。" />
+<meta name="keywords" content="聯絡我們, 高位企業, Yes Way, 詢價, 線材訂製, OEM, ODM, 高速傳輸線材" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+  /* ============================================================
+     Contact page — specific styles
+     ============================================================ */
+
+  /* HERO BANNER */
+  .contact-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--paper);
+    isolation: isolate;
+  }
+  .contact-hero-img {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    min-height: 380px;
+    background: linear-gradient(135deg, #0E2E1A 0%, #0E1410 60%, #11221a 100%);
+    overflow: hidden;
+  }
+  .contact-hero-img img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: .82;
+  }
+  .contact-hero-img::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(14,20,16,.25) 0%, rgba(14,20,16,.1) 50%, rgba(14,20,16,.88) 100%),
+      linear-gradient(95deg, rgba(14,20,16,.45) 0%, rgba(14,20,16,0) 55%);
+    pointer-events: none;
+  }
+  .contact-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: clamp(40px, 6vw, 90px) var(--gutter);
+    max-width: var(--max-w);
+    margin: 0 auto;
+    width: 100%;
+  }
+  .contact-hero-overlay .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.7);
+    display: flex; gap: 10px;
+    margin-bottom: 28px;
+  }
+  .contact-hero-overlay .breadcrumb a { color: rgba(247,246,241,.7); }
+  .contact-hero-overlay .breadcrumb a:hover { color: #6BFF6E; }
+  .contact-hero-overlay .breadcrumb .sep { opacity: .5; }
+  .contact-hero-overlay .eyebrow {
+    color: #6BFF6E;
+    font-size: 16.5px;
+    margin-bottom: 18px;
+  }
+  .contact-hero-overlay .eyebrow::before { background: #6BFF6E; }
+  .contact-hero-overlay h1 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-weight: 500;
+    font-size: clamp(40px, 6vw, 96px);
+    line-height: 1.0;
+    letter-spacing: -.025em;
+    color: var(--paper);
+    margin: 0;
+    max-width: 960px;
+  }
+  .contact-hero-overlay h1 em { color: #6BFF6E; font-style: normal; font-weight: 400; }
+  .contact-hero-overlay .lead {
+    margin: 24px 0 0;
+    max-width: 600px;
+    font-size: clamp(15px, 1.15vw, 17px);
+    line-height: 1.7;
+    color: rgba(247,246,241,.85);
+  }
+  .contact-hero-overlay .lead strong { color: #6BFF6E; }
+
+  /* ── INFO STRIP ── */
+  .contact-strip {
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
+  .contact-strip-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  @media (max-width: 800px) { .contact-strip-track { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .contact-strip-track { grid-template-columns: 1fr; } }
+  .contact-strip-item {
+    padding: 32px clamp(20px, 3vw, 36px);
+    border-right: 1px solid var(--hair);
+  }
+  .contact-strip-item:last-child { border-right: 0; }
+  @media (max-width: 800px) {
+    .contact-strip-item:nth-child(2n) { border-right: 0; }
+    .contact-strip-item { border-bottom: 1px solid var(--hair); }
+  }
+  .contact-strip-item .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--steel); margin-bottom: 10px;
+  }
+  .contact-strip-item .val {
+    font-size: 15px; font-weight: 500;
+    color: var(--ink); line-height: 1.55;
+  }
+  .contact-strip-item .val a {
+    color: var(--ink);
+    transition: color .2s;
+  }
+  .contact-strip-item .val a:hover { color: var(--green); }
+
+  /* ── MAIN CONTENT (MAP + FORM) ── */
+  .contact-main {
+    padding: clamp(64px, 8vw, 120px) 0;
+    background: var(--paper);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Left column */
+  .contact-map-wrap {
+    position: static; /* default; desktop override below */
+  }
+  /* Sticky only on desktop 2-column layout */
+  @media (min-width: 901px) {
+    .contact-map-wrap { position: sticky; top: 110px; }
+  }
+  .contact-map-frame {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border: 1px solid var(--hair);
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+  .contact-map-frame iframe {
+    width: 100%; height: 100%;
+    border: none; display: block;
+    filter: grayscale(20%);
+  }
+  .contact-details {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--hair);
+  }
+  .contact-detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--hair);
+    transition: background .25s;
+  }
+  .contact-detail-row:last-child { border-bottom: 0; }
+  .contact-detail-row:hover { background: var(--paper-2); }
+  .contact-detail-row .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--steel); white-space: nowrap; padding-top: 3px;
+  }
+  .contact-detail-row .v {
+    font-size: 14.5px; color: var(--ink); line-height: 1.6; text-align: right;
+  }
+  .contact-detail-row .v a { color: var(--ink); transition: color .2s; }
+  .contact-detail-row .v a:hover { color: var(--green); }
+
+  /* Right column — Form */
+  .contact-form-section .form-head {
+    margin-bottom: 36px;
+  }
+  .contact-form-section .form-head h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 500;
+    letter-spacing: -.02em;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 16px 0 0;
+  }
+  .contact-form-section .form-head h2 em {
+    font-style: normal; color: var(--green); font-weight: 400;
+  }
+  .contact-form-section .form-head p {
+    font-size: 15px; line-height: 1.7; color: var(--ink-2); margin: 14px 0 0;
+  }
+
+  /* Form itself */
+  .inquiry-form {
+    display: flex; flex-direction: column; gap: 0;
+    border: 1px solid var(--hair);
+  }
+
+  .form-block {
+    border-bottom: 1px solid var(--hair);
+    padding: 28px 28px 24px;
+  }
+  .form-block:last-child { border-bottom: 0; }
+
+  .form-block-label {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink); font-weight: 600;
+    margin-bottom: 22px;
+    padding-left: 12px;
+    border-left: 3px solid var(--green);
+  }
+
+  .form-row-2 {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  @media (max-width: 640px) { .form-row-2 { grid-template-columns: 1fr; } }
+
+  .form-field {
+    display: flex; flex-direction: column; gap: 7px;
+    margin-bottom: 18px;
+  }
+  .form-field:last-child { margin-bottom: 0; }
+
+  .form-field label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--steel);
+  }
+  .form-field label span.req { color: var(--green); margin-left: 3px; }
+  .form-field label .hint {
+    display: block; margin-top: 3px;
+    font-size: 10px; color: var(--steel-2); letter-spacing: .04em;
+    text-transform: none; font-family: 'Noto Sans TC', sans-serif;
+  }
+
+  .form-field input,
+  .form-field select,
+  .form-field textarea {
+    background: var(--paper-2);
+    border: 1px solid var(--hair);
+    padding: 11px 14px;
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .25s, background .25s;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    border-radius: 0;
+  }
+  .form-field input:focus,
+  .form-field select:focus,
+  .form-field textarea:focus {
+    border-color: var(--green);
+    background: #fff;
+  }
+  .form-field textarea { resize: vertical; min-height: 110px; }
+
+  .form-checkbox-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-top: 10px;
+  }
+  .form-checkbox-row input[type="checkbox"] {
+    width: 16px; height: 16px; flex-shrink: 0;
+    margin-top: 3px; accent-color: var(--green);
+    cursor: pointer;
+  }
+  .form-checkbox-row span {
+    font-size: 13.5px; color: var(--ink-2); line-height: 1.55;
+  }
+
+  .form-submit-area {
+    padding: 28px 28px 28px;
+    background: var(--paper);
+    border-top: 1px solid var(--hair);
+    display: flex; flex-direction: column; gap: 14px;
+  }
+
+  .btn-submit {
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 17px 28px;
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: 15.5px; font-weight: 600;
+    letter-spacing: .02em;
+    cursor: pointer;
+    width: 100%;
+    transition: background .25s var(--easing);
+  }
+  .btn-submit:hover { background: var(--green); }
+  .btn-submit .arr { transition: transform .3s var(--easing); }
+  .btn-submit:hover .arr { transform: translateX(4px); }
+
+  .form-note {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: .08em;
+    color: var(--steel); line-height: 1.6;
+  }
+
+  /* Success state */
+  .form-success {
+    display: none; /* changed to flex by JS on success */
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 28px;
+    text-align: center;
+    border: 1px solid var(--hair);
+    background: var(--paper);
+  }
+  .form-success .ok-icon {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--green-tint); color: var(--green);
+    display: grid; place-items: center;
+    margin: 0 auto 20px;
+  }
+  .form-success h3 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: 24px; font-weight: 500; margin: 0 0 10px;
+  }
+  .form-success p { font-size: 15px; color: var(--ink-2); margin: 0; }
+
+  /* ── CTA BAND ── */
+  .contact-cta-band {
+    background: var(--green);
+    color: var(--paper);
+    padding: clamp(56px, 7vw, 90px) 0;
+    position: relative; overflow: hidden;
+  }
+  .contact-cta-band::after {
+    content: "CONTACT";
+    position: absolute;
+    bottom: -24px; right: 12px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(80px, 14vw, 200px);
+    color: rgba(247,246,241,.08);
+    letter-spacing: -.05em;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .contact-cta-inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px; align-items: center;
+  }
+  @media (max-width: 760px) { .contact-cta-inner { grid-template-columns: 1fr; } }
+  .contact-cta-inner h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 500; letter-spacing: -.02em; line-height: 1.1;
+    margin: 14px 0 0; color: var(--paper);
+  }
+  .contact-cta-inner h2 em { font-style: normal; color: rgba(247,246,241,.85); font-weight: 400; }
+  .contact-cta-actions { display: flex; flex-direction: column; gap: 0; }
+  .cta-link-row {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(247,246,241,.25);
+    padding: 16px 0;
+    transition: padding-left .3s var(--easing);
+    text-decoration: none; color: var(--paper);
+  }
+  .cta-link-row:last-child { border-bottom: 1px solid rgba(247,246,241,.25); }
+  .cta-link-row:hover { padding-left: 10px; }
+  .cta-link-row .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(247,246,241,.7);
+  }
+  .cta-link-row .v { font-size: 16px; font-weight: 500; margin-top: 3px; }
+  .cta-link-row .arr { font-size: 20px; }
+</style>
+</head>
+
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="container top-bar-track">
+    <div class="top-bar-left">
+      <span class="pulse"></span>
+      <span>COMPUTEX 2026 / 06.02 — 06.05</span>
+      <span class="sep">/</span>
+      <span>TPE 南港展覽館 2館 4F</span>
+      <span class="sep">/</span>
+      <a href="news.html#computex-2026">攤位 Q1334C →</a>
+    </div>
+    <div class="top-bar-right">
+      <span>EST. 1992</span>
+      <span class="sep">/</span>
+      <span>MADE IN TAIWAN · 三峽</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-track">
+    <a class="brand" href="index.html">
+      <img src="images/logo/logo-yesway-green.svg" alt="Yes Way 高位企業" />
+    </a>
+    <input type="checkbox" id="nav-cb" class="nav-cb" hidden />
+    <nav><ul class="nav">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="about.html">關於高位</a></li>
+      <li class="has-sub"><a href="quality.html">品質與技術</a></li>
+      <li class="has-sub"><a href="products.html">產品介紹</a></li>
+      <li><a href="news.html">最新消息</a></li>
+      <li><a href="esg.html">ESG</a></li>
+      <li><a href="contact.html" class="active">聯絡我們</a></li>
+    </ul></nav>
+    <div class="header-actions">
+      <button class="lang-switch"><span class="on">中</span><span>/</span><span>EN</span></button>
+      <button class="btn-cta" onclick="document.getElementById('inquiry-form').scrollIntoView({behavior:'smooth'})">詢價 Inquiry <span class="arrow">→</span></button>
+      <label for="nav-cb" class="nav-toggle" aria-label="選單 Menu"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     CONTACT HERO BANNER
+============================================================ -->
+<section class="contact-hero">
+  <div class="contact-hero-img">
+    <img src="images/banner/contact.png" alt="Yes Way 高位企業 — 聯絡我們" />
+    <div class="contact-hero-overlay">
+      <nav class="breadcrumb">
+        <a href="index.html">HOME</a>
+        <span class="sep">/</span>
+        <span>CONTACT · 聯絡我們</span>
+      </nav>
+      <span class="eyebrow">CONTACT US · 聯絡我們</span>
+      <h1>
+        與高位攜手，<br/>
+        把傳輸挑戰<em>交給我們</em>。
+      </h1>
+      <p class="lead">
+        從規格確認到 ODM 量產，
+        <strong>工程團隊 24 小時內回覆</strong>。
+        填寫下方表單或直接來電，讓高位成為您最可靠的線材製造夥伴。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT INFO STRIP
+============================================================ -->
+<section class="contact-strip">
+  <div class="contact-strip-track">
+    <div class="contact-strip-item">
+      <div class="lbl">ADDRESS · 公司總部</div>
+      <div class="val">新北市三峽區<br/>介壽路一段 318 巷 21 號</div>
+    </div>
+    <div class="contact-strip-item">
+      <div class="lbl">TEL / FAX · 電話 / 傳真</div>
+      <div class="val">
+        <a href="tel:+886226735492">+886-2-2673-5492</a><br/>
+        <span style="color:var(--steel); font-size:13px;">F &nbsp;886-2-2673-3904</span>
+      </div>
+    </div>
+    <div class="contact-strip-item">
+      <div class="lbl">EMAIL · 業務信箱</div>
+      <div class="val"><a href="mailto:sales@yesway.com.tw">sales@yesway.com.tw</a></div>
+    </div>
+    <div class="contact-strip-item">
+      <div class="lbl">HOURS · 服務時間</div>
+      <div class="val">週一 — 週五<br/><span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--steel);">08:30 — 17:30</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MAIN — MAP + FORM
+============================================================ -->
+<section class="contact-main">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- ── Left: Map + Company Details ── -->
+      <div class="contact-map-wrap">
+        <div class="contact-map-frame">
+          <iframe
+            src="https://www.google.com/maps?q=新北市三峽區介壽路一段318巷21號&output=embed&hl=zh-TW"
+            title="Yes Way 高位企業 — 新北市三峽區介壽路一段318巷21號"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+        <div class="contact-details">
+          <div class="contact-detail-row">
+            <span class="k">Company</span>
+            <span class="v">高位企業有限公司<br/><span style="font-size:12.5px;color:var(--steel);">Yes Way Enterprise Corporation</span></span>
+          </div>
+          <div class="contact-detail-row">
+            <span class="k">Address</span>
+            <span class="v">新北市三峽區<br/>介壽路一段 318 巷 21 號</span>
+          </div>
+          <div class="contact-detail-row">
+            <span class="k">統編</span>
+            <span class="v" style="font-family:'JetBrains Mono',monospace; font-size:14px;">86973811</span>
+          </div>
+          <div class="contact-detail-row">
+            <span class="k">Tel</span>
+            <span class="v"><a href="tel:+886226735492">+886-2-2673-5492</a></span>
+          </div>
+          <div class="contact-detail-row">
+            <span class="k">Fax</span>
+            <span class="v" style="font-family:'JetBrains Mono',monospace; font-size:14px;">886-2-2673-3904</span>
+          </div>
+          <div class="contact-detail-row">
+            <span class="k">Email</span>
+            <span class="v"><a href="mailto:sales@yesway.com.tw">sales@yesway.com.tw</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Right: Inquiry Form ── -->
+      <div class="contact-form-section" id="inquiry-form">
+        <div class="form-head">
+          <span class="eyebrow">INQUIRY FORM · 諮詢表單</span>
+          <h2>填寫諮詢，<br/>我們<em>立即回覆</em>。</h2>
+          <p>請輸入下列資料以便我們提供最有效率也最符合您期待的解決方案與產品。</p>
+        </div>
+
+        <!-- Form -->
+        <form
+          class="inquiry-form"
+          id="contact-form"
+          action="https://formsubmit.co/sales@yesway.com.tw"
+          method="POST"
+          onsubmit="return handleFormSubmit(this);">
+          <input type="hidden" name="_subject" value="[Yes Way 官網] 在線諮詢表單">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" style="display:none">
+
+          <!-- 聯絡人資料 -->
+          <div class="form-block">
+            <div class="form-block-label">聯絡人資料</div>
+            <div class="form-row-2">
+              <div class="form-field">
+                <label>姓名 <span class="req">*</span></label>
+                <input required name="name" type="text" placeholder="王小明" />
+              </div>
+              <div class="form-field">
+                <label>職稱</label>
+                <input name="title" type="text" placeholder="採購工程師" />
+              </div>
+            </div>
+            <div class="form-row-2">
+              <div class="form-field">
+                <label>E-Mail <span class="req">*</span></label>
+                <input required name="email" type="email" placeholder="you@company.com" />
+              </div>
+              <div class="form-field">
+                <label>
+                  聯絡電話(日) <span class="req">*</span>
+                  <span class="hint">請輸入完整號碼，含國碼、地區碼，例 xxx-x-xxxxxxx</span>
+                </label>
+                <input required name="phone" type="tel" placeholder="+886-2-..." />
+              </div>
+            </div>
+            <div class="form-checkbox-row">
+              <input type="checkbox" name="newsletter" id="newsletter" value="yes" />
+              <label for="newsletter"><span>請寄給我有關貴公司的產品、服務及舉辦活動的資訊。</span></label>
+            </div>
+          </div>
+
+          <!-- 公司資料 -->
+          <div class="form-block">
+            <div class="form-block-label">公司資料</div>
+            <div class="form-field">
+              <label>公司名稱 <span class="req">*</span></label>
+              <input required name="company" type="text" placeholder="ABC Corporation" />
+            </div>
+            <div class="form-row-2">
+              <div class="form-field">
+                <label>公司網址
+                  <span class="hint">包含 http://</span>
+                </label>
+                <input name="website" type="url" placeholder="https://www.example.com" />
+              </div>
+              <div class="form-field">
+                <label>產品需求 <span class="req">*</span></label>
+                <input required name="inquiry_type" type="text" placeholder="Cable Assembly / PCIe Gen6 / ODM…" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 留言 -->
+          <div class="form-block">
+            <div class="form-block-label">留言</div>
+            <div class="form-field" style="margin-bottom:0;">
+              <label>留下訊息 <span class="req">*</span></label>
+              <textarea required name="message" rows="5" placeholder="請描述您的需求，例如：MCIO i8 / PCIe Gen6 64 GT/s 線組客製化規格、應用場景、預估數量…"></textarea>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <div class="form-submit-area">
+            <button type="submit" class="btn-submit">
+              送出諮詢
+              <span class="arr">→</span>
+            </button>
+            <p class="form-note">送出後內容將傳送至 sales@yesway.com.tw，工程團隊將於 24 小時內回覆。</p>
+          </div>
+        </form>
+
+        <!-- Success message (shown after submit) -->
+        <div class="form-success" id="form-success">
+          <div class="ok-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>諮詢已成功送出！</h3>
+          <p>感謝您的來信，高位工程團隊將於 24 小時內與您聯繫。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA BAND
+============================================================ -->
+<section class="contact-cta-band">
+  <div class="container contact-cta-inner">
+    <div>
+      <span class="eyebrow" style="color:rgba(247,246,241,.85);">MORE WAYS · 其他聯繫方式</span>
+      <h2>
+        直接聯繫，<br/>
+        <em>快速解決需求</em>。
+      </h2>
+    </div>
+    <div class="contact-cta-actions">
+      <a class="cta-link-row" href="mailto:sales@yesway.com.tw">
+        <div><div class="k">EMAIL</div><div class="v">sales@yesway.com.tw</div></div>
+        <span class="arr">→</span>
+      </a>
+      <a class="cta-link-row" href="tel:+886226735492">
+        <div><div class="k">TEL</div><div class="v">+886-2-2673-5492</div></div>
+        <span class="arr">→</span>
+      </a>
+      <a class="cta-link-row" href="products.html">
+        <div><div class="k">PRODUCTS</div><div class="v">瀏覽完整產品線 →</div></div>
+        <span class="arr">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo/logo-yesway-white.svg" alt="Yes Way" />
+        <p>高位企業有限公司<br/>Yes Way Enterprise Corporation</p>
+        <p style="margin-top:14px; font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(247,246,241,.5);letter-spacing:.06em;">
+          新北市三峽區介壽路一段318巷21號<br/>
+          T &nbsp;886-2-2673-5492<br/>
+          F &nbsp;886-2-2673-3904<br/>
+          統編 &nbsp;86973811
+        </p>
+      </div>
+      <div>
+        <h5>SITE MAP</h5>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="about.html">關於高位</a></li>
+          <li><a href="quality.html">品質與技術</a></li>
+          <li><a href="products.html">產品介紹</a></li>
+          <li><a href="news.html">最新消息</a></li>
+          <li><a href="esg.html">ESG</a></li>
+          <li><a href="contact.html">聯絡我們</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>PRODUCT LINES</h5>
+        <ul>
+          <li><a href="products.html?cat=cable-assembly">Cable Assembly 線束加工</a></li>
+          <li><a href="products.html?cat=pcb-assembly">PCB Assembly 電路板組裝</a></li>
+          <li><a href="products.html?cat=ai-gpu-servers">AI / GPU Servers</a></li>
+          <li><a href="products.html?cat=server-storage-pc">Server &amp; Storage / PC</a></li>
+          <li><a href="products.html?cat=cable-diy-tooling">電纜 DIY 工具</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>CONTACT</h5>
+        <ul>
+          <li>銷售諮詢 <a href="mailto:sales@yesway.com.tw">sales@yesway.com.tw</a></li>
+          <li>生產據點：新北 · 三峽</li>
+          <li><a href="contact.html">在線詢問表單 →</a></li>
+        </ul>
+        <h5 style="margin-top:24px;">FOLLOW</h5>
+        <ul style="display:flex;gap:14px;">
+          <li><a href="#">FB</a></li>
+          <li><a href="#">IG</a></li>
+          <li><a href="#">LINE</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 YES WAY ENTP. CORP. — ALL RIGHTS RESERVED</span>
+      <div class="seo">
+        <span>高速傳輸線材</span><span>·</span>
+        <span>Cable Assembly</span><span>·</span>
+        <span>OEM/ODM</span><span>·</span>
+        <span>聯絡我們</span><span>·</span>
+        <span>Made in Taiwan</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function handleFormSubmit(form) {
+    const btn = form.querySelector('.btn-submit');
+
+    // Disable button & show loading state
+    btn.disabled = true;
+    btn.innerHTML = '送出中… <span class="arr" style="opacity:.4;">→</span>';
+
+    // Use FormSubmit AJAX endpoint (no page redirect)
+    fetch('https://formsubmit.co/ajax/sales@yesway.com.tw', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success === 'true' || data.success === true) {
+        // Hide form, show success message
+        form.style.display = 'none';
+        const success = document.getElementById('form-success');
+        if (success) {
+          success.style.display = 'flex';
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      } else {
+        throw new Error('FormSubmit returned failure');
+      }
+    })
+    .catch(() => {
+      // Re-enable button on error
+      btn.disabled = false;
+      btn.innerHTML = '送出諮詢 <span class="arr">→</span>';
+      alert('送出失敗，請稍後再試，或直接來信：sales@yesway.com.tw');
+    });
+
+    return false; // Prevent native POST / page redirect
+  }
+</script>
+
+</body>
+</html>

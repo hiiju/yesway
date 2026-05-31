@@ -1,0 +1,802 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>最新消息 — Yes Way 高位企業｜COMPUTEX 2026 參展、技術文章與 ESG 報告</title>
+<meta name="description" content="高位企業 (Yes Way) 最新消息：COMPUTEX 2026 參展、PCIe Gen6 BIRT 驗證、ISO 14001 認證等技術與永續發展紀錄。" />
+<meta name="keywords" content="Yes Way 最新消息, 高位企業 新聞, COMPUTEX 2026, PCIe Gen6, BIRT, ISO 14001, AI 伺服器" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+
+<style>
+  /* ============================================================
+     News page styles
+     ============================================================ */
+  .page-hero {
+    padding: clamp(70px, 9vw, 140px) 0 clamp(50px, 6vw, 90px);
+    background:
+      radial-gradient(circle at 90% 10%, rgba(0,127,2,.06) 0%, transparent 50%),
+      var(--paper);
+    position: relative;
+    border-bottom: 1px solid var(--hair);
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--hair) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hair) 1px, transparent 1px);
+    background-size: 96px 96px;
+    opacity: .25;
+    -webkit-mask-image: radial-gradient(ellipse at 30% 100%, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at 30% 100%, #000 30%, transparent 75%);
+    pointer-events: none;
+  }
+  .breadcrumb {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--steel); margin-bottom: 36px;
+    display: flex; gap: 10px;
+    position: relative; z-index: 1;
+  }
+  .breadcrumb a:hover { color: var(--green); }
+  .breadcrumb .sep { opacity: .5; }
+  .page-hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+    gap: clamp(40px, 6vw, 100px);
+    align-items: end;
+    position: relative; z-index: 1;
+  }
+  @media (max-width: 900px) { .page-hero-grid { grid-template-columns: 1fr; } }
+  .page-hero h1 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-weight: 500;
+    font-size: clamp(48px, 7vw, 110px);
+    line-height: .98;
+    letter-spacing: -.025em;
+    margin: 0;
+  }
+  .page-hero h1 em { font-style: normal; font-weight: 400; color: var(--green); }
+  .page-hero .lead {
+    font-size: clamp(16px, 1.3vw, 18px);
+    line-height: 1.65;
+    color: var(--ink-2);
+    max-width: 480px;
+  }
+
+  /* ============================================================
+     NEWS BANNER — full-bleed hero (Edge Computing image)
+     Left side of the artwork is pure white → dark text.
+     ============================================================ */
+  .news-banner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2048 / 1152;
+    max-height: 760px;
+    min-height: 420px;
+    overflow: hidden;
+    background: #ffffff;
+    isolation: isolate;
+  }
+  .news-banner > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 82% center;
+  }
+  .news-banner::before {
+    /* White scrim over the left half so dark text stays crisp */
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(100deg,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,.96) 26%,
+      rgba(255,255,255,.55) 43%,
+      rgba(255,255,255,0) 60%);
+    pointer-events: none;
+  }
+  .nb-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: clamp(26px, 3.4vw, 52px) var(--gutter);
+    display: flex;
+    flex-direction: column;
+  }
+  .nb-overlay .breadcrumb { margin-bottom: 0; }
+  .nb-content {
+    margin: auto 0;
+    max-width: 600px;
+  }
+  .nb-content .eyebrow { margin-bottom: 20px; }
+  .news-banner h1 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-weight: 500;
+    font-size: clamp(40px, 5.6vw, 92px);
+    line-height: 1.0;
+    letter-spacing: -.025em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .news-banner h1 em { font-style: normal; font-weight: 400; color: var(--green); }
+  .nb-sub {
+    margin: 24px 0 0;
+    max-width: 490px;
+    font-size: clamp(14.5px, 1.1vw, 16.5px);
+    line-height: 1.72;
+    color: var(--ink-2);
+  }
+  .nb-sub strong { color: var(--green); font-weight: 600; }
+
+  /* Mobile — banner grows taller, stronger top-down scrim */
+  @media (max-width: 820px) {
+    .news-banner {
+      aspect-ratio: auto;
+      min-height: 540px;
+      max-height: none;
+    }
+    .news-banner::before {
+      background: linear-gradient(178deg,
+        rgba(255,255,255,.97) 0%,
+        rgba(255,255,255,.86) 48%,
+        rgba(255,255,255,.62) 100%);
+    }
+    .nb-content { max-width: 100%; }
+  }
+
+  /* Filter chips */
+  .news-filter {
+    background: var(--paper);
+    border-bottom: 1px solid var(--hair);
+  }
+  .news-filter-track {
+    display: flex;
+    gap: 10px;
+    padding: 22px 0;
+    flex-wrap: wrap;
+  }
+  .nf-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all .25s var(--easing);
+  }
+  .nf-chip:hover { border-color: var(--ink); }
+  .nf-chip.active {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+  .nf-chip .count {
+    margin-left: 6px;
+    color: var(--green);
+    font-weight: 600;
+  }
+  .nf-chip.active .count { color: #6BFF6E; }
+
+  /* Featured article block */
+  .news-featured {
+    padding: clamp(50px, 7vw, 90px) 0 clamp(40px, 5vw, 60px);
+    background: var(--paper);
+  }
+  .article-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    box-shadow: 0 30px 60px -28px rgba(14,20,16,.25);
+  }
+  @media (max-width: 900px) { .article-card { grid-template-columns: 1fr; } }
+  .article-card .a-img {
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+    background: #11221a;
+  }
+  .article-card .a-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .article-card .a-body {
+    padding: clamp(28px, 4vw, 56px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .article-card .a-meta {
+    display: flex; gap: 14px; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: rgba(247,246,241,.65);
+  }
+  .article-card .a-meta .tag {
+    background: rgba(107,255,110,.15);
+    color: #6BFF6E;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .article-card h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: clamp(26px, 3vw, 42px);
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -.015em;
+    margin: 0;
+    color: var(--paper);
+  }
+  .article-card h2 em { color: #6BFF6E; font-style: normal; font-weight: 400; }
+  .article-card .lede {
+    font-size: 15px;
+    line-height: 1.75;
+    color: rgba(247,246,241,.82);
+    margin: 0;
+  }
+  .article-card .bullets {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .article-card .bullets li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(247,246,241,.85);
+  }
+  .article-card .bullets li::before {
+    content: "●";
+    position: absolute; left: 0; top: 0;
+    color: #6BFF6E;
+    font-size: 10px;
+    line-height: 1.7;
+  }
+  .article-card .bullets li strong {
+    display: block;
+    color: var(--paper);
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    letter-spacing: -.005em;
+  }
+  .article-card .venue {
+    margin-top: 10px;
+    padding: 18px 0 0;
+    border-top: 1px dashed rgba(247,246,241,.18);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 540px) { .article-card .venue { grid-template-columns: 1fr; } }
+  .article-card .venue .v-item .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.55);
+    margin-bottom: 4px;
+  }
+  .article-card .venue .v-item .v {
+    font-size: 14px;
+    color: var(--paper);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .article-card .a-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 22px;
+    background: #6BFF6E;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 6px;
+    align-self: flex-start;
+    transition: background .25s var(--easing);
+  }
+  .article-card .a-cta:hover { background: var(--paper); }
+
+  /* News list */
+  .news-list-section {
+    padding: clamp(40px, 5vw, 70px) 0 clamp(80px, 10vw, 140px);
+    background: var(--paper);
+  }
+  .news-list-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .news-list-head h3 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: clamp(22px, 2.4vw, 32px);
+    font-weight: 500;
+    letter-spacing: -.01em;
+    margin: 12px 0 0;
+  }
+  .news-list-head h3 em { color: var(--green); font-style: normal; font-weight: 400; }
+  .news-list-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--steel);
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--hair);
+    border: 1px solid var(--hair);
+  }
+  @media (max-width: 900px) { .news-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .news-grid { grid-template-columns: 1fr; } }
+
+  .news-item {
+    background: var(--paper);
+    padding: 32px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 280px;
+    transition: background .25s var(--easing);
+  }
+  .news-item:hover { background: var(--paper-2); }
+  .news-item .meta {
+    display: flex; gap: 12px; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: var(--steel);
+  }
+  .news-item .meta .tag {
+    background: var(--green-tint);
+    color: var(--green-deep);
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .news-item h4 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: 19px;
+    font-weight: 500;
+    letter-spacing: -.005em;
+    line-height: 1.3;
+    margin: 0;
+    color: var(--ink);
+  }
+  .news-item p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0;
+    flex-grow: 1;
+  }
+  .news-item .read {
+    margin-top: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    display: inline-flex; gap: 8px; align-items: center;
+  }
+  .news-item .read::after { content: "→"; color: var(--green); }
+
+  .news-item.empty {
+    background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 12px, var(--paper-2) 12px, var(--paper-2) 24px);
+    color: var(--steel);
+    cursor: default;
+  }
+  .news-item.empty:hover { background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 12px, var(--paper-2) 12px, var(--paper-2) 24px); }
+  .news-item.empty .meta { color: var(--steel); }
+  .news-item.empty h4 { color: var(--steel); font-style: normal; }
+  .news-item.empty p { color: var(--steel); }
+
+  /* CTA */
+  .cta {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::after {
+    content: "NEWS";
+    position: absolute;
+    bottom: -40px; left: 50%; transform: translateX(-50%);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(120px, 22vw, 320px);
+    color: rgba(247,246,241,.04);
+    letter-spacing: -.05em;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .cta-inner {
+    position: relative; z-index: 1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px; align-items: center;
+  }
+  @media (max-width: 800px) { .cta-inner { grid-template-columns: 1fr; } }
+  .cta h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: 500; line-height: 1.04; letter-spacing: -.02em;
+    margin: 18px 0 0;
+  }
+  .cta h2 em { font-style: normal; font-weight: 400; color: #6BFF6E; }
+  .cta-side p { color: rgba(247,246,241,.78); font-size: 16px; line-height: 1.7; margin: 0 0 32px; }
+  .cta-actions { display: flex; flex-direction: column; gap: 0; }
+  .cta-action-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(247,246,241,.15); padding: 18px 0; transition: padding-left .3s var(--easing); }
+  .cta-action-row:last-child { border-bottom: 1px solid rgba(247,246,241,.15); }
+  .cta-action-row:hover { padding-left: 12px; color: #6BFF6E; }
+  .cta-action-row .lbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(247,246,241,.6); }
+  .cta-action-row .val { font-size: 17px; font-weight: 500; margin-top: 4px; }
+  .cta-action-row .arrow { font-size: 22px; }
+</style>
+</head>
+
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="container top-bar-track">
+    <div class="top-bar-left">
+      <span class="pulse"></span>
+      <span>COMPUTEX 2026 / 06.02 — 06.05</span>
+      <span class="sep">/</span>
+      <span>TPE 南港展覽館 2館 1F</span>
+      <span class="sep">/</span>
+      <a href="#computex-2026">攤位 Q1334C →</a>
+    </div>
+    <div class="top-bar-right">
+      <span>EST. 1992</span>
+      <span class="sep">/</span>
+      <span>MADE IN TAIWAN · 三峽</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-track">
+    <a class="brand" href="index.html">
+      <img src="images/logo/logo-yesway-green.svg" alt="Yes Way 高位企業" />
+    </a>
+    <input type="checkbox" id="nav-cb" class="nav-cb" hidden />
+    <nav><ul class="nav">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="about.html">關於高位</a></li>
+      <li class="has-sub"><a href="quality.html">品質與技術</a></li>
+      <li class="has-sub"><a href="products.html">產品介紹</a></li>
+      <li><a href="news.html" class="active">最新消息</a></li>
+      <li><a href="esg.html">ESG</a></li>
+      <li><a href="contact.html">聯絡我們</a></li>
+    </ul></nav>
+    <div class="header-actions">
+      <button class="lang-switch"><span class="on">中</span><span>/</span><span>EN</span></button>
+      <button class="btn-cta">詢價 Inquiry <span class="arrow">→</span></button>
+      <label for="nav-cb" class="nav-toggle" aria-label="選單 Menu"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     NEWS BANNER — full-bleed hero (Edge Computing image)
+============================================================ -->
+<section class="news-banner">
+  <img src="images/banner/news_EdgeComputing.png" alt="高位快訊 — 邊緣運算與高速傳輸技術文章" />
+  <div class="nb-overlay">
+    <nav class="breadcrumb">
+      <a href="index.html">HOME</a>
+      <span class="sep">/</span>
+      <span>最新消息 / NEWS</span>
+    </nav>
+
+    <div class="nb-content">
+      <span class="eyebrow no-line">NEWS &amp; INSIGHTS · 最新消息與技術文章</span>
+      <h1>
+        高位<em>快訊</em><br/>
+        技術與<em>永續</em>的每一刻。
+      </h1>
+      <p class="nb-sub">
+        從 <strong>COMPUTEX 參展</strong>、<strong>PCIe Gen6 BIRT 驗證</strong>到 <strong>ISO 14001 環境認證</strong>——
+        高位 (Yes Way) 在此記錄最新消息、展會動態與高速傳輸技術文章。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FILTER CHIPS
+============================================================ -->
+<section class="news-filter">
+  <div class="container news-filter-track">
+    <button class="nf-chip active" data-filter="all">全部 <span class="count">3</span></button>
+    <button class="nf-chip" data-filter="exhibition">展覽 Exhibition <span class="count">1</span></button>
+    <button class="nf-chip" data-filter="tech">技術 Tech <span class="count">1</span></button>
+    <button class="nf-chip" data-filter="esg">ESG <span class="count">1</span></button>
+  </div>
+</section>
+
+<!-- ============================================================
+     FEATURED ARTICLE — COMPUTEX 2026
+============================================================ -->
+<section class="news-featured" id="computex-2026" data-cat="exhibition">
+  <div class="container">
+    <article class="article-card">
+      <div class="a-img">
+        <img src="images/index/computex-2026.jpg" alt="高位企業 COMPUTEX 2026 參展" />
+      </div>
+      <div class="a-body">
+        <div class="a-meta">
+          <span class="tag">EXHIBITION</span>
+          <span>2026.06.02 — 06.05</span>
+          <span>·</span>
+          <span>COMPUTEX</span>
+        </div>
+        <h2>高位企業參展 <em>COMPUTEX 2026</em><br/>展示 AI 伺服器高速傳輸解決方案</h2>
+        <p class="lede">
+          高位企業將於 2026 / 06 / 02 — 06 / 05 亮相 COMPUTEX 台北國際電腦展！
+          響應年度主題「AI Together」，我們現場展示專為 AI 伺服器與高效能運算（HPC）打造的尖端連接技術。
+        </p>
+
+        <ul class="bullets">
+          <li>
+            <strong>AI 核心傳輸</strong>
+            領先佈局 MCIO（4i/8i）、PCIe Gen5（32GT/s）與 SlimSAS（SFF-8654）高速線材加工。
+          </li>
+          <li>
+            <strong>次世代規格</strong>
+            全面支援 USB 4.0、CXL 及 SFF-TA-1033 等前瞻規格設計。
+          </li>
+          <li>
+            <strong>研發設計實力</strong>
+            提供 AI 伺服器背板 PCB 設計、轉接板開發至精密線束加工的一站式客製化 OEM/ODM 服務。
+          </li>
+          <li>
+            <strong>精密製造工藝</strong>
+            承接高難度精密線束加工，堅持高品質台灣製造標準。
+          </li>
+        </ul>
+
+        <div class="venue">
+          <div class="v-item">
+            <div class="k">地點 / Venue</div>
+            <div class="v">南港展覽館 2館 1樓</div>
+          </div>
+          <div class="v-item">
+            <div class="k">攤位 / Booth</div>
+            <div class="v">Q1334C</div>
+          </div>
+          <div class="v-item">
+            <div class="k">時間 / Hours</div>
+            <div class="v">09:30 — 17:30<br/><span class="mono" style="font-size:11px;opacity:.65;">最終日至 16:30</span></div>
+          </div>
+        </div>
+
+        <p class="lede" style="margin-top:6px;">
+          歡迎預約現場技術交流，或<a href="pdf/YesWay 32G FlatCable_CATALOUGE_V250509.pdf" style="color:inherit;text-decoration:underline;font-weight:600;">查看完整產品型錄 PDF</a>。
+        </p>
+
+        <a class="a-cta" href="mailto:sales@yesway.com.tw?subject=%5BComputex%202026%5D%20%E9%A0%90%E7%B4%84%E7%8F%BE%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%20%2F%20%E7%B4%A2%E5%8F%96%E5%9E%8B%E9%8C%84">
+          📧 sales@yesway.com.tw
+          <span>→</span>
+        </a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================================================
+     OTHER NEWS — list
+============================================================ -->
+<section class="news-list-section">
+  <div class="container">
+    <div class="news-list-head">
+      <div>
+        <span class="eyebrow">NEWS ARCHIVE</span>
+        <h3>更多<em>消息</em></h3>
+      </div>
+      <span class="news-list-count">— 2 篇 / TOTAL</span>
+    </div>
+
+    <div class="news-grid">
+
+      <article class="news-item" data-cat="tech">
+        <div class="meta">
+          <span class="tag">TECH</span>
+          <span>2026.04.18</span>
+        </div>
+        <h4>MCIO i8 線材通過 PCIe Gen6 BIRT 驗證</h4>
+        <p>新一代 64 GT/s 高速線組完成位元錯誤率 (BIRT) 測試，正式量產供應 AI 伺服器與資料中心客戶。</p>
+        <span class="read">技術文章</span>
+      </article>
+
+      <article class="news-item" data-cat="esg">
+        <div class="meta">
+          <span class="tag">ESG</span>
+          <span>2026.03.10</span>
+        </div>
+        <h4>取得 ISO 14001 環境管理系統認證</h4>
+        <p>持續推動綠色供應鏈，落實 ESG 永續承諾，朝零廢棄製造目標邁進。</p>
+        <span class="read">永續報告</span>
+      </article>
+
+      <article class="news-item empty">
+        <div class="meta">
+          <span class="tag" style="background:transparent;color:var(--steel);border:1px dashed var(--hair);">COMING SOON</span>
+        </div>
+        <h4>更多消息陸續發布中</h4>
+        <p>追蹤高位 (Yes Way) 的最新技術進展、認證里程碑與展覽動態。</p>
+        <span class="read">敬請期待</span>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA
+============================================================ -->
+<section class="cta">
+  <div class="container cta-inner">
+    <div>
+      <span class="eyebrow" style="color:rgba(247,246,241,.6);">SUBSCRIBE</span>
+      <h2>
+        關注高位的<em>每一次進展</em>。
+      </h2>
+    </div>
+    <div class="cta-side">
+      <p>
+        想第一時間掌握高位的展覽資訊、新規格量產與技術文章？
+        歡迎來信訂閱電子報，或加入 LINE 官方帳號。
+      </p>
+      <div class="cta-actions">
+        <a class="cta-action-row" href="mailto:sales@yesway.com.tw?subject=%E8%A8%82%E9%96%B1%20Yes%20Way%20%E9%9B%BB%E5%AD%90%E5%A0%B1">
+          <div><div class="lbl">SUBSCRIBE</div><div class="val">訂閱電子報 → sales@yesway.com.tw</div></div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="cta-action-row" href="tel:+886226735492">
+          <div><div class="lbl">TEL</div><div class="val">+886-2-2673-5492</div></div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="cta-action-row" href="contact.html">
+          <div><div class="lbl">INQUIRY FORM</div><div class="val">在線詢問表單 →</div></div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo/logo-yesway-white.svg" alt="Yes Way" />
+        <p>高位企業有限公司<br/>Yes Way Enterprise Corporation</p>
+        <p style="margin-top:14px; font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(247,246,241,.5);letter-spacing:.06em;">
+          新北市三峽區介壽路一段318巷21號<br/>
+          T &nbsp;886-2-2673-5492<br/>
+          F &nbsp;886-2-2673-3904<br/>
+          統編 &nbsp;86973811
+        </p>
+      </div>
+      <div>
+        <h5>SITE MAP</h5>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="about.html">關於高位</a></li>
+          <li><a href="quality.html">品質與技術</a></li>
+          <li><a href="products.html">產品介紹</a></li>
+          <li><a href="news.html">最新消息</a></li>
+          <li><a href="esg.html">ESG</a></li>
+          <li><a href="contact.html">聯絡我們</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>PRODUCT LINES</h5>
+        <ul>
+          <li><a href="products.html?cat=cable-assembly">Cable Assembly 線束加工</a></li>
+          <li><a href="products.html?cat=pcb-assembly">PCB Assembly 電路板組裝</a></li>
+          <li><a href="products.html?cat=ai-gpu-servers">AI / GPU Servers</a></li>
+          <li><a href="products.html?cat=server-storage-pc">Server &amp; Storage / PC</a></li>
+          <li><a href="products.html?cat=cable-diy-tooling">電纜 DIY 工具</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>CONTACT</h5>
+        <ul>
+          <li>銷售諮詢 <a href="mailto:sales@yesway.com.tw">sales@yesway.com.tw</a></li>
+          <li>生產據點：新北 · 三峽</li>
+          <li><a href="contact.html">在線詢問表單 →</a></li>
+        </ul>
+        <h5 style="margin-top:24px;">FOLLOW</h5>
+        <ul style="display:flex;gap:14px;">
+          <li><a href="#">FB</a></li>
+          <li><a href="#">IG</a></li>
+          <li><a href="#">LINE</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 YES WAY ENTP. CORP. — ALL RIGHTS RESERVED</span>
+      <div class="seo">
+        <span>COMPUTEX 2026</span><span>·</span>
+        <span>PCIe Gen6 BIRT</span><span>·</span>
+        <span>ISO 14001</span><span>·</span>
+        <span>AI Server</span><span>·</span>
+        <span>MCIO</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // News filter chips — toggle visibility by data-cat
+  (function () {
+    const chips = document.querySelectorAll('.nf-chip');
+    const featured = document.getElementById('computex-2026');
+    const items = document.querySelectorAll('.news-item');
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const f = chip.dataset.filter;
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+
+        // Featured (Computex)
+        if (featured) {
+          featured.style.display = (f === 'all' || f === featured.dataset.cat) ? '' : 'none';
+        }
+        // List items
+        items.forEach(it => {
+          if (it.classList.contains('empty')) {
+            it.style.display = (f === 'all') ? '' : 'none';
+            return;
+          }
+          it.style.display = (f === 'all' || f === it.dataset.cat) ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>

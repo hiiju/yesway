@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# 編輯器
+.vscode/
+.idea/
+*.swp
+
+# Netlify
+.netlify/
+
+# 環境變數（未來會用到）
+.env
+.env.local
+
+# Logs
+*.log
+
+# 未來引入 build 工具時會用到
+node_modules/
+dist/
+
+
+# Claude Code 本機設定
+.claude/

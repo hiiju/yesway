@@ -1,0 +1,3317 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>高位企業有限公司 Yes Way｜AI 高速傳輸線材 OEM/ODM 製造 (台灣)</title>
+<meta name="description" content="高位企業 (Yes Way) — 深耕台灣 30 年，專業高速傳輸線材加工與 OEM/ODM 製造。MCIO i4/i8、PCIe Gen6 (64 GT/s)、SlimSAS 客製化線束，為 AI 伺服器與資料中心提供精密訊號完整性解決方案。" />
+<meta name="keywords" content="高速傳輸線材, Cable Assembly, PCB Assembly, AI/GPU Server, 線束 OEM, PCIe Gen6 線材, MCIO 線材, SlimSAS, 電纜 DIY 工具, 高位企業, Yes Way" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     Yes Way Design Tokens
+     ============================================================ */
+  :root {
+    --ink: #0E1410;
+    --ink-2: #1F2622;
+    --paper: #F7F6F1;
+    --paper-2: #EFEEE7;
+    --green: #007F02;
+    --green-deep: #00580A;
+    --green-tint: #E8F1E5;
+    --steel: #6B7268;
+    --steel-2: #B5B9B1;
+    --hair: #D8D6CC;
+    --signal: #FF5A1F;
+    --max-w: 1440px;
+    --gutter: clamp(20px, 4vw, 64px);
+    --rad: 2px;
+    --easing: cubic-bezier(.2,.7,.2,1);
+  }
+
+  *,*::before,*::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Bricolage Grotesque', 'Noto Sans TC', system-ui, sans-serif;
+    font-feature-settings: "ss01","cv11";
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+  }
+
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: .02em; }
+  .tc { font-family: 'Noto Sans TC', 'Bricolage Grotesque', sans-serif; }
+  .grotesk { font-family: 'Bricolage Grotesque', 'Noto Sans TC', sans-serif; }
+
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; }
+  img, svg { display: block; max-width: 100%; }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+
+  /* Eyebrow / overline label — recurring brand element */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--steel);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 24px; height: 1px;
+    background: var(--green);
+  }
+  .eyebrow.no-line::before { display: none; }
+
+  /* Section headings */
+  .h-section {
+    font-family: 'Bricolage Grotesque', 'Noto Sans TC', sans-serif;
+    font-weight: 500;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .h-section em {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--green);
+  }
+
+  /* ============================================================
+     Top Announcement Bar
+     ============================================================ */
+  .top-bar {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .top-bar-track {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 0;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .top-bar-left { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .top-bar .pulse {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #6BFF6E;
+    box-shadow: 0 0 0 0 rgba(107,255,110,.6);
+    animation: pulse 1.8s infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(107,255,110,.5); }
+    50%     { box-shadow: 0 0 0 6px rgba(107,255,110,0); }
+  }
+  .top-bar a { color: var(--paper); }
+  .top-bar a:hover { color: #6BFF6E; }
+  .top-bar .sep { opacity: .4; }
+  .top-bar-right { display: flex; gap: 18px; opacity: .85; }
+
+  /* ============================================================
+     Header
+     ============================================================ */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(247,246,241,.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--hair);
+  }
+  .header-track {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    height: 96px;
+    gap: 32px;
+  }
+  .brand { display: flex; align-items: center; gap: 18px; }
+  .brand img { width: 221px; height: auto; }
+  .brand-meta {
+    border-left: 1px solid var(--hair);
+    padding-left: 16px;
+    line-height: 1.2;
+  }
+  .brand-meta .b1 { font-size: 13.5px; font-weight: 700; letter-spacing: .04em; }
+  .brand-meta .b2 { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--steel); letter-spacing: .16em; font-weight: 600; }
+
+  .nav { display: flex; gap: 4px; justify-content: center; }
+  .nav > li { list-style: none; position: relative; }
+  .nav a {
+    display: inline-block;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    position: relative;
+  }
+  .nav a:hover { color: var(--green); }
+  .nav a::after {
+    content: ""; position: absolute;
+    left: 14px; right: 14px; bottom: 4px; height: 1px;
+    background: var(--green);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .35s var(--easing);
+  }
+  .nav a:hover::after { transform: scaleX(1); }
+  .nav .has-sub > a::before {
+    content: "+";
+    margin-right: 4px;
+    color: var(--green);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    opacity: .5;
+  }
+
+  .header-actions { display: flex; align-items: center; gap: 14px; }
+  .lang-switch {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .14em;
+    color: var(--steel);
+    border: 1px solid var(--hair);
+    border-radius: 999px;
+    padding: 6px 10px;
+    display: flex; gap: 8px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .lang-switch .on { color: var(--ink); font-weight: 600; }
+  .btn-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--ink); color: var(--paper);
+    border: none;
+    padding: 12px 18px;
+    font-size: 13.5px; font-weight: 500;
+    cursor: pointer;
+    transition: background .25s var(--easing);
+  }
+  .btn-cta:hover { background: var(--green); }
+  .btn-cta .arrow { transition: transform .3s var(--easing); }
+  .btn-cta:hover .arrow { transform: translateX(3px); }
+
+  /* Mobile navigation — CSS-only hamburger (checkbox toggle) */
+  .nav-toggle { display: none; }
+  .nav-cb { display: none; }
+  @media (max-width: 960px) {
+    .header-track {
+      grid-template-columns: 1fr auto;
+      height: auto;
+      padding-top: 14px; padding-bottom: 14px;
+      gap: 14px;
+    }
+    .brand img { width: 168px; }
+    .brand-meta { display: none; }
+    .header-actions { gap: 10px; }
+    .lang-switch { display: none; }
+    .nav-toggle {
+      display: flex; flex-direction: column; justify-content: center; gap: 5px;
+      width: 46px; height: 42px;
+      border: 1px solid var(--hair); background: var(--paper);
+      padding: 0 11px; flex-shrink: 0;
+    }
+    .nav-toggle span {
+      display: block; height: 2px; width: 100%;
+      background: var(--ink);
+      transition: transform .3s var(--easing), opacity .3s var(--easing);
+    }
+    .site-header nav {
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--hair);
+      box-shadow: 0 22px 30px -22px rgba(14,20,16,.3);
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s var(--easing);
+    }
+    .site-header .nav {
+      flex-direction: column; align-items: stretch; gap: 0;
+      padding: 4px var(--gutter) 14px;
+    }
+    .site-header .nav a {
+      padding: 15px 2px; font-size: 16px;
+      border-bottom: 1px solid var(--hair);
+    }
+    .site-header .nav a::after { display: none; }
+    .site-header .nav li:last-child a { border-bottom: 0; }
+    .nav-cb:checked ~ nav { max-height: 75vh; overflow-y: auto; }
+    .nav-cb:checked ~ .header-actions .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-cb:checked ~ .header-actions .nav-toggle span:nth-child(2) { opacity: 0; }
+    .nav-cb:checked ~ .header-actions .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+  @media (max-width: 420px) {
+    .brand img { width: 140px; }
+    .btn-cta { padding: 10px 13px; font-size: 12.5px; }
+  }
+
+  /* ============================================================
+     HERO CAROUSEL (產業應用 Banner — 3 張輪播)
+     ============================================================ */
+  .hero-carousel {
+    position: relative;
+    width: 100%;
+    height: clamp(480px, 62vw, 720px);
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--paper);
+    isolation: isolate;
+  }
+  .hc-slide {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .9s var(--easing), visibility 0s linear .9s;
+    z-index: 1;
+  }
+  @media (max-width: 900px) { .hc-slide { grid-template-columns: 1fr; grid-template-rows: 34% 66%; } }
+  .hc-slide.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+    transition: opacity .9s var(--easing), visibility 0s linear 0s;
+  }
+
+  /* Left — Scene image (application scenario) */
+  .hc-scene {
+    position: relative;
+    overflow: hidden;
+    background: #0E1410;
+  }
+  .hc-scene::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(95deg, rgba(14,20,16,.55) 0%, rgba(14,20,16,.15) 45%, rgba(14,20,16,0) 70%);
+    pointer-events: none;
+  }
+  .hc-scene img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.08);
+    transition: transform 7s linear;
+  }
+  .hc-slide.active .hc-scene img { transform: scale(1.0); }
+
+  .hc-tag {
+    position: absolute;
+    top: clamp(20px, 3vw, 36px);
+    left: clamp(20px, 3vw, 36px);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(14,20,16,.7);
+    backdrop-filter: blur(8px);
+    padding: 9px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #6BFF6E;
+    border: 1px solid rgba(107,255,110,.35);
+  }
+  .hc-tag .num { color: rgba(247,246,241,.55); }
+
+  /* Right — copy + animated product */
+  .hc-copy {
+    position: relative;
+    background: linear-gradient(135deg, #11221a 0%, #0E1410 60%, #0a1612 100%);
+    padding: clamp(36px, 5vw, 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hc-copy::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse at 80% 80%, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at 80% 80%, #000 30%, transparent 75%);
+    pointer-events: none;
+  }
+
+  .hc-copy-inner {
+    position: relative;
+    z-index: 4;             /* sits above the product image so text is always readable */
+    max-width: 520px;
+  }
+  .hc-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: #6BFF6E;
+    margin-bottom: 18px;
+    display: inline-flex; align-items: center; gap: 10px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity .7s var(--easing) .2s, transform .7s var(--easing) .2s;
+  }
+  .hc-eyebrow::before {
+    content: ""; width: 28px; height: 1px; background: #6BFF6E;
+  }
+  .hc-title {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-weight: 500;
+    font-size: clamp(28px, 3.4vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+    color: var(--paper);
+    margin: 0 0 22px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .8s var(--easing) .35s, transform .8s var(--easing) .35s;
+  }
+  .hc-title em { color: #6BFF6E; font-style: normal; font-weight: 400; }
+  .hc-desc {
+    font-size: clamp(14.5px, 1.05vw, 16.5px);
+    line-height: 1.75;
+    color: rgba(247,246,241,.82);
+    margin: 0 0 28px;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .8s var(--easing) .5s, transform .8s var(--easing) .5s;
+  }
+  .hc-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .8s var(--easing) .65s, transform .8s var(--easing) .65s;
+  }
+  .hc-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.85);
+    border: 1px solid rgba(247,246,241,.22);
+    padding: 6px 10px;
+    background: rgba(247,246,241,.04);
+  }
+  .hc-cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: #6BFF6E;
+    color: var(--ink);
+    padding: 14px 22px;
+    font-size: 14px; font-weight: 600;
+    letter-spacing: .04em;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .8s var(--easing) .8s, transform .8s var(--easing) .8s, background .25s var(--easing);
+  }
+  .hc-cta:hover { background: var(--paper); }
+  .hc-cta .arr { transition: transform .25s var(--easing); }
+  .hc-cta:hover .arr { transform: translateX(4px); }
+
+  /* Active state — kick off entrance animations on copy */
+  .hc-slide.active .hc-eyebrow,
+  .hc-slide.active .hc-title,
+  .hc-slide.active .hc-desc,
+  .hc-slide.active .hc-tags,
+  .hc-slide.active .hc-cta {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Product image — entrance animation (sits BEHIND the text via z-index) */
+  .hc-product {
+    position: absolute;
+    bottom: clamp(-20px, -2vw, -40px);
+    right: clamp(-20px, -2vw, -50px);
+    width: clamp(220px, 30vw, 400px);
+    max-width: 52%;
+    height: auto;
+    z-index: 1;             /* below .hc-copy-inner (z:4) so text always wins */
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(60px, 50px) rotate(-8deg) scale(0.85);
+    filter: drop-shadow(0 28px 46px rgba(0,0,0,.55));
+    /* Soft fade-out on the side closest to the copy text — graceful blend
+       even where image meets text. */
+    -webkit-mask-image: linear-gradient(to left, #000 70%, transparent 100%);
+            mask-image: linear-gradient(to left, #000 70%, transparent 100%);
+    transition:
+      opacity 1s var(--easing) .55s,
+      transform 1.2s cubic-bezier(.22,.9,.18,1) .55s;
+  }
+  .hc-slide.active .hc-product {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0deg) scale(1);
+    animation: floatProduct 5.5s ease-in-out 1.8s infinite;
+  }
+  @keyframes floatProduct {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50%      { transform: translate(0, -12px) rotate(.8deg); }
+  }
+  @media (max-width: 900px) {
+    /* Taller carousel so scene + copy + product image all fit */
+    .hero-carousel { height: clamp(680px, 160vw, 800px); }
+
+    /* Give hc-copy more breathing room; don't clip the product image */
+    .hc-copy { overflow: visible; }
+
+    .hc-product {
+      position: relative;
+      right: 0; bottom: 0;
+      margin: 24px auto 0;
+      display: block;
+      width: 72%;
+      max-width: none;
+      -webkit-mask-image: none;
+              mask-image: none;
+    }
+  }
+
+  /* Decorative spec corner inside copy */
+  .hc-spec-corner {
+    position: absolute;
+    bottom: clamp(20px, 3vw, 36px);
+    left: clamp(36px, 5vw, 80px);
+    z-index: 4;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(247,246,241,.5);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    display: flex; gap: 14px;
+  }
+  .hc-spec-corner .v { color: #6BFF6E; }
+  @media (max-width: 900px) { .hc-spec-corner { display: none; } }
+
+  /* Carousel controls */
+  .hc-controls {
+    position: absolute;
+    bottom: clamp(20px, 2.5vw, 32px);
+    right: clamp(20px, 3vw, 36px);
+    z-index: 6;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hc-dots {
+    display: flex; gap: 10px;
+    align-items: center;
+  }
+  .hc-dot {
+    width: 36px; height: 2px;
+    background: rgba(247,246,241,.25);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: background .3s var(--easing);
+  }
+  .hc-dot::after {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 0;
+    background: #6BFF6E;
+    transition: none;
+  }
+  .hc-dot.active { background: rgba(107,255,110,.2); }
+  .hc-dot.active::after {
+    width: 100%;
+    transition: width 6.5s linear;
+  }
+  .hc-dot.paused.active::after { transition: none; }
+
+  .hc-arrows { display: flex; gap: 6px; }
+  .hc-arrow {
+    width: 38px; height: 38px;
+    background: rgba(247,246,241,.06);
+    color: var(--paper);
+    border: 1px solid rgba(247,246,241,.18);
+    cursor: pointer;
+    display: grid; place-items: center;
+    transition: all .25s var(--easing);
+  }
+  .hc-arrow:hover {
+    background: #6BFF6E;
+    color: var(--ink);
+    border-color: #6BFF6E;
+  }
+
+  /* Slide counter */
+  .hc-counter {
+    position: absolute;
+    top: clamp(20px, 3vw, 36px);
+    right: clamp(20px, 3vw, 36px);
+    z-index: 6;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: .14em;
+    color: rgba(247,246,241,.65);
+  }
+  .hc-counter .cur { color: var(--paper); font-weight: 600; }
+
+  /* ============================================================
+     Buttons (used by news / sections)
+     ============================================================ */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 12px;
+    background: var(--green);
+    color: var(--paper);
+    padding: 16px 26px;
+    font-size: 15px; font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background .25s var(--easing);
+  }
+  .btn-primary:hover { background: var(--green-deep); }
+  .btn-text {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 500;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 4px;
+    transition: gap .3s var(--easing);
+  }
+  .btn-text:hover { gap: 14px; color: var(--green); border-color: var(--green); }
+
+  /* ============================================================
+     Marquee Strip
+     ============================================================ */
+  .marquee {
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+    background: var(--paper);
+    overflow: hidden;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 56px;
+    padding: 18px 0;
+    animation: scroll 40s linear infinite;
+    white-space: nowrap;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: .14em;
+    color: var(--ink-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .marquee-item .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+  /* ============================================================
+     Section: Industries (industry-led showcase)
+     ============================================================ */
+  .industries {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--paper);
+    position: relative;
+  }
+  .industries-head {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 760px) {
+    .industries-head { grid-template-columns: 1fr; }
+  }
+  .industries-head p {
+    max-width: 460px;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0 0 0 auto;
+  }
+  @media (max-width: 760px) {
+    .industries-head p { margin: 0; }
+  }
+
+  .industry-tabs {
+    border-top: 1px solid var(--ink);
+    margin-top: 12px;
+  }
+  .industry-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 90px);
+    align-items: center;
+    border-bottom: 1px solid var(--hair);
+    padding: clamp(50px, 6vw, 80px) 0;
+    position: relative;
+  }
+  /* Alternate image / content position (zig-zag) */
+  .industry-row:nth-child(even) .ind-img { order: 2; }
+  .industry-row:nth-child(even) .ind-content { order: 1; }
+
+  /* Photo card */
+  .ind-img {
+    position: relative;
+    aspect-ratio: 4/3;
+    background: var(--paper-2);
+    overflow: hidden;
+    border: 1px solid var(--hair);
+  }
+  .ind-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform .8s var(--easing);
+  }
+  .industry-row:hover .ind-img img { transform: scale(1.04); }
+  .ind-img .num-badge {
+    position: absolute;
+    top: 18px; left: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    color: var(--paper);
+    background: rgba(15,20,28,.78);
+    backdrop-filter: blur(8px);
+    padding: 7px 14px;
+    z-index: 2;
+  }
+
+  /* Right-side text content */
+  .ind-content .en {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .16em;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+  .ind-content .name {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(26px, 2.6vw, 38px);
+    font-weight: 500;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    color: var(--ink);
+    margin: 0 0 20px;
+  }
+  .ind-content .desc {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink-2);
+    margin: 0 0 24px;
+    max-width: 520px;
+  }
+  .ind-content .specs {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--steel);
+    letter-spacing: .08em;
+    line-height: 1.85;
+    margin-bottom: 28px;
+  }
+  .ind-content .specs strong {
+    color: var(--green);
+    font-weight: 600;
+  }
+  .ind-content .specs .tag-light {
+    opacity: .65;
+  }
+
+  /* Structured facets: 核心訴求 / 應用場景 / 產品運用 */
+  .ind-facets {
+    display: grid;
+    gap: 14px;
+    margin: 0 0 32px;
+    max-width: 560px;
+  }
+  .facet {
+    padding: 10px 0 10px 16px;
+    border-left: 2px solid var(--hair);
+    transition: border-left-color .35s var(--easing);
+  }
+  .industry-row:hover .facet { border-left-color: var(--green); }
+  .facet .f-lbl {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .16em;
+    color: var(--green);
+    margin-bottom: 6px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .facet p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  .facet p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .ind-bottom {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: gap .3s var(--easing), color .3s;
+  }
+  .ind-bottom .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .ind-bottom .arrow {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--hair);
+    display: grid; place-items: center;
+    transition: all .3s var(--easing);
+  }
+  .industry-row:hover .ind-bottom { gap: 18px; color: var(--green); }
+  .industry-row:hover .ind-bottom .arrow {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--paper);
+    transform: rotate(-45deg);
+  }
+
+  @media (max-width: 800px) {
+    .industry-row {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding: 40px 0;
+    }
+    .industry-row:nth-child(even) .ind-img { order: 0; }
+    .industry-row:nth-child(even) .ind-content { order: 1; }
+  }
+
+  /* ============================================================
+     Section: Products (7 categories) — light mode w/ line-art
+     ============================================================ */
+  /* ── Product Showcase (3D rotating carousel — Compal style) ── */
+  .ps {
+    /* Dark, but with a luminous green-tinted spotlight so products pop */
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 42%, #18301F 0%, #102018 42%, var(--ink) 78%);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,.06);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    padding: clamp(60px, 7vw, 100px) 0 clamp(40px, 5vw, 80px);
+  }
+  .ps::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(107,255,110,.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(107,255,110,.05) 1px, transparent 1px);
+    background-size: 80px 80px;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    pointer-events: none;
+  }
+
+  /* Section header at top (no longer centered in the stage) */
+  .ps-head {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 48px) clamp(40px, 5vw, 70px);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    align-items: end;
+    position: relative;
+    z-index: 6;
+  }
+  .ps-head .eyebrow { color: var(--green); }
+  .ps-head .eyebrow::before { background: var(--green); }
+  .ps-head h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    color: var(--paper);
+    margin: 14px 0 0;
+  }
+  .ps-head h2 em { color: var(--green); font-style: normal; }
+  .ps-head p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: rgba(247,246,241,.55);
+    max-width: 460px;
+    margin: 18px 0 0;
+  }
+  .ps-head .ps-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .14em;
+    color: var(--green);
+    text-decoration: none;
+    padding: 14px 26px;
+    border: 1px solid rgba(107,255,110,.4);
+    transition: background .25s, border-color .25s, gap .25s;
+  }
+  .ps-head .ps-cta:hover {
+    background: rgba(107,255,110,.1);
+    border-color: var(--green);
+    gap: 14px;
+  }
+
+  /* 2D stage (JS animates each product's scale + opacity per frame) */
+  .ps-stage {
+    position: relative;
+    width: 100%;
+    height: clamp(440px, 50vw, 580px);
+    overflow: hidden;
+  }
+
+  /* Floor spotlight — brighter so the front product stands out */
+  .ps-stage::after {
+    content: "";
+    position: absolute;
+    left: 50%; bottom: 8%;
+    width: 72%;
+    height: 130px;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(107,255,110,.42) 0%, rgba(107,255,110,.12) 45%, transparent 72%);
+    filter: blur(26px);
+    pointer-events: none;
+  }
+  /* Central glow halo behind the front product */
+  .ps-stage::before {
+    content: "";
+    position: absolute;
+    left: 50%; top: 46%;
+    width: 46%; height: 60%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(ellipse at center, rgba(107,255,110,.16) 0%, transparent 65%);
+    filter: blur(30px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Ring container — products inside are positioned by JS */
+  .ps-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+  }
+
+  /* Each product (transform / opacity / filter set by JS) */
+  .ps-prod {
+    position: absolute;
+    top: 0; left: 0;
+    width: 200px;
+    height: 200px;
+    margin: -100px 0 0 -100px;
+    text-decoration: none;
+    will-change: transform, opacity, filter;
+    transform-origin: center;
+    transition: filter .25s;
+  }
+
+  .ps-prod-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ps-prod-inner img {
+    max-width: 100%;
+    max-height: 168px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 16px 36px rgba(0,0,0,.55));
+    transition: filter .35s, transform .35s;
+  }
+  /* Front product glows green so it reads as the highlight */
+  .ps-prod.is-front .ps-prod-inner img {
+    filter: drop-shadow(0 18px 40px rgba(107,255,110,.45)) drop-shadow(0 4px 14px rgba(0,0,0,.5));
+  }
+
+  .ps-prod-inner .ps-label {
+    display: block;
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    color: rgba(247,246,241,.55);
+    text-align: center;
+    text-transform: uppercase;
+    transition: color .3s;
+  }
+
+  /* Hover: extra glow on the front product */
+  .ps-prod.is-front:hover .ps-prod-inner img {
+    transform: scale(1.05);
+    filter: drop-shadow(0 28px 50px rgba(107,255,110,.5));
+  }
+  .ps-prod.is-front:hover .ps-prod-inner .ps-label { color: var(--green); }
+
+  /* Tablet */
+  @media (max-width: 1100px) {
+    .ps-prod { width: 180px; height: 180px; margin: -90px 0 0 -90px; }
+    .ps-prod-inner img { max-height: 138px; }
+  }
+  @media (max-width: 880px) {
+    .ps-stage { height: clamp(380px, 60vw, 500px); }
+    .ps-prod { width: 150px; height: 150px; margin: -75px 0 0 -75px; }
+    .ps-prod-inner img { max-height: 116px; }
+  }
+
+  /* Mobile — disable carousel, switch to 2-col grid */
+  @media (max-width: 700px) {
+    .ps-head { grid-template-columns: 1fr; gap: 24px; }
+    .ps-head .ps-cta { justify-self: start; }
+    .ps-stage {
+      height: auto;
+      padding: 8px 16px 0;
+    }
+    .ps-stage::after { display: none; }
+    .ps-ring {
+      position: static;
+      width: 100%;
+      height: auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px 14px;
+      justify-items: center;
+    }
+    .ps-prod {
+      position: static;
+      width: 100%;
+      height: auto;
+      margin: 0;
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+    .ps-prod-inner img {
+      max-width: 140px;
+      max-height: 140px;
+    }
+  }
+
+  /* ============================================================
+     CATALOG DOWNLOAD CTA (placed after Products grid)
+     ============================================================ */
+  .catalog-cta {
+    position: relative;
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+  }
+  .catalog-cta::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(ellipse at 80% 50%, #000 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at 80% 50%, #000 30%, transparent 75%);
+    pointer-events: none;
+  }
+  .catalog-cta::after {
+    content: "CATALOG · PDF";
+    position: absolute;
+    bottom: -28px; right: -8px;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(80px, 14vw, 200px);
+    color: rgba(247,246,241,.05);
+    letter-spacing: -.05em;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .catalog-inner {
+    position: relative;
+    z-index: 1;
+    padding: clamp(60px, 8vw, 110px) 0;
+    display: grid;
+    grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: center;
+  }
+  @media (max-width: 800px) { .catalog-inner { grid-template-columns: 1fr; } }
+  .catalog-copy .eyebrow {
+    color: rgba(107,255,110,.85);
+    margin-bottom: 18px;
+  }
+  .catalog-copy .eyebrow::before { background: #6BFF6E; }
+  .catalog-copy h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: -.02em;
+    margin: 0 0 22px;
+    color: var(--paper);
+    max-width: 540px;
+  }
+  .catalog-copy h2 em { color: #6BFF6E; font-style: normal; font-weight: 400; }
+  .catalog-copy p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(247,246,241,.78);
+    margin: 0;
+    max-width: 460px;
+  }
+  .catalog-meta-list {
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 24px;
+    max-width: 460px;
+  }
+  .catalog-meta-list li {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.7);
+    padding-left: 18px;
+    position: relative;
+  }
+  .catalog-meta-list li::before {
+    content: "✓"; color: #6BFF6E; font-weight: 700;
+    position: absolute; left: 0; top: 0;
+  }
+
+  /* File preview card on the right */
+  .catalog-card {
+    background: rgba(247,246,241,.04);
+    border: 1px solid rgba(247,246,241,.18);
+    padding: 34px 32px;
+    position: relative;
+    transition: border-color .3s var(--easing), background .3s var(--easing);
+  }
+  .catalog-card:hover {
+    border-color: #6BFF6E;
+    background: rgba(107,255,110,.05);
+  }
+  .catalog-card .file-row {
+    display: flex; align-items: center; gap: 18px;
+    margin-bottom: 22px;
+  }
+  .catalog-card .file-icon {
+    width: 56px; height: 70px;
+    background: linear-gradient(135deg, #6BFF6E 0%, #00C04F 100%);
+    color: var(--ink);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    position: relative;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .04em;
+  }
+  .catalog-card .file-icon::after {
+    content: "";
+    position: absolute; top: 0; right: 0;
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 0 14px 14px 0;
+    border-color: transparent rgba(14,20,16,.18) transparent transparent;
+  }
+  .catalog-card .file-meta { flex: 1; min-width: 0; }
+  .catalog-card .file-meta .fn {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--paper);
+    line-height: 1.25;
+    margin: 0 0 4px;
+    word-break: break-all;
+  }
+  .catalog-card .file-meta .fs {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.55);
+  }
+  .catalog-card .download-btn {
+    width: 100%;
+    background: #6BFF6E;
+    color: var(--ink);
+    border: none;
+    padding: 16px 22px;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: background .25s var(--easing), transform .25s var(--easing);
+  }
+  .catalog-card .download-btn:hover {
+    background: var(--paper);
+    transform: translateY(-2px);
+  }
+  .catalog-card .download-btn .arrow { transition: transform .3s var(--easing); }
+  .catalog-card .download-btn:hover .arrow { transform: translateY(3px); }
+  .catalog-card .alt-link {
+    display: block;
+    margin-top: 14px;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.6);
+  }
+  .catalog-card .alt-link:hover { color: #6BFF6E; }
+
+  /* ============================================================
+     FLOATING ACTION BUTTON (PDF download — appears on scroll)
+     ============================================================ */
+  .pdf-fab {
+    position: fixed;
+    right: clamp(16px, 2.5vw, 32px);
+    bottom: clamp(16px, 2.5vw, 32px);
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px 14px 14px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: -.005em;
+    cursor: pointer;
+    box-shadow: 0 18px 40px -16px rgba(14,20,16,.55);
+    transform: translateY(120%);
+    opacity: 0;
+    transition: transform .45s var(--easing), opacity .35s var(--easing), background .25s var(--easing);
+  }
+  .pdf-fab.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .pdf-fab:hover { background: var(--green); border-color: var(--green); }
+  .pdf-fab .fab-ico {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #6BFF6E;
+    color: var(--ink);
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    transition: transform .35s var(--easing);
+  }
+  .pdf-fab:hover .fab-ico { transform: translateY(2px); }
+  .pdf-fab .fab-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.6);
+    display: block;
+    line-height: 1;
+    margin-bottom: 3px;
+  }
+  .pdf-fab:hover .fab-tag { color: rgba(247,246,241,.85); }
+  @media (max-width: 540px) {
+    .pdf-fab { padding: 10px 14px 10px 10px; font-size: 12px; }
+    .pdf-fab .fab-ico { width: 26px; height: 26px; }
+  }
+
+  /* ============================================================
+     Section: Capabilities / Spirit (6 pillars)
+     ============================================================ */
+  .capabilities {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--paper);
+  }
+  .cap-head {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+    gap: 40px;
+    align-items: end;
+    margin-bottom: 56px;
+  }
+  @media (max-width: 760px) { .cap-head { grid-template-columns: 1fr; } }
+  .cap-head p {
+    max-width: 480px;
+    margin: 0 0 0 auto;
+    font-size: 16px; line-height: 1.65; color: var(--ink-2);
+  }
+  @media (max-width: 760px) { .cap-head p { margin: 0; } }
+
+  .cap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--hair);
+    border: 1px solid var(--hair);
+  }
+  @media (max-width: 900px) { .cap-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 540px) { .cap-grid { grid-template-columns: 1fr; } }
+
+  .cap-card {
+    background: var(--paper);
+    padding: 36px 32px 32px;
+    display: flex; flex-direction: column;
+    gap: 18px;
+    min-height: 280px;
+    transition: background .3s var(--easing);
+  }
+  .cap-card:hover { background: var(--paper-2); }
+  .cap-card .icon {
+    width: 53px; height: 53px;          /* 44 × 1.2 ≈ 53 */
+    border: 1px solid #007f02;
+    display: grid; place-items: center;
+    color: #007f02;                      /* SVG strokes inherit this green */
+    transition: background .3s var(--easing), color .3s;
+  }
+  .cap-card:hover .icon {
+    background: rgba(0,127,2,.08);
+  }
+  .cap-card .num {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--steel);
+    letter-spacing: .12em;
+  }
+  .cap-card .top { display: flex; align-items: center; }
+  .cap-card h3 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.25;
+    letter-spacing: -.01em;
+  }
+  .cap-card p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0;
+  }
+
+  /* ============================================================
+     Section: Tech / Equipment band
+     ============================================================ */
+  .tech-band {
+    background: var(--green);
+    color: var(--paper);
+    padding: 60px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .tech-band-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 760px) { .tech-band-track { grid-template-columns: repeat(2,1fr); } }
+  .tech-stat .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.7);
+    margin-bottom: 8px;
+  }
+  .tech-stat .big {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: clamp(36px, 4.4vw, 64px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -.02em;
+  }
+  .tech-stat .desc {
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(247,246,241,.8);
+    max-width: 200px;
+  }
+
+  /* ============================================================
+     Section: Latest News
+     ============================================================ */
+  .news {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--paper);
+  }
+  .news-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 50px;
+  }
+  .news-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  /* Featured single Computex card — full-width on home */
+  .news-feature-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+    box-shadow: 0 30px 60px -28px rgba(14,20,16,.25);
+  }
+  @media (max-width: 800px) { .news-feature-card { grid-template-columns: 1fr; } }
+  .news-feature-card .nf-img {
+    aspect-ratio: 16 / 11;
+    overflow: hidden;
+    background: #11221a;
+  }
+  .news-feature-card .nf-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform .8s var(--easing);
+  }
+  .news-feature-card:hover .nf-img img { transform: scale(1.05); }
+  .news-feature-card .nf-body {
+    padding: clamp(28px, 4vw, 56px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .news-feature-card .nf-meta {
+    display: flex; gap: 14px; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    color: rgba(247,246,241,.65);
+  }
+  .news-feature-card .nf-meta .tag {
+    background: rgba(107,255,110,.15);
+    color: #6BFF6E;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .news-feature-card h3 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: clamp(22px, 2.6vw, 36px);
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -.015em;
+    margin: 0;
+    color: var(--paper);
+  }
+  .news-feature-card h3 em { color: #6BFF6E; font-style: normal; font-weight: 400; }
+  .news-feature-card .lede {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: rgba(247,246,241,.78);
+    margin: 0;
+  }
+  .news-feature-card .bullets {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .news-feature-card .bullets li {
+    position: relative;
+    padding-left: 22px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: rgba(247,246,241,.85);
+  }
+  .news-feature-card .bullets li::before {
+    content: "●";
+    position: absolute; left: 0; top: 0;
+    color: #6BFF6E;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  .news-feature-card .bullets li strong {
+    display: block;
+    color: var(--paper);
+    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
+    font-size: 14.5px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    letter-spacing: -.005em;
+  }
+  .news-feature-card .venue {
+    margin-top: 8px;
+    padding: 18px 0 0;
+    border-top: 1px dashed rgba(247,246,241,.18);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 540px) { .news-feature-card .venue { grid-template-columns: 1fr; } }
+  .news-feature-card .venue .v-item .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: rgba(247,246,241,.55);
+    margin-bottom: 4px;
+  }
+  .news-feature-card .venue .v-item .v {
+    font-size: 13.5px;
+    color: var(--paper);
+    font-weight: 500;
+  }
+  .news-feature-card .nf-cta {
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #6BFF6E;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    border-bottom: 1px solid #6BFF6E;
+    padding-bottom: 4px;
+    align-self: flex-start;
+    transition: gap .3s var(--easing);
+  }
+  .news-feature-card .nf-cta:hover { gap: 18px; }
+
+  .news-card {
+    border: 1px solid var(--hair);
+    padding: 0;
+    background: var(--paper);
+    cursor: pointer;
+    transition: all .3s var(--easing);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    min-height: 320px;
+  }
+  .news-card .news-body { padding: 28px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+  .news-card .news-img { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: var(--paper-2); border-bottom: 1px solid var(--hair); }
+  .news-card.feature .news-img { border-bottom: 1px solid rgba(247,246,241,.15); }
+  .news-card .news-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--easing); }
+  .news-card:hover .news-img img { transform: scale(1.04); }
+  .news-card:hover {
+    border-color: var(--ink);
+    box-shadow: 0 24px 50px -28px rgba(14,20,16,.25);
+  }
+  .news-card.feature {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+    grid-row: span 1;
+  }
+  .news-card .meta {
+    display: flex; gap: 14px; align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--steel);
+    letter-spacing: .12em;
+  }
+  .news-card.feature .meta { color: rgba(247,246,241,.7); }
+  .news-card .tag {
+    background: var(--green-tint);
+    color: var(--green-deep);
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .news-card.feature .tag {
+    background: rgba(107,255,110,.15);
+    color: #6BFF6E;
+  }
+  .news-card h3 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(20px, 2vw, 26px);
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0;
+    letter-spacing: -.01em;
+  }
+  .news-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin: 0;
+    flex-grow: 1;
+  }
+  .news-card.feature p { color: rgba(247,246,241,.78); }
+  .news-card .read {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    display: inline-flex; gap: 8px; align-items: center;
+    color: var(--ink);
+    margin-top: auto;
+  }
+  .news-card.feature .read { color: var(--paper); }
+  .news-card.feature .read::after { content: "→"; color: #6BFF6E; }
+  .news-card .read::after { content: "→"; color: var(--green); }
+
+  /* ============================================================
+     Certifications
+     ============================================================ */
+  .certs {
+    background: var(--paper-2);
+    padding: 70px 0;
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+  }
+  .certs-head { text-align: center; margin-bottom: 36px; }
+  .certs-head h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 12px 0 0;
+    color: var(--ink);
+  }
+  .certs-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  .cert-badge {
+    border: 1px solid var(--hair);
+    background: var(--paper);
+    padding: 12px 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: .08em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cert-badge::before {
+    content: "✓"; color: var(--green); font-weight: 700;
+  }
+  .patents-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+  .patent {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--steel);
+    border-left: 2px solid var(--green);
+    padding: 4px 10px;
+    letter-spacing: .08em;
+  }
+
+  /* ============================================================
+     Final CTA
+     ============================================================ */
+  .cta {
+    padding: clamp(80px, 9vw, 140px) 0;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta::after {
+    content: "YESWAY";
+    position: absolute;
+    bottom: -40px; left: 50%; transform: translateX(-50%);
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(120px, 22vw, 320px);
+    color: rgba(247,246,241,.04);
+    letter-spacing: -.05em;
+    line-height: 1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .cta-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 800px) { .cta-inner { grid-template-columns: 1fr; } }
+  .cta h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(40px, 5.5vw, 80px);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: -.02em;
+    margin: 18px 0 0;
+  }
+  .cta h2 em {
+    font-style: normal;
+    font-weight: 400;
+    color: #6BFF6E;
+  }
+  .cta-side p {
+    color: rgba(247,246,241,.78);
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 0 0 32px;
+  }
+  .cta-actions { display: flex; flex-direction: column; gap: 14px; }
+  .cta-action-row {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(247,246,241,.15);
+    padding: 18px 0;
+    transition: padding-left .3s var(--easing);
+    cursor: pointer;
+  }
+  .cta-action-row:last-child { border-bottom: 1px solid rgba(247,246,241,.15); }
+  .cta-action-row:hover { padding-left: 12px; color: #6BFF6E; }
+  .cta-action-row .lbl {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(247,246,241,.6);
+  }
+  .cta-action-row .val { font-size: 17px; font-weight: 500; margin-top: 4px; }
+  .cta-action-row .arrow { font-size: 22px; }
+
+  /* ============================================================
+     Footer
+     ============================================================ */
+  .footer {
+    background: #06090A;
+    color: rgba(247,246,241,.7);
+    padding: 80px 0 28px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(247,246,241,.1);
+  }
+  @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  .footer h5 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--paper);
+    margin: 0 0 16px;
+  }
+  .footer ul { list-style: none; padding: 0; margin: 0; }
+  .footer li { margin-bottom: 10px; font-size: 14px; }
+  .footer li a:hover { color: #6BFF6E; }
+  .footer-brand img { width: 130px; margin-bottom: 18px; filter: brightness(0) invert(1); }
+  .footer-brand p { font-size: 14px; line-height: 1.6; max-width: 320px; }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 28px;
+    flex-wrap: wrap; gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .12em;
+    color: rgba(247,246,241,.45);
+  }
+  .footer-bottom .seo {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    color: rgba(247,246,241,.35);
+  }
+
+  /* ============================================================
+     Hover/Reveal niceties
+     ============================================================ */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .9s var(--easing), transform .9s var(--easing);
+  }
+  [data-reveal].in { opacity: 1; transform: none; }
+
+
+  /* ============================================================
+     Client feedback 0526 — enlarge only prominent green labels
+     (eyebrows / category labels) ×1.5; card sub-labels stay original.
+     Black card body text softened ×1.4.
+     ============================================================ */
+  .hc-eyebrow       { font-size: 17px; }    /* 11.5 → 17  (×1.5 carousel eyebrow) */
+  .ind-content .en  { font-size: 16.5px; }  /* 11 → 16.5 (×1.5 category label) */
+  .ps-head .eyebrow { font-size: 16.5px; }  /* 11 → 16.5 (×1.5 section eyebrow) */
+  .facet p          { font-size: 20px; }    /* 14 → 20   (×1.4 card body) */
+  /* green sub-labels ×1.2 */
+  .hc-tag           { font-size: 13.2px; }  /* 11 → 13.2 */
+  .facet .f-lbl     { font-size: 12px; }    /* 10 → 12   */
+
+  /* ============================================================
+     NEW PRODUCTS — 新產品資訊 (featured high-speed line)
+     ============================================================ */
+  .np {
+    background: var(--paper);
+    padding: clamp(64px, 7vw, 110px) 0 clamp(56px, 6vw, 96px);
+    border-top: 1px solid var(--hair);
+  }
+  .np-inner {
+    max-width: var(--max-w, 1440px);
+    margin: 0 auto;
+    padding: 0 var(--gutter, clamp(20px,4vw,64px));
+  }
+  .np-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 28px;
+    align-items: end;
+    margin-bottom: clamp(40px, 5vw, 68px);
+  }
+  .np-head .eyebrow { color: var(--green); }
+  .np-head .eyebrow::before { background: var(--green); }
+  .np-head h2 {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(34px, 4.4vw, 58px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    color: var(--ink);
+    margin: 16px 0 0;
+  }
+  .np-head h2 em { color: var(--green); font-style: normal; }
+  .np-head p {
+    font-size: 14.5px;
+    line-height: 1.7;
+    color: var(--steel);
+    max-width: 440px;
+    margin: 18px 0 0;
+  }
+
+  .np-grid { display: flex; flex-direction: column; gap: clamp(28px, 3vw, 44px); }
+
+  .np-card {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(28px, 3vw, 56px);
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--hair);
+    padding: clamp(24px, 2.6vw, 40px);
+    transition: box-shadow .4s var(--easing), transform .4s var(--easing);
+  }
+  .np-card:hover {
+    box-shadow: 0 24px 60px -28px rgba(14,20,16,.28);
+    transform: translateY(-3px);
+  }
+  /* alternate image side on even cards */
+  .np-card:nth-child(even) .np-media { order: 2; }
+  .np-card:nth-child(even) .np-body  { order: 1; }
+
+  .np-media {
+    background: var(--paper-2);
+    border: 1px solid var(--hair);
+    border-radius: 4px;
+    padding: clamp(18px, 2vw, 30px);
+    display: grid;
+    gap: 14px;
+    align-content: center;
+  }
+  .np-media.dual { grid-template-columns: 1fr 1fr; }
+  .np-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    aspect-ratio: 4/3;
+    display: block;
+  }
+  .np-media.dual img { aspect-ratio: 3/4; }
+
+  .np-body { min-width: 0; }
+  .np-code {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: .12em;
+    color: var(--green-deep);
+    background: var(--green-tint);
+    border: 1px solid rgba(0,127,2,.22);
+    padding: 6px 12px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+  }
+  .np-title {
+    font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif;
+    font-size: clamp(19px, 1.9vw, 25px);
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -.01em;
+    color: var(--ink);
+    margin: 0 0 18px;
+  }
+  .np-apps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 22px;
+  }
+  .np-apps .np-app {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: .06em;
+    color: var(--steel);
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    padding: 5px 10px;
+    border-radius: 3px;
+  }
+  .np-feats { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+  .np-feats li {
+    position: relative;
+    padding-left: 26px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .np-feats li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 8px;
+    width: 13px; height: 13px;
+    background: var(--green);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 6L9 17l-5-5' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 6L9 17l-5-5' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .np-feats li strong { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 860px) {
+    .np-head { grid-template-columns: 1fr; gap: 18px; }
+    .np-card { grid-template-columns: 1fr; gap: 22px; }
+    .np-card:nth-child(even) .np-media { order: 0; }
+    .np-card:nth-child(even) .np-body  { order: 0; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     Top Announcement Bar
+============================================================ -->
+<div class="top-bar">
+  <div class="container top-bar-track">
+    <div class="top-bar-left">
+      <span class="pulse"></span>
+      <span>COMPUTEX 2026 / 06.02 — 06.05</span>
+      <span class="sep">/</span>
+      <span>TPE 南港展覽館 2館 1F</span>
+      <span class="sep">/</span>
+      <a href="news.html#computex-2026">攤位 Q1334C →</a>
+    </div>
+    <div class="top-bar-right">
+      <span>EST. 1992</span>
+      <span class="sep">/</span>
+      <span>MADE IN TAIWAN · 三峽</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     Header
+============================================================ -->
+<header class="site-header">
+  <div class="container header-track">
+    <a class="brand" href="/">
+      <img src="images/logo/logo-yesway-green.svg" alt="Yes Way 高位企業" />
+    </a>
+
+    <input type="checkbox" id="nav-cb" class="nav-cb" hidden />
+    <nav><ul class="nav">
+      <li><a href="/">首頁</a></li>
+      <li><a href="about.html">關於高位</a></li>
+      <li class="has-sub"><a href="quality.html">品質與技術</a></li>
+      <li class="has-sub"><a href="products.html">產品介紹</a></li>
+      <li><a href="news.html">最新消息</a></li>
+      <li><a href="esg.html">ESG</a></li>
+      <li><a href="contact.html">聯絡我們</a></li>
+    </ul></nav>
+
+    <div class="header-actions">
+      <button class="lang-switch">
+        <span class="on">中</span><span>/</span><span>EN</span>
+      </button>
+      <button class="btn-cta">
+        詢價 Inquiry
+        <span class="arrow">→</span>
+      </button>
+      <label for="nav-cb" class="nav-toggle" aria-label="選單 Menu"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO CAROUSEL — 3 張產業應用 Banner
+============================================================ -->
+<section class="hero-carousel" id="hero-carousel" aria-label="Yes Way 產品輪播 Banner">
+
+  <!-- Slide counter -->
+  <div class="hc-counter"><span class="cur" id="hc-current">01</span> &nbsp;/&nbsp; <span id="hc-total">03</span></div>
+
+  <!-- SLIDE 1 — Gen.6 M.2 Cable / AI Server -->
+  <article class="hc-slide active" data-slide="0">
+    <div class="hc-scene">
+      <span class="hc-tag"><span class="num">01 ·</span> AI Server / GPU</span>
+      <img src="images/banner/Gen6_M2_Cable_AI_Server.png" alt="高速 Gen.6 M.2 Cable 應用於 AI 伺服器與 GPU 運算平台" />
+    </div>
+    <div class="hc-copy">
+      <div class="hc-copy-inner">
+        <span class="hc-eyebrow">FEATURED PRODUCT · 01</span>
+        <h2 class="hc-title">高速 <em>Gen.6</em> M.2 Cable<br/>為 AI 訓練而生</h2>
+        <p class="hc-desc">
+          應用於 AI 伺服器、GPU 運算平台與高速儲存設備，提供低延遲、高頻寬與穩定訊號傳輸，
+          滿足 AI 訓練、大數據分析與高效能運算需求。
+        </p>
+        <div class="hc-tags">
+          <span class="hc-chip">PCIe Gen6</span>
+          <span class="hc-chip">64 GT/s</span>
+          <span class="hc-chip">M.2 Form Factor</span>
+          <span class="hc-chip">AI / Data Center</span>
+        </div>
+        <a class="hc-cta" href="products.html?cat=ai-gpu-servers">
+          查看 AI / GPU 產品線
+          <span class="arr">→</span>
+        </a>
+      </div>
+      <img class="hc-product" src="images/banner/Gen6_M2_Cable.png" alt="Yes Way 高速 Gen.6 M.2 Cable" />
+    </div>
+    <div class="hc-spec-corner">
+      <span><span class="v">SPEED</span> 64 GT/s</span>
+      <span><span class="v">STD.</span> PCIe Gen6</span>
+      <span><span class="v">USE</span> AI Server / Storage</span>
+    </div>
+  </article>
+
+  <!-- SLIDE 2 — Key A 20M USB Type-C 20G / Medical -->
+  <article class="hc-slide" data-slide="1">
+    <div class="hc-scene">
+      <span class="hc-tag"><span class="num">02 ·</span> Medical / 行動醫療</span>
+      <img src="images/banner/Key_A_20M_typeC_20G_Cable_Medical.png" alt="Key A 20M 內轉外 USB Type-C 20G Cable 應用於醫療影像與病患監測" />
+    </div>
+    <div class="hc-copy">
+      <div class="hc-copy-inner">
+        <span class="hc-eyebrow">FEATURED PRODUCT · 02</span>
+        <h2 class="hc-title">Key A 20M 內轉外<br/>USB Type-C <em>20G</em> Cable</h2>
+        <p class="hc-desc">
+          廣泛應用於醫療影像、病患監測與行動醫療設備，具備高速資料傳輸、穩定供電與高可靠度特性，
+          協助醫療設備長時間穩定運作。
+        </p>
+        <div class="hc-tags">
+          <span class="hc-chip">USB Type-C</span>
+          <span class="hc-chip">20 Gbps</span>
+          <span class="hc-chip">Key A 內轉外</span>
+          <span class="hc-chip">Medical Imaging</span>
+        </div>
+        <a class="hc-cta" href="products.html?cat=cable-assembly">
+          查看 Cable Assembly
+          <span class="arr">→</span>
+        </a>
+      </div>
+      <img class="hc-product" src="images/banner/Key_A_20M_typeC_20G_Cable.png" alt="Yes Way Key A 20M USB Type-C 20G Cable" />
+    </div>
+    <div class="hc-spec-corner">
+      <span><span class="v">SPEED</span> 20 Gbps</span>
+      <span><span class="v">STD.</span> USB Type-C</span>
+      <span><span class="v">USE</span> Medical / Mobile</span>
+    </div>
+  </article>
+
+  <!-- SLIDE 3 — PCIe Gen.5 Cable / Gaming -->
+  <article class="hc-slide" data-slide="2">
+    <div class="hc-scene">
+      <span class="hc-tag"><span class="num">03 ·</span> eSports / Gaming</span>
+      <img src="images/banner/PCIe_Gen5_Gaming.png" alt="PCIe Gen.5 Cable 應用於高效能電競主機與顯示卡" />
+    </div>
+    <div class="hc-copy">
+      <div class="hc-copy-inner">
+        <span class="hc-eyebrow">FEATURED PRODUCT · 03</span>
+        <h2 class="hc-title">PCIe <em>Gen.5</em> Cable<br/>為電競沉浸而生</h2>
+        <p class="hc-desc">
+          應用於高效能電競主機與顯示卡連接，提供高速低損耗訊號傳輸，
+          支援高刷新率與高畫質遊戲需求，打造流暢沉浸式遊戲體驗。
+        </p>
+        <div class="hc-tags">
+          <span class="hc-chip">PCIe Gen5</span>
+          <span class="hc-chip">32 GT/s</span>
+          <span class="hc-chip">Low Loss</span>
+          <span class="hc-chip">Gaming / GPU</span>
+        </div>
+        <a class="hc-cta" href="products.html?cat=server-storage-pc">
+          查看 PC 線材產品
+          <span class="arr">→</span>
+        </a>
+      </div>
+      <img class="hc-product" src="images/banner/PCIe_Gen5.png" alt="Yes Way PCIe Gen.5 Cable" />
+    </div>
+    <div class="hc-spec-corner">
+      <span><span class="v">SPEED</span> 32 GT/s</span>
+      <span><span class="v">STD.</span> PCIe Gen5</span>
+      <span><span class="v">USE</span> eSports / Workstation</span>
+    </div>
+  </article>
+
+  <!-- Controls -->
+  <div class="hc-controls">
+    <div class="hc-dots" id="hc-dots">
+      <button class="hc-dot active" data-go="0" aria-label="切換到第 1 張"></button>
+      <button class="hc-dot" data-go="1" aria-label="切換到第 2 張"></button>
+      <button class="hc-dot" data-go="2" aria-label="切換到第 3 張"></button>
+    </div>
+    <div class="hc-arrows">
+      <button class="hc-arrow" id="hc-prev" aria-label="上一張">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="hc-arrow" id="hc-next" aria-label="下一張">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Marquee — 規格條帶（緊貼 Hero Carousel）
+============================================================ -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="dot"></span> Cable Assembly</span>
+    <span class="marquee-item"><span class="dot"></span> PCB Assembly</span>
+    <span class="marquee-item"><span class="dot"></span> AI / GPU Servers</span>
+    <span class="marquee-item"><span class="dot"></span> Server & Storage / PC</span>
+    <span class="marquee-item"><span class="dot"></span> 電纜 DIY 工具</span>
+    <span class="marquee-item"><span class="dot"></span> MCIO i4 / i8</span>
+    <span class="marquee-item"><span class="dot"></span> PCIe Gen6 64GT/s</span>
+    <span class="marquee-item"><span class="dot"></span> SlimSAS SFF-8654</span>
+    <span class="marquee-item"><span class="dot"></span> miniSAS HD SFF-8643</span>
+    <span class="marquee-item"><span class="dot"></span> USB 4.0 / Thunderbolt</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item"><span class="dot"></span> Cable Assembly</span>
+    <span class="marquee-item"><span class="dot"></span> PCB Assembly</span>
+    <span class="marquee-item"><span class="dot"></span> AI / GPU Servers</span>
+    <span class="marquee-item"><span class="dot"></span> Server & Storage / PC</span>
+    <span class="marquee-item"><span class="dot"></span> 電纜 DIY 工具</span>
+    <span class="marquee-item"><span class="dot"></span> MCIO i4 / i8</span>
+    <span class="marquee-item"><span class="dot"></span> PCIe Gen6 64GT/s</span>
+    <span class="marquee-item"><span class="dot"></span> SlimSAS SFF-8654</span>
+    <span class="marquee-item"><span class="dot"></span> miniSAS HD SFF-8643</span>
+    <span class="marquee-item"><span class="dot"></span> USB 4.0 / Thunderbolt</span>
+  </div>
+</div>
+
+<!-- ============================================================
+     LATEST NEWS — 單一焦點：Computex 2026
+============================================================ -->
+<section class="news" id="news">
+  <div class="container">
+    <div class="news-head">
+      <div>
+        <span class="eyebrow">LATEST · 高位快訊</span>
+        <h2 class="h-section" style="margin-top:18px;">
+          高位<em>快訊</em>
+        </h2>
+      </div>
+      <a href="news.html" class="btn-text">查看所有消息 →</a>
+    </div>
+
+    <div class="news-grid">
+
+      <a href="news.html#computex-2026" class="news-feature-card">
+        <div class="nf-img">
+          <img src="images/index/computex-2026.jpg" alt="高位企業 COMPUTEX 2026 參展" />
+        </div>
+        <div class="nf-body">
+          <div class="nf-meta">
+            <span class="tag">EXHIBITION</span>
+            <span>2026.06.02 — 06.05</span>
+            <span>·</span>
+            <span>COMPUTEX</span>
+          </div>
+          <h3>高位企業參展 <em>COMPUTEX 2026</em><br/>展示 AI 伺服器高速傳輸解決方案</h3>
+          <p class="lede">
+            高位企業將於 2026 / 06 / 02 — 06 / 05 亮相 COMPUTEX 台北國際電腦展！
+            響應年度主題「AI Together」，現場展示專為 AI 伺服器與高效能運算（HPC）打造的尖端連接技術。
+          </p>
+
+          <ul class="bullets">
+            <li>
+              <strong>AI 核心傳輸</strong>
+              領先佈局 MCIO（4i/8i）、PCIe Gen5（32GT/s）與 SlimSAS（SFF-8654）高速線材加工。
+            </li>
+            <li>
+              <strong>次世代規格</strong>
+              全面支援 USB 4.0、CXL 及 SFF-TA-1033 等前瞻規格設計。
+            </li>
+            <li>
+              <strong>研發設計實力</strong>
+              提供 AI 伺服器背板 PCB 設計、轉接板開發至精密線束加工的一站式客製化 OEM/ODM 服務。
+            </li>
+            <li>
+              <strong>精密製造工藝</strong>
+              承接高難度精密線束加工，堅持高品質台灣製造標準。
+            </li>
+          </ul>
+
+          <div class="venue">
+            <div class="v-item">
+              <div class="k">地點 / Venue</div>
+              <div class="v">南港展覽館 2館 1樓</div>
+            </div>
+            <div class="v-item">
+              <div class="k">攤位 / Booth</div>
+              <div class="v">Q1334C</div>
+            </div>
+            <div class="v-item">
+              <div class="k">時間 / Hours</div>
+              <div class="v">09:30 — 17:30<br/><span class="mono" style="font-size:11px;opacity:.65;">最終日至 16:30</span></div>
+            </div>
+          </div>
+
+          <span class="nf-cta">閱讀完整內容 →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INDUSTRIES — 產業應用 (industry-led showcase)
+============================================================ -->
+<section class="industries" id="industries">
+  <div class="container">
+    <div class="industries-head">
+      <div>
+        <span class="eyebrow">01 / INDUSTRY APPLICATIONS</span>
+        <h2 class="h-section" style="margin-top:18px;">
+          產業應用<br/><em>從 AI 到醫療影像</em>
+        </h2>
+      </div>
+      <p>
+        我們不只是線材製造商，更是產業夥伴。
+        從 AI 伺服器到醫療影像、工業顯示到外接介面——
+        <strong>每一條訊號背後，都是高位的精密工藝</strong>。
+      </p>
+    </div>
+
+    <div class="industry-tabs">
+
+      <!-- 001 · AI / GPU SERVERS (image left) -->
+      <div class="industry-row">
+        <div class="ind-img">
+          <span class="num-badge">SOLUTION · 001</span>
+          <img src="images/index/solutions-01-ai-gpu.png" alt="AI 運算與 GPU 伺服器" loading="lazy" />
+        </div>
+        <div class="ind-content">
+          <span class="en">AI / GPU SERVERS</span>
+          <h3 class="name">AI 運算與<br/>GPU 伺服器</h3>
+          <div class="ind-facets">
+            <div class="facet">
+              <span class="f-lbl">Core · 核心訴求</span>
+              <p>極速傳輸、低延遲、訊號完整性</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Use Cases · 應用場景</span>
+              <p>資料中心、深度學習工作站、邊緣運算設備</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Application · 產品運用</span>
+              <p>提供 <strong>MCIO（4i / 8i）</strong>、<strong>PCIe Gen5（32GT/s）</strong> 高速線組，支援高密度 GPU 佈線需求，確保大數據傳輸下的訊號完整性與低功耗表現。</p>
+            </div>
+          </div>
+          <a class="ind-bottom" href="products.html?cat=ai-gpu-servers">
+            <span class="lbl">Explore Solution</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 002 · ETHERNET / INFINIBAND / LAN (image right) -->
+      <div class="industry-row">
+        <div class="ind-img">
+          <span class="num-badge">SOLUTION · 002</span>
+          <img src="images/index/solutions-02-ethernet.png" alt="高速通訊與網路基礎設施" loading="lazy" />
+        </div>
+        <div class="ind-content">
+          <span class="en">ETHERNET / INFINIBAND / LAN</span>
+          <h3 class="name">高速通訊與<br/>網路基礎設施</h3>
+          <div class="ind-facets">
+            <div class="facet">
+              <span class="f-lbl">Core · 核心訴求</span>
+              <p>高頻寬、數據完整性、抗干擾</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Use Cases · 應用場景</span>
+              <p>企業級路由器、交換器、雲端儲存網路</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Application · 產品運用</span>
+              <p><strong>OSFP</strong> &amp; <strong>QSFP-DD FORM FACTORY</strong> 使用於 DAC、ACC、AEC、AOC、Transceiver 等外部連接方案，支援 InfiniBand 與 ETHERNET 高速乙太網路（400G / 800G / 1.6T / 3.2T）高頻寬傳輸需求，滿足次世代網路架構的嚴苛標準。</p>
+            </div>
+          </div>
+          <a class="ind-bottom" href="products.html?cat=server-storage-pc">
+            <span class="lbl">Explore Solution</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 003 · INDUSTRIAL & MEDICAL DISPLAY (image left) -->
+      <div class="industry-row">
+        <div class="ind-img">
+          <span class="num-badge">SOLUTION · 003</span>
+          <img src="images/index/solutions-03-display.png" alt="工業與醫療顯示系統" loading="lazy" />
+        </div>
+        <div class="ind-content">
+          <span class="en">INDUSTRIAL &amp; MEDICAL DISPLAY</span>
+          <h3 class="name">工業與<br/>醫療顯示系統</h3>
+          <div class="ind-facets">
+            <div class="facet">
+              <span class="f-lbl">Core · 核心訴求</span>
+              <p>高畫質同步、耐用性、多介面相容</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Use Cases · 應用場景</span>
+              <p>醫療影像設備、數位看板、智慧零售顯示終端、車載顯示</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Application · 產品運用</span>
+              <p>提供客製化 <strong>DisplayPort（DP）</strong>、<strong>HDMI</strong> 以及 <strong>eDP</strong> 等視訊傳輸線材加工，具備優異的抗電磁干擾（EMI）屏蔽能力，確保影像訊號完整穩定輸出。</p>
+            </div>
+          </div>
+          <a class="ind-bottom" href="products.html">
+            <span class="lbl">Explore Solution</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 004 · USB & THUNDERBOLT (image right) -->
+      <div class="industry-row">
+        <div class="ind-img">
+          <span class="num-badge">SOLUTION · 004</span>
+          <img src="images/index/solutions-04-usb.png" alt="外部連接與高速介面" loading="lazy" />
+        </div>
+        <div class="ind-content">
+          <span class="en">USB &amp; THUNDERBOLT</span>
+          <h3 class="name">外部連接與<br/>高速介面</h3>
+          <div class="ind-facets">
+            <div class="facet">
+              <span class="f-lbl">Core · 核心訴求</span>
+              <p>一線多用、高相容性、精密加工</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Use Cases · 應用場景</span>
+              <p>高階擴充塢（Docking Station）、視訊會議系統、外接式儲存設備</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Application · 產品運用</span>
+              <p>支援 <strong>USB 4.0</strong> 與 <strong>Thunderbolt</strong> 技術規格，整合電力傳輸（PD）與數據同步，提供高精密度的 USB-C 連接方案，適合高階商用設備與專業影音工作站應用。</p>
+            </div>
+          </div>
+          <a class="ind-bottom" href="products.html?cat=cable-assembly">
+            <span class="lbl">Explore Solution</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 005 · SERVER & STORAGE / PC (image left) -->
+      <div class="industry-row">
+        <div class="ind-img">
+          <span class="num-badge">SOLUTION · 005</span>
+          <img src="images/index/solutions-05-server.png" alt="伺服器、儲存設備與個人電腦" loading="lazy" />
+        </div>
+        <div class="ind-content">
+          <span class="en">SERVER &amp; STORAGE / PC</span>
+          <h3 class="name">伺服器、儲存設備<br/>與個人電腦</h3>
+          <div class="ind-facets">
+            <div class="facet">
+              <span class="f-lbl">Core · 核心訴求</span>
+              <p>穩定供應、客製化長度、一站式 OEM</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Use Cases · 應用場景</span>
+              <p>企業伺服器、NAS 儲存系統、高效能桌上型電腦、IPC 工業電腦</p>
+            </div>
+            <div class="facet">
+              <span class="f-lbl">Application · 產品運用</span>
+              <p>提供完整的 <strong>SATA</strong>、<strong>SAS</strong> 及 <strong>NVMe</strong> 內部精密線束加工 / <strong>Gen.6</strong>、<strong>Gen.5 BACKPLANE</strong>，依客戶主機空間量身打造最佳佈線路徑，提升氣流效率與組裝便利性。</p>
+            </div>
+          </div>
+          <a class="ind-bottom" href="products.html?cat=server-storage-pc">
+            <span class="lbl">Explore Solution</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCTS — 5 categories grid
+============================================================ -->
+<section class="ps" id="products">
+
+  <!-- Section header (top, full-width) -->
+  <div class="ps-head">
+    <div>
+      <span class="eyebrow">02 / PRODUCT CATALOG</span>
+      <h2>產品 <em>全覽</em></h2>
+      <p>五大產品線 · 13 款精品實拍，涵蓋 AI 伺服器、線束加工、電路板組裝及 DIY 工具配件。</p>
+    </div>
+    <a href="products.html" class="ps-cta">查看完整規格 →</a>
+  </div>
+
+  <!-- 3D Stage: rotating ring of 13 products -->
+  <div class="ps-stage" aria-label="產品 3D 輪轉展示">
+    <div class="ps-ring">
+
+      <a class="ps-prod" href="products.html?cat=ai-gpu-servers" style="--n: 0;">
+        <div class="ps-prod-inner">
+          <img src="images/index/AI-GPU-Servers-01.png" alt="AI GPU Servers 01" loading="lazy" />
+          <span class="ps-label">AI / GPU Servers</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=ai-gpu-servers" style="--n: 1;">
+        <div class="ps-prod-inner">
+          <img src="images/index/AI-GPU-Servers-02.png" alt="AI GPU Servers 02" loading="lazy" />
+          <span class="ps-label">AI / GPU Servers</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=ai-gpu-servers" style="--n: 2;">
+        <div class="ps-prod-inner">
+          <img src="images/index/AI-GPU-Servers-03.png" alt="AI GPU Servers 03" loading="lazy" />
+          <span class="ps-label">AI / GPU Servers</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=ai-gpu-servers" style="--n: 3;">
+        <div class="ps-prod-inner">
+          <img src="images/index/AI-GPU-Servers-04.png" alt="AI GPU Servers 04" loading="lazy" />
+          <span class="ps-label">AI / GPU Servers</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=cable-assembly" style="--n: 4;">
+        <div class="ps-prod-inner">
+          <img src="images/index/Cable-Assembly-01.png" alt="Cable Assembly 01" loading="lazy" />
+          <span class="ps-label">Cable Assembly</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=cable-assembly" style="--n: 5;">
+        <div class="ps-prod-inner">
+          <img src="images/index/Cable-Assembly-02.png" alt="Cable Assembly 02" loading="lazy" />
+          <span class="ps-label">Cable Assembly</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=cable-assembly" style="--n: 6;">
+        <div class="ps-prod-inner">
+          <img src="images/index/Cable-Assembly-03.png" alt="Cable Assembly 03" loading="lazy" />
+          <span class="ps-label">Cable Assembly</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=server-storage-pc" style="--n: 7;">
+        <div class="ps-prod-inner">
+          <img src="images/index/Server-Storage_PC-01.png" alt="Server &amp; Storage / PC 01" loading="lazy" />
+          <span class="ps-label">Server &amp; Storage / PC</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=server-storage-pc" style="--n: 8;">
+        <div class="ps-prod-inner">
+          <img src="images/index/Server-Storage_PC-02.png" alt="Server &amp; Storage / PC 02" loading="lazy" />
+          <span class="ps-label">Server &amp; Storage / PC</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=server-storage-pc" style="--n: 9;">
+        <div class="ps-prod-inner">
+          <img src="images/index/Server-Storage_PC-03.png" alt="Server &amp; Storage / PC 03" loading="lazy" />
+          <span class="ps-label">Server &amp; Storage / PC</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=pcb-assembly" style="--n: 10;">
+        <div class="ps-prod-inner">
+          <img src="images/index/PCB-Assembly-01.png" alt="PCB Assembly 01" loading="lazy" />
+          <span class="ps-label">PCB Assembly</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=pcb-assembly" style="--n: 11;">
+        <div class="ps-prod-inner">
+          <img src="images/index/PCB-Assembly-02.png" alt="PCB Assembly 02" loading="lazy" />
+          <span class="ps-label">PCB Assembly</span>
+        </div>
+      </a>
+
+      <a class="ps-prod" href="products.html?cat=cable-diy-tooling" style="--n: 12;">
+        <div class="ps-prod-inner">
+          <img src="images/index/DIY-Tooling-Accessories-01.png" alt="DIY Tooling &amp; Accessories" loading="lazy" />
+          <span class="ps-label">DIY Tooling &amp; Accessories</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NEW PRODUCTS — 新產品資訊
+============================================================ -->
+<section class="np" id="new-products">
+  <div class="np-inner">
+
+    <div class="np-head" data-reveal>
+      <div>
+        <span class="eyebrow">NEW · 新產品資訊</span>
+        <h2>新產品 <em>資訊</em></h2>
+      </div>
+      <p>支援 PCIe Gen5 / Gen6 的次世代高速線材、背板與量測治具，專為 AI 伺服器與資料中心打造。</p>
+    </div>
+
+    <div class="np-grid">
+
+      <!-- Product 1 — MCIO 8i NO FLANGE -->
+      <article class="np-card" data-reveal>
+        <div class="np-media">
+          <img src="images/index/new-5G74F31.png" alt="5G74F31 系列 NO FLANGE MCIO 8i 高速線材" loading="lazy" />
+        </div>
+        <div class="np-body">
+          <span class="np-code">料號 5G74F31 系列</span>
+          <h3 class="np-title">NO FLANGE MCIO 8i 74M ×2，PCIe Gen5 32GT/s 高速線材</h3>
+          <div class="np-apps">
+            <span class="np-app">DATA CENTER</span>
+            <span class="np-app">AI SERVER</span>
+            <span class="np-app">GPU SERVER</span>
+            <span class="np-app">BACKPLANE RAID</span>
+            <span class="np-app">IMMERSION BLADE</span>
+          </div>
+          <ul class="np-feats">
+            <li>符合 <strong>SFF-TA-1016 (MCIO)</strong> 規範，NO FLANGE 兩邊無側牆，相容 SFF-TA-1033 (Multi-Trak)。</li>
+            <li>支援 <strong>PCIe Gen5 32GT/s</strong>，線材長度 70cm～80cm。</li>
+            <li><strong>30AWG 超薄扁平排線</strong>，單層厚度 0.9mm、雙排堆疊 ≤1.8mm，優化高功耗 GPU／AI 散熱與高密度空間。</li>
+            <li>無鹵 Halogen-Free（UL21283／UL21425），符合 ESG；多國發明專利（美歐日台中）。</li>
+            <li>支援 <strong>180° 對折彎曲</strong>，衰減／阻抗／回波損耗／串擾等高頻特性幾乎不受影響。</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Product 2 — PCIe Gen5 x16 Extension Cable (dual image) -->
+      <article class="np-card" data-reveal>
+        <div class="np-media dual">
+          <img src="images/index/new-5G164F19.png" alt="5G164F19 PCIe Gen5 x16 延長線" loading="lazy" />
+          <img src="images/index/new-5G164F20.png" alt="5G164F20 PCIe Gen5 x16 延長線" loading="lazy" />
+        </div>
+        <div class="np-body">
+          <span class="np-code">料號 5G164F19 / 5G164F20 系列</span>
+          <h3 class="np-title">PCIe Gen5 x16 164F Vertical to 164M 延長線</h3>
+          <div class="np-apps">
+            <span class="np-app">AI SERVER</span>
+            <span class="np-app">GPU SERVER</span>
+            <span class="np-app">IMMERSION COOLING</span>
+            <span class="np-app">COMMUNICATION</span>
+            <span class="np-app">MEDICAL</span>
+            <span class="np-app">GAMING</span>
+          </div>
+          <ul class="np-feats">
+            <li>支援 <strong>PCIe Gen5 x16 32GT/s</strong>，線材 70cm～80cm；30AWG 0.9mm 超薄不阻擋散熱。</li>
+            <li>PCIe A Side／B Side 均可出線；支援最高 <strong>75W</strong> PCIe 供電，外加電源再增 75～100W。</li>
+            <li>可應用 NVMe Storage Card、CXL Accelerator、400G–3.2T 網卡、AOC 介面與高速 Switch NIC。</li>
+            <li>支援 <strong>3-Slot／4-Slot 高功耗 GPU</strong>，相容 NVIDIA／AMD／Intel／Arm／TPU-NPU-AI 加速器。</li>
+            <li>無鹵 UL21283／UL21425、ESG；多國發明專利；支援 180° 對折；連接器可選金屬強化鐵殼版。</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Product 3 — M.2 Gen6 Active Cable -->
+      <article class="np-card" data-reveal>
+        <div class="np-media">
+          <img src="images/index/new-5G75C11.png" alt="5G75C11 M.2 Gen6 Active 主動式線材" loading="lazy" />
+        </div>
+        <div class="np-body">
+          <span class="np-code">料號 5G75C11 SERIES</span>
+          <h3 class="np-title">M.2 75F / 75M PCIe Gen6 Active 64Gbps 主動式線材</h3>
+          <div class="np-apps">
+            <span class="np-app">AI SERVER</span>
+            <span class="np-app">DATA CENTER</span>
+            <span class="np-app">MEDICAL</span>
+            <span class="np-app">GAMING</span>
+            <span class="np-app">FACTORY</span>
+            <span class="np-app">RAILWAY</span>
+          </div>
+          <ul class="np-feats">
+            <li>支援 <strong>PCIe Gen6 64GT/s PAM4</strong> 與 Gen5 32GT/s NRZ；線材 50cm～120cm。</li>
+            <li>30AWG 超薄 0.9mm／1.25mm；無鹵 UL21283／UL21425；多國發明專利；支援 180° 對折。</li>
+            <li>內建 <strong>Active Redriver</strong> 提升長距訊號，多段 EQ／Gain 可透過 I2C／I3C 調整。</li>
+            <li>採用創立於 1950 年、NASDAQ 上市公司之高速元件方案。</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Product 4 — NVMe Backplane -->
+      <article class="np-card" data-reveal>
+        <div class="np-media">
+          <img src="images/index/new-5R68A02-5A.png" alt="5R68A02-5A 2.5吋 4 Ports NVMe 背板" loading="lazy" />
+        </div>
+        <div class="np-body">
+          <span class="np-code">料號 5R68A02-5A</span>
+          <h3 class="np-title">2.5" 4 Ports NVMe Gen4/5 U.2 / U.3 SAS / SATA 背板</h3>
+          <div class="np-apps">
+            <span class="np-app">AI SERVER</span>
+            <span class="np-app">DATA CENTER</span>
+            <span class="np-app">SATELLITE STATION</span>
+            <span class="np-app">AIR TRAFFIC</span>
+            <span class="np-app">HA SERVER</span>
+            <span class="np-app">MISSION CRITICAL</span>
+          </div>
+          <ul class="np-feats">
+            <li>支援 <strong>PCIe Gen5 32GT/s</strong> 與 Gen4 16GT/s NVMe SSD；4 埠 SFF-8639（x4／x2／x1），同時支援 SATA／SAS。</li>
+            <li>Low Loss 高速 PCB 材料；雙 MOLEX 4-Pin 電源（12V/9A、5V/9A、3.3V/0.8A）。</li>
+            <li>可串接最多 <strong>64 組背板</strong>、256 台儲存裝置，總容量最高 <strong>31.5PB</strong>。</li>
+            <li>內建 Clock Buffer（1 In／4 Out），支援 PCIe Bifurcation（搭配 Broadcom／ATTO HBA）。</li>
+            <li>LED 指示 + 聲音警示（溫度過熱／Fan Fail）。</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Product 5 — High-frequency test fixture -->
+      <article class="np-card" data-reveal>
+        <div class="np-media">
+          <img src="images/index/new-TF164-A-HTF.png" alt="TF164-A-HTF PCIe Gen5/6 16X 高頻治具" loading="lazy" />
+        </div>
+        <div class="np-body">
+          <span class="np-code">料號 TF164-A-HTF</span>
+          <h3 class="np-title">PCIe Gen5 / Gen6 16X 高頻治具版（SI/PI 驗證）</h3>
+          <div class="np-apps">
+            <span class="np-app">SI / PI 驗證</span>
+            <span class="np-app">TDR / TDT</span>
+            <span class="np-app">PNA / ENA / VNA</span>
+            <span class="np-app">RETIMER / REDRIVER</span>
+            <span class="np-app">CABLE / CONNECTOR</span>
+          </div>
+          <ul class="np-feats">
+            <li>支援 <strong>Gen6 64Gbps (PAM4) / Gen5 32Gbps (NRZ)</strong> 高速訊號分析，可測 X1／X4／X8／X16。</li>
+            <li>Ultra Low Loss 6 層 PCB 疊構（Low Dk/Df、極低插損、<strong>56GHz Nyquist</strong>），85Ω Diff／42.5Ω SE。</li>
+            <li>Backdrill Via、Low Stub、差分對最佳化；2.92mm／1.85mm RF Launch；可外加 +12V/3.3V 電源。</li>
+            <li>支援校正／去嵌（2X THRU／TRL／SOLT／Fixture Removal／Port Extension）；輸出 Touchstone S2P～S16P。</li>
+            <li>對應 IEEE／OIF／PCI-SIG；量測 SDD21／SDD11／串擾／TDR、Eye Diagram／COM／Jitter／BERT。</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CATALOG DOWNLOAD CTA (PDF)
+============================================================ -->
+<section class="catalog-cta" id="catalog">
+  <div class="container catalog-inner">
+    <div class="catalog-copy">
+      <span class="eyebrow">PRODUCT CATALOG · 完整型錄</span>
+      <h2>一份 <em>PDF</em>，<br/>看遍 Yes Way <em>5 大線材</em>產品。</h2>
+      <p>
+        高位企業 (Yes Way) 全產品型錄，涵蓋 Cable Assembly、PCB Assembly、AI / GPU Servers、Server &amp; Storage / PC、電纜 DIY 工具五大類別，
+        附完整規格表、PCIe Gen6 / MCIO / SlimSAS 介面對照與應用情境說明。
+      </p>
+      <ul class="catalog-meta-list">
+        <li>5 大產品類別</li>
+        <li>122+ SKU 規格</li>
+        <li>PCIe Gen6 對照</li>
+        <li>BIRT 驗證紀錄</li>
+      </ul>
+    </div>
+
+    <div class="catalog-card">
+      <div class="file-row">
+        <div class="file-icon">PDF</div>
+        <div class="file-meta">
+          <h3 class="fn">Yes Way 全產品型錄 v2026.06</h3>
+          <div class="fs">PDF · 約 8.4 MB · 中 / 英雙語</div>
+        </div>
+      </div>
+      <button class="download-btn" id="catalog-download">
+        下載產品型錄
+        <span class="arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </span>
+      </button>
+      <a class="alt-link" href="mailto:sales@yesway.com.tw?subject=%E7%94%B3%E8%AB%8B%E5%AF%84%E9%80%81%20Yes%20Way%20%E5%85%A8%E7%94%A2%E5%93%81%E5%9E%8B%E9%8C%84%20PDF&body=%E6%82%A8%E5%A5%BD%EF%BC%8C%E6%83%B3%E7%B4%A2%E5%8F%96%E9%AB%98%E4%BD%8D%E4%BC%81%E6%A5%AD%E5%85%A8%E7%94%A2%E5%93%81%E5%9E%8B%E9%8C%84%20PDF%EF%BC%8C%E8%AC%9D%E8%AC%9D%E3%80%82">
+          或寄送至我的 Email →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CAPABILITIES — 6 pillars
+============================================================ -->
+<section class="capabilities" id="capabilities">
+  <div class="container">
+    <div class="cap-head">
+      <div>
+        <span class="eyebrow">03 / CORE CAPABILITIES</span>
+        <h2 class="h-section" style="margin-top:18px;">
+          高位<em>核心能力</em>
+        </h2>
+      </div>
+      <p>
+        嚴謹的線材加工不只是工序，而是高位 30 年累積的工藝信仰。
+        六大支柱，從品質、研發到永續，定義我們的製造標準。
+      </p>
+    </div>
+
+    <div class="cap-grid">
+
+      <!-- 01 · 嚴謹製程，品質至上 -->
+      <div class="cap-card">
+        <div class="top">
+          <div class="icon">
+            <!-- shield with check -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8.5-8 9.5C7.5 20.5 4 17 4 12V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <span class="num">01</span>
+        </div>
+        <h3>嚴謹製程，品質至上</h3>
+        <p>專注製程品管，嚴格把關每道線材加工工序，導入 TDR / VNA / BIRT 訊號完整性檢測，確保產品符合國際標準，實現穩定可靠的品質一致性。</p>
+      </div>
+
+      <!-- 02 · 專業線材 OEM/ODM 客製服務 -->
+      <div class="cap-card">
+        <div class="top">
+          <div class="icon">
+            <!-- sliders / customization -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+          </div>
+          <span class="num">02</span>
+        </div>
+        <h3>專業線材 OEM / ODM 客製服務</h3>
+        <p>從規格確認、打樣到量產交付，提供完整的 OEM / ODM 客製流程，以誠信為核心建立長遠穩健的合作夥伴關係，創造企業與客戶的雙贏價值。</p>
+      </div>
+
+      <!-- 03 · 高精度客製化線材加工 -->
+      <div class="cap-card">
+        <div class="top">
+          <div class="icon">
+            <!-- precision target / crosshair -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3"/></svg>
+          </div>
+          <span class="num">03</span>
+        </div>
+        <h3>高精度客製化線材加工</h3>
+        <p>依需求靈活調整規格、材質與接頭參數，提供高匹配度的客製化線束解決方案，確保訊號傳輸穩定性與組裝相容性。</p>
+      </div>
+
+      <!-- 04 · 專業研發，高速傳輸與伺服器線材設計 -->
+      <div class="cap-card">
+        <div class="top">
+          <div class="icon">
+            <!-- signal / R&D waves -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2 0 2-4 4-4s2 8 4 8 2-12 4-12 2 16 4 16 2-8 4-8"/></svg>
+          </div>
+          <span class="num">04</span>
+        </div>
+        <h3>專業研發，高速傳輸與伺服器線材設計</h3>
+        <p>依需求開發專屬規格，針對高導電、高耐溫、抗干擾需求優化材料選用，提升 AI 伺服器連接方案的整體可靠性。</p>
+      </div>
+
+      <!-- 05 · 穩定高效，自動化生產 -->
+      <div class="cap-card">
+        <div class="top">
+          <div class="icon">
+            <!-- gear / automation -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <span class="num">05</span>
+        </div>
+        <h3>穩定高效，自動化生產</h3>
+        <p>採用先進工藝與自動化生產設備，確保產品高精準度與一致性，靈活對應不同規模的線材加工訂單需求。</p>
+      </div>
+
+      <!-- 06 · 永續經營，綠色供應鏈 -->
+      <div class="cap-card">
+        <div class="top">
+          <div class="icon">
+            <!-- leaf (sustainability / ESG) -->
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.5 2c.71 4.81.5 8.27-1.74 12.31C16.85 17.18 14.43 19.5 11 20"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+          </div>
+          <span class="num">06</span>
+        </div>
+        <h3>永續經營，綠色供應鏈</h3>
+        <p>重視 ESG 永續發展，符合 RoHS / REACH 環保規範，提供無鹵素線材方案，與合作夥伴共同落實 ISO 14001 綠色供應鏈目標。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TECH BAND — 設備能力 stat band
+============================================================ -->
+<section class="tech-band">
+  <div class="container tech-band-track">
+    <div class="tech-stat">
+      <div class="label">SIGNAL TEST · 訊號檢測</div>
+      <div class="big">TDR / VNA</div>
+      <div class="desc">時域反射儀 + 網路分析儀，100% 阻抗與訊號完整性檢測。</div>
+    </div>
+    <div class="tech-stat">
+      <div class="label">PRECISION · 精密加工</div>
+      <div class="big">Laser Strip</div>
+      <div class="desc">雷射剝皮自動化設備，微細線材處理零誤差。</div>
+    </div>
+    <div class="tech-stat">
+      <div class="label">CERTIFICATION · 認證</div>
+      <div class="big">ISO ×3</div>
+      <div class="desc">ISO 9001 / 14001 / 45001 + UL 國際安規認證。</div>
+    </div>
+    <div class="tech-stat">
+      <div class="label">PATENTS · 專利</div>
+      <div class="big">TW / CN / JP / US</div>
+      <div class="desc">降低串擾訊號傳輸結構，全球四地專利保護。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CERTIFICATIONS BAND
+============================================================ -->
+<section class="certs">
+  <div class="container">
+    <div class="certs-head">
+      <span class="eyebrow no-line" style="justify-content:center;display:inline-flex;">CERTIFICATIONS & PATENTS</span>
+      <h3>國際認證 / 專利保護</h3>
+    </div>
+    <div class="certs-row">
+      <span class="cert-badge">ISO 9001</span>
+      <span class="cert-badge">ISO 14001</span>
+      <span class="cert-badge">ISO 45001</span>
+      <span class="cert-badge">UL Listed</span>
+      <span class="cert-badge">RoHS Compliant</span>
+    </div>
+    <div class="patents-row">
+      <span class="patent">TW · 降低串擾訊號傳輸 單元結構專利</span>
+      <span class="patent">CN · 降低串擾訊號傳輸 單元結構專利</span>
+      <span class="patent">JP · 降低串擾訊號傳輸 單元結構專利</span>
+      <span class="patent">US · 降低串擾訊號傳輸 單元結構專利</span>
+      <span class="patent">TW · 連接器及線結構專利</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA / Inquiry Form
+============================================================ -->
+<section class="cta" id="contact">
+  <div class="container cta-inner">
+    <div>
+      <span class="eyebrow" style="color:rgba(247,246,241,.6);">04 / GET IN TOUCH</span>
+      <h2>
+        把您的<em>傳輸挑戰</em><br/>
+        交給高位工程團隊。
+      </h2>
+      <p style="color:rgba(247,246,241,.78); font-size:16px; line-height:1.7; margin:32px 0 0; max-width:480px;">
+        從規格諮詢到 ODM 量產，我們的工程團隊將在 24 小時內回覆。
+        您也可以撥打電話、寄信，或填寫右側「在線諮詢表」，內容將直接傳送至 Yes Way 客服信箱。
+      </p>
+      <div class="cta-actions" style="margin-top:32px;">
+        <a class="cta-action-row" href="mailto:sales@yesway.com.tw">
+          <div>
+            <div class="lbl">MAIL</div>
+            <div class="val">sales@yesway.com.tw</div>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="cta-action-row" href="tel:+886226735492">
+          <div>
+            <div class="lbl">TEL</div>
+            <div class="val">+886-2-2673-5492</div>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+        <a class="cta-action-row" href="#contact-form">
+          <div>
+            <div class="lbl">INQUIRY FORM</div>
+            <div class="val">在線詢問表單 ↓</div>
+          </div>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Inquiry Form -->
+    <div class="cta-side">
+      <form id="contact-form"
+            action="https://formsubmit.co/sales@yesway.com.tw"
+            method="POST"
+            style="background:rgba(247,246,241,.04); border:1px solid rgba(247,246,241,.15); padding:32px; display:flex; flex-direction:column; gap:18px;"
+            onsubmit="return handleInquirySubmit(this);">
+        <input type="hidden" name="_subject" value="[Yes Way 官網] 在線詢問表單">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none">
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <label style="display:flex; flex-direction:column; gap:6px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(247,246,241,.6);">姓名 / Name *</span>
+            <input required name="name" type="text" placeholder="王小明" style="background:transparent; border:none; border-bottom:1px solid rgba(247,246,241,.3); padding:8px 0; color:var(--paper); font-size:15px; outline:none;" />
+          </label>
+          <label style="display:flex; flex-direction:column; gap:6px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(247,246,241,.6);">公司 / Company</span>
+            <input name="company" type="text" placeholder="ABC Corp." style="background:transparent; border:none; border-bottom:1px solid rgba(247,246,241,.3); padding:8px 0; color:var(--paper); font-size:15px; outline:none;" />
+          </label>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+          <label style="display:flex; flex-direction:column; gap:6px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(247,246,241,.6);">Email *</span>
+            <input required name="email" type="email" placeholder="you@company.com" style="background:transparent; border:none; border-bottom:1px solid rgba(247,246,241,.3); padding:8px 0; color:var(--paper); font-size:15px; outline:none;" />
+          </label>
+          <label style="display:flex; flex-direction:column; gap:6px;">
+            <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(247,246,241,.6);">電話 / Phone</span>
+            <input name="phone" type="tel" placeholder="+886-..." style="background:transparent; border:none; border-bottom:1px solid rgba(247,246,241,.3); padding:8px 0; color:var(--paper); font-size:15px; outline:none;" />
+          </label>
+        </div>
+
+        <label style="display:flex; flex-direction:column; gap:6px;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(247,246,241,.6);">需求類別 / Inquiry Type</span>
+          <select name="inquiryType" style="background:transparent; border:none; border-bottom:1px solid rgba(247,246,241,.3); padding:8px 0; color:var(--paper); font-size:15px; outline:none;">
+            <option value="Cable Assembly" style="color:#0E1410;">Cable Assembly 線束加工</option>
+            <option value="PCB Assembly" style="color:#0E1410;">PCB Assembly 電路板組裝</option>
+            <option value="AI/GPU Servers" style="color:#0E1410;">AI / GPU Servers 高速線組</option>
+            <option value="Server & Storage / PC" style="color:#0E1410;">Server &amp; Storage / PC</option>
+            <option value="Cable DIY Tooling" style="color:#0E1410;">電纜 DIY 工具</option>
+            <option value="ODM Custom" style="color:#0E1410;">ODM 客製化設計</option>
+            <option value="Other" style="color:#0E1410;">其他 / Other</option>
+          </select>
+        </label>
+
+        <label style="display:flex; flex-direction:column; gap:6px;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(247,246,241,.6);">需求說明 / Message *</span>
+          <textarea required name="message" rows="4" placeholder="例：MCIO i8 / PCIe Gen6 64 GT/s 線組客製化規格、應用、預估數量..." style="background:transparent; border:none; border-bottom:1px solid rgba(247,246,241,.3); padding:8px 0; color:var(--paper); font-size:15px; outline:none; resize:vertical; font-family:inherit;"></textarea>
+        </label>
+
+        <button type="submit" id="cta-submit-btn" style="background:var(--paper); color:var(--ink); border:none; padding:16px 24px; font-size:14.5px; font-weight:600; letter-spacing:.04em; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:10px; margin-top:6px; width:100%; transition:background .25s;">
+          送出諮詢 <span style="transition:transform .25s;">→</span>
+        </button>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:rgba(247,246,241,.5); letter-spacing:.06em; margin:0;">
+          送出後工程團隊將於 24 小時內回覆。
+        </p>
+      </form>
+
+      <!-- Success message -->
+      <div id="cta-form-success" style="display:none; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:48px 28px; border:1px solid rgba(247,246,241,.15); text-align:center;">
+        <div style="width:52px; height:52px; border-radius:50%; background:rgba(107,255,110,.15); color:#6BFF6E; display:grid; place-items:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 style="font-family:'Bricolage Grotesque','Noto Sans TC',sans-serif; font-size:22px; font-weight:500; color:var(--paper); margin:0;">諮詢已成功送出！</h3>
+        <p style="font-size:14.5px; color:rgba(247,246,241,.7); margin:0;">感謝您的來信，高位工程團隊將於 24 小時內與您聯繫。</p>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  // Hover effect for CTA submit button
+  (function() {
+    var btn = document.getElementById('cta-submit-btn');
+    if (btn) {
+      btn.addEventListener('mouseenter', function() { this.style.background = 'var(--green)'; this.style.color = 'var(--paper)'; });
+      btn.addEventListener('mouseleave', function() { this.style.background = 'var(--paper)'; this.style.color = 'var(--ink)'; });
+    }
+  })();
+
+  function handleInquirySubmit(form) {
+    var btn = document.getElementById('cta-submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '送出中… <span style="opacity:.4;">→</span>';
+
+    fetch('https://formsubmit.co/ajax/sales@yesway.com.tw', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      if (data.success === 'true' || data.success === true) {
+        form.style.display = 'none';
+        var success = document.getElementById('cta-form-success');
+        if (success) { success.style.display = 'flex'; }
+      } else {
+        throw new Error('failed');
+      }
+    })
+    .catch(function() {
+      btn.disabled = false;
+      btn.innerHTML = '送出諮詢 <span>→</span>';
+      alert('送出失敗，請稍後再試或直接來信 sales@yesway.com.tw');
+    });
+
+    return false;
+  }
+</script>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo/logo-yesway-white.svg" alt="Yes Way" />
+        <p>高位企業有限公司<br/>Yes Way Enterprise Corporation</p>
+        <p style="margin-top:14px; font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(247,246,241,.5);letter-spacing:.06em;">
+          新北市三峽區介壽路一段318巷21號<br/>
+          T &nbsp;886-2-2673-5492<br/>
+          F &nbsp;886-2-2673-3904<br/>
+          統編 &nbsp;86973811
+        </p>
+      </div>
+
+      <div>
+        <h5>SITE MAP</h5>
+        <ul>
+          <li><a href="/">首頁</a></li>
+          <li><a href="about.html">關於高位</a></li>
+          <li><a href="quality.html">品質與技術</a></li>
+          <li><a href="products.html">產品介紹</a></li>
+          <li><a href="news.html">最新消息</a></li>
+          <li><a href="esg.html">ESG</a></li>
+          <li><a href="contact.html">聯絡我們</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>PRODUCT LINES</h5>
+        <ul>
+          <li><a href="products.html?cat=pin-assignment-cad">PIN Assignment / CAD</a></li>
+          <li><a href="products.html?cat=cable-assembly">Cable Assembly 線束加工</a></li>
+          <li><a href="products.html?cat=pcb-assembly">PCB Assembly 電路板組裝</a></li>
+          <li><a href="products.html?cat=ai-gpu-servers">AI / GPU Servers</a></li>
+          <li><a href="products.html?cat=server-storage-pc">Server & Storage / PC</a></li>
+          <li><a href="products.html?cat=cable-diy-tooling">電纜 DIY 工具</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5>CONTACT</h5>
+        <ul>
+          <li>銷售諮詢 <a href="mailto:sales@yesway.com.tw">sales@yesway.com.tw</a></li>
+          <li>生產據點：新北 · 三峽</li>
+          <li><a href="contact.html">在線詢問表單 →</a></li>
+        </ul>
+        <h5 style="margin-top:24px;">FOLLOW</h5>
+        <ul style="display:flex;gap:14px;">
+          <li><a href="#">FB</a></li>
+          <li><a href="#">IG</a></li>
+          <li><a href="#">LINE</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 YES WAY ENTP. CORP. — ALL RIGHTS RESERVED</span>
+      <div class="seo">
+        <span>高速傳輸線材</span>
+        <span>·</span>
+        <span>Cable Assembly</span>
+        <span>·</span>
+        <span>線束 OEM</span>
+        <span>·</span>
+        <span>PCIe Gen6</span>
+        <span>·</span>
+        <span>MCIO 線材</span>
+        <span>·</span>
+        <span>SlimSAS</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     PDF FAB (floating action button — PDF download)
+============================================================ -->
+<button class="pdf-fab" id="pdf-fab" type="button" aria-label="下載 Yes Way 產品介紹 PDF">
+  <span class="fab-ico">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+  </span>
+  <span>
+    <span class="fab-tag">CATALOG · PDF</span>
+    下載產品型錄
+  </span>
+</button>
+
+<script>
+  // simple reveal-on-scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+  // ============================================================
+  // HERO CAROUSEL — auto-rotate, dots, arrows, pause-on-hover
+  // ============================================================
+  (function () {
+    const root = document.getElementById('hero-carousel');
+    if (!root) return;
+    const slides = root.querySelectorAll('.hc-slide');
+    const dots   = root.querySelectorAll('.hc-dot');
+    const cur    = document.getElementById('hc-current');
+    const total  = slides.length;
+    let idx = 0;
+    let timer = null;
+    const DURATION = 6500; // matches CSS dot fill animation
+
+    document.getElementById('hc-total').textContent = String(total).padStart(2, '0');
+
+    function go(n, opts = {}) {
+      idx = (n + total) % total;
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      dots.forEach((d, i) => {
+        d.classList.toggle('active', i === idx);
+        d.classList.remove('paused');
+      });
+      cur.textContent = String(idx + 1).padStart(2, '0');
+      if (!opts.skipTimer) restartTimer();
+    }
+    function next() { go(idx + 1); }
+    function prev() { go(idx - 1); }
+
+    function restartTimer() {
+      clearInterval(timer);
+      timer = setInterval(next, DURATION);
+    }
+
+    document.getElementById('hc-next').addEventListener('click', next);
+    document.getElementById('hc-prev').addEventListener('click', prev);
+    dots.forEach(d => d.addEventListener('click', () => go(parseInt(d.dataset.go, 10))));
+
+    // Pause on hover
+    root.addEventListener('mouseenter', () => {
+      clearInterval(timer);
+      dots.forEach(d => d.classList.add('paused'));
+    });
+    root.addEventListener('mouseleave', () => {
+      dots.forEach(d => d.classList.remove('paused'));
+      restartTimer();
+    });
+
+    // Pause when tab hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) clearInterval(timer);
+      else restartTimer();
+    });
+
+    // Keyboard navigation
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+    root.tabIndex = 0;
+
+    // Touch swipe
+    let touchX = null;
+    root.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    root.addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) (dx < 0 ? next() : prev());
+      touchX = null;
+    });
+
+    restartTimer();
+  })();
+
+  // ============================================================
+  // PDF DOWNLOAD — FAB visibility + click handler (catalog + FAB share one handler)
+  // ============================================================
+  (function () {
+    const fab = document.getElementById('pdf-fab');
+    const carousel = document.getElementById('hero-carousel');
+    const catalogBtn = document.getElementById('catalog-download');
+    if (!fab) return;
+
+    // Show FAB once the user has scrolled past the carousel (or 500px on small screens)
+    function updateFab() {
+      const threshold = carousel ? carousel.offsetHeight * 0.6 : 500;
+      if (window.scrollY > threshold) fab.classList.add('visible');
+      else fab.classList.remove('visible');
+    }
+    window.addEventListener('scroll', updateFab, { passive: true });
+    window.addEventListener('resize', updateFab);
+    updateFab();
+
+    // Shared download handler — replace href / fetch when real PDF is ready
+    function triggerDownload(e) {
+      e.preventDefault();
+      // Smooth-scroll FAB clicks to the catalog section so user sees full context first
+      if (e.currentTarget === fab) {
+        const target = document.getElementById('catalog');
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+      }
+      // Download the catalog PDF
+      window.location.href = 'pdf/YesWay 32G FlatCable_CATALOUGE_V250509.pdf';
+    }
+
+    fab.addEventListener('click', triggerDownload);
+    if (catalogBtn) catalogBtn.addEventListener('click', triggerDownload);
+  })();
+
+  /* ============================================================
+     Product Carousel — single-point perspective rotation
+     Front product = largest; others shrink + fade as they
+     orbit toward the back. JS sets transform / opacity / z-index
+     per frame so back products never occlude front ones.
+     ============================================================ */
+  (function () {
+    const ring = document.querySelector('.ps-ring');
+    if (!ring) return;
+
+    // CSS handles mobile grid fallback
+    const mqMobile  = window.matchMedia('(max-width: 700px)');
+    const mqReduce  = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const products = Array.from(ring.querySelectorAll('.ps-prod'));
+    const N = products.length;
+    if (!N) return;
+
+    let angle = 0;          // global rotation angle (degrees)
+    let paused = false;     // pause on hover / when off-screen
+    let visible = true;     // only animate when section is in view
+
+    // Radius scales with viewport width — wide enough that adjacent
+    // products at ±27.7° don't crowd the centre one.
+    function getRadius() {
+      const w = window.innerWidth;
+      if (w < 880)  return Math.min(w * 0.46, 400);
+      if (w < 1100) return Math.min(w * 0.46, 520);
+      return Math.min(w * 0.44, 640);
+    }
+
+    // Hover on stage pauses rotation
+    const stage = ring.parentElement;
+    stage.addEventListener('mouseenter', () => paused = true);
+    stage.addEventListener('mouseleave', () => paused = false);
+
+    // Only animate while section is in viewport
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { visible = e.isIntersecting; });
+    }, { threshold: 0.1 });
+    observer.observe(stage);
+
+    function frame() {
+      if (visible && !paused && !mqMobile.matches) {
+        angle = (angle + 0.18) % 360;  // ~33s per full revolution
+      }
+
+      const radius = getRadius();
+      const step = 360 / N;
+
+      products.forEach((p, i) => {
+        const a = ((angle + i * step) % 360) * Math.PI / 180;
+        // Slightly bias the X spread so neighbour products move outward faster
+        const sinA = Math.sin(a);
+        const x = Math.sign(sinA) * Math.pow(Math.abs(sinA), 0.78) * radius;
+        const z = Math.cos(a);                 // -1 (back) → 1 (front)
+        const t = (z + 1) / 2;                  // 0 (back) → 1 (front)
+
+        // Steep curve: only the very front product is large; neighbours
+        // shrink quickly so they don't crowd into the centre.
+        const tCurve = Math.pow(t, 2.6);
+
+        const scale   = 0.30 + tCurve * 1.15;   // 0.30 (back) → 1.45 (front, larger highlight)
+        const opacity = 0.12 + tCurve * 0.88;   // 0.12 (back) → 1.00 (front)
+        const blur    = (1 - t) * 2.5;          // 2.5px (back) → 0
+        const y       = (1 - t) * -42;          // back products sit higher (vanishing point)
+
+        p.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+        p.style.opacity = opacity;
+        p.style.filter = blur > 0.1 ? `blur(${blur.toFixed(2)}px)` : '';
+        // z-index so back products never overlap front ones
+        p.style.zIndex = String(Math.round((z + 1) * 50));
+
+        // Mark front-most product (for hover styling)
+        if (tCurve > 0.88) p.classList.add('is-front');
+        else p.classList.remove('is-front');
+      });
+
+      requestAnimationFrame(frame);
+    }
+
+    // If reduced-motion, render a static snapshot (no animation loop)
+    if (mqReduce.matches || mqMobile.matches) {
+      // Just compute positions once
+      visible = false; paused = true;
+      frame();
+      return;
+    }
+
+    requestAnimationFrame(frame);
+  })();
+
+</script>
+
+</body>
+</html>
