@@ -1636,7 +1636,11 @@
     color: var(--ink);
     letter-spacing: .08em;
     display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color .2s, color .2s;
   }
+  a.cert-badge:hover { border-color: var(--green); color: var(--green); }
   .cert-badge::before {
     content: "✓"; color: var(--green); font-weight: 700;
   }
@@ -2842,11 +2846,11 @@
       <h3>國際認證 / 專利保護</h3>
     </div>
     <div class="certs-row">
-      <span class="cert-badge">ISO 9001</span>
-      <span class="cert-badge">ISO 14001</span>
-      <span class="cert-badge">ISO 45001</span>
-      <span class="cert-badge">UL Listed</span>
-      <span class="cert-badge">RoHS Compliant</span>
+      <a href="quality.html#patents" class="cert-badge">ISO 9001</a>
+      <a href="quality.html#patents" class="cert-badge">ISO 14001</a>
+      <a href="quality.html#patents" class="cert-badge">ISO 45001</a>
+      <a href="quality.html#patents" class="cert-badge">UL Listed</a>
+      <a href="quality.html#patents" class="cert-badge">RoHS Compliant</a>
     </div>
     <div class="patents-row">
       <span class="patent">TW · 降低串擾訊號傳輸 單元結構專利</span>

@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <title>品質與技術 — Yes Way 高位企業｜精密線材製造、檢測與研發能力</title>
-<meta name="description" content="高位企業 (Yes Way) 品質與技術介紹：精密生產能力、先進設備與工藝、驗證與測試、客製化能力、研發技術，以及 UL / ISO 9001 / IATF 16949 等國際認證。" />
-<meta name="keywords" content="品質管理, 高速線材檢測, TDR, VNA, 精密加工, ISO 9001, IATF 16949, UL, 高位企業, Yes Way" />
+<meta name="description" content="高位企業 (Yes Way) 品質與技術介紹：精密生產能力、先進設備與工藝、驗證與測試、客製化能力、研發技術，以及 UL / ISO 9001 等國際認證。" />
+<meta name="keywords" content="品質管理, 高速線材檢測, TDR, VNA, 精密加工, ISO 9001, UL, 高位企業, Yes Way" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -578,31 +578,48 @@
     grid-template-columns: auto 1fr auto;
     align-items: center;
     gap: clamp(14px, 2.5vw, 36px);
+    overflow: hidden; /* clip peeking slides */
   }
-  .pc-viewport { overflow: hidden; }
+  .pc-viewport { overflow: visible; min-width: 0; } /* visible so adjacent slides peek in; min-width:0 so the grid cell width is honored (not inflated by the wide flex track) */
   .pc-track {
     display: flex;
-    transition: transform .55s var(--easing);
   }
   .pc-slide {
-    flex: 0 0 100%;
+    flex: 0 0 min(520px, 72%);
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 26px;
+    padding: 0 clamp(8px, 1.5vw, 20px);
+    box-sizing: border-box;
   }
   .pc-img-wrap {
     display: block;
-    height: clamp(360px, 54vh, 600px);
+    width: 100%;
+    height: clamp(360px, 52vh, 580px);
     border: 1px solid var(--hair);
     background: var(--paper-2);
     box-shadow: 0 18px 50px -24px rgba(14,20,16,.45);
     overflow: hidden;
-    transition: box-shadow .3s var(--easing), transform .3s var(--easing);
+    cursor: default;
+    transition: transform .45s var(--easing), box-shadow .45s var(--easing);
   }
-  .pc-img-wrap:hover { transform: translateY(-4px); box-shadow: 0 28px 64px -22px rgba(14,20,16,.55); }
-  .pc-img-wrap img { height: 100%; width: auto; display: block; object-fit: contain; }
+  .pc-img-wrap img {
+    width: 100%; height: 100%; display: block; object-fit: contain;
+    transition: opacity .4s var(--easing);
+  }
+  /* Non-centered slides → real patent images, dimmed & scaled down */
+  .pc-slide:not(.active) {
+    opacity: .4;
+    cursor: pointer;
+  }
+  .pc-slide:not(.active) .pc-img-wrap {
+    transform: scale(.84);
+    box-shadow: 0 10px 28px -20px rgba(14,20,16,.3);
+  }
+  .pc-slide:not(.active) .pc-cap { opacity: 0; }
+  .pc-cap { transition: opacity .4s var(--easing); }
   .pc-cap { display: flex; align-items: center; gap: 16px; text-align: left; }
   .pc-code {
     flex-shrink: 0;
@@ -647,7 +664,7 @@
     .pc-arrow { position: absolute; top: 38%; z-index: 3; width: 42px; height: 42px; font-size: 19px; }
     .pc-prev { left: 2px; }
     .pc-next { right: 2px; }
-    .pc-img-wrap { height: clamp(320px, 62vh, 480px); }
+
     .pc-cap { justify-content: center; }
   }
 
@@ -781,7 +798,6 @@
           探索六大能力
           <span>→</span>
         </button>
-        <a href="about.html" class="btn-text">了解高位 30 年技術沿革 →</a>
         <a href="pdf/YesWay 32G FlatCable_CATALOUGE_V250509.pdf" class="btn-text" download style="display:inline-flex;align-items:center;gap:10px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           下載產品型錄
@@ -930,7 +946,7 @@
             <li><strong>核心研發能力</strong>從材料選用、結構設計到製程優化，提供完整解決方案。</li>
             <li><strong>先進檢測設備</strong>配備精密加工與檢測儀器，可快速打樣與驗證。</li>
             <li><strong>滿足特殊需求</strong>支援高頻傳輸、耐候等嚴苛應用，確保可靠度。</li>
-            <li><strong>國際認證把關</strong>通過 UL、ISO 9001、IATF 16949 等品質與安規認證。</li>
+            <li><strong>國際認證把關</strong>通過 UL、ISO 9001 等品質與安規認證。</li>
           </ul>
         </div>
       </div>
@@ -953,7 +969,6 @@
       <span class="cert-pill">ISO 9001</span>
       <span class="cert-pill">ISO 14001</span>
       <span class="cert-pill">ISO 45001</span>
-      <span class="cert-pill">IATF 16949</span>
       <span class="cert-pill">RoHS</span>
       <span class="cert-pill">REACH</span>
     </div>
@@ -972,7 +987,7 @@
       </div>
       <p>
         高位自主研發的高速傳輸結構，已在 <strong>台灣、中國、日本、德國、美國</strong> 取得發明與新型專利，
-        以智慧財產權鞏固訊號完整性的技術領先。點擊圖片可放大檢視專利證書。
+        以智慧財產權鞏固訊號完整性的技術領先。
       </p>
     </div>
 
@@ -983,9 +998,9 @@
         <div class="pc-track">
 
           <figure class="pc-slide">
-            <a class="pc-img-wrap" href="images/quality/tw-invention-crosstalk.jpg" target="_blank" rel="noopener">
-              <img src="images/quality/tw-invention-crosstalk.jpg" alt="台灣 發明專利 — 降低串擾訊號之傳輸單元結構" loading="lazy" />
-            </a>
+            <div class="pc-img-wrap">
+              <img src="images/quality/tw-invention-crosstalk.jpg" alt="台灣 發明專利 — 降低串擾訊號之傳輸單元結構" />
+            </div>
             <figcaption class="pc-cap">
               <span class="pc-code">TW</span>
               <span class="pc-meta"><span class="pc-country">台灣 Taiwan</span><span class="pc-type">發明專利 · 降低串擾訊號之傳輸單元結構</span></span>
@@ -993,9 +1008,9 @@
           </figure>
 
           <figure class="pc-slide">
-            <a class="pc-img-wrap" href="images/quality/cn-invention-crosstalk.jpg" target="_blank" rel="noopener">
-              <img src="images/quality/cn-invention-crosstalk.jpg" alt="中國 發明專利 — 降低串擾訊號的傳輸單元結構" loading="lazy" />
-            </a>
+            <div class="pc-img-wrap">
+              <img src="images/quality/cn-invention-crosstalk.jpg" alt="中國 發明專利 — 降低串擾訊號的傳輸單元結構" />
+            </div>
             <figcaption class="pc-cap">
               <span class="pc-code">CN</span>
               <span class="pc-meta"><span class="pc-country">中國 China</span><span class="pc-type">發明專利 · 降低串擾訊號之傳輸單元結構</span></span>
@@ -1003,9 +1018,9 @@
           </figure>
 
           <figure class="pc-slide">
-            <a class="pc-img-wrap" href="images/quality/jp-invention-crosstalk.jpg" target="_blank" rel="noopener">
-              <img src="images/quality/jp-invention-crosstalk.jpg" alt="日本 發明專利 — 降低串擾訊號之傳輸單元結構" loading="lazy" />
-            </a>
+            <div class="pc-img-wrap">
+              <img src="images/quality/jp-invention-crosstalk.jpg" alt="日本 發明專利 — 降低串擾訊號之傳輸單元結構" />
+            </div>
             <figcaption class="pc-cap">
               <span class="pc-code">JP</span>
               <span class="pc-meta"><span class="pc-country">日本 Japan</span><span class="pc-type">發明專利 · 降低串擾訊號之傳輸單元結構</span></span>
@@ -1013,9 +1028,9 @@
           </figure>
 
           <figure class="pc-slide">
-            <a class="pc-img-wrap" href="images/quality/us-invention-crosstalk.jpg" target="_blank" rel="noopener">
-              <img src="images/quality/us-invention-crosstalk.jpg" alt="美國 發明專利申請 — 降低串擾訊號之傳輸單元結構" loading="lazy" />
-            </a>
+            <div class="pc-img-wrap">
+              <img src="images/quality/us-invention-crosstalk.jpg" alt="美國 發明專利申請 — 降低串擾訊號之傳輸單元結構" />
+            </div>
             <figcaption class="pc-cap">
               <span class="pc-code">US</span>
               <span class="pc-meta"><span class="pc-country">美國 USA</span><span class="pc-type">發明專利申請 · 降低串擾訊號之傳輸單元結構</span></span>
@@ -1023,9 +1038,9 @@
           </figure>
 
           <figure class="pc-slide">
-            <a class="pc-img-wrap" href="images/quality/jp-utility-emi.jpg" target="_blank" rel="noopener">
-              <img src="images/quality/jp-utility-emi.jpg" alt="日本 新型專利 — 防電磁干擾傳輸排線" loading="lazy" />
-            </a>
+            <div class="pc-img-wrap">
+              <img src="images/quality/jp-utility-emi.jpg" alt="日本 新型專利 — 防電磁干擾傳輸排線" />
+            </div>
             <figcaption class="pc-cap">
               <span class="pc-code">JP</span>
               <span class="pc-meta"><span class="pc-country">日本 Japan</span><span class="pc-type">新型專利 · 防電磁干擾傳輸排線</span></span>
@@ -1033,9 +1048,9 @@
           </figure>
 
           <figure class="pc-slide">
-            <a class="pc-img-wrap" href="images/quality/de-utility-emi.jpg" target="_blank" rel="noopener">
-              <img src="images/quality/de-utility-emi.jpg" alt="德國 新型專利 — 防電磁干擾傳輸排線" loading="lazy" />
-            </a>
+            <div class="pc-img-wrap">
+              <img src="images/quality/de-utility-emi.jpg" alt="德國 新型專利 — 防電磁干擾傳輸排線" />
+            </div>
             <figcaption class="pc-cap">
               <span class="pc-code">DE</span>
               <span class="pc-meta"><span class="pc-country">德國 Germany</span><span class="pc-type">新型專利 · 防電磁干擾傳輸排線</span></span>
@@ -1043,9 +1058,9 @@
           </figure>
 
           <figure class="pc-slide">
-            <a class="pc-img-wrap" href="images/quality/tw-utility-connector.jpg" target="_blank" rel="noopener">
-              <img src="images/quality/tw-utility-connector.jpg" alt="台灣 新型專利 — 連接器及其排線結構" loading="lazy" />
-            </a>
+            <div class="pc-img-wrap">
+              <img src="images/quality/tw-utility-connector.jpg" alt="台灣 新型專利 — 連接器及其排線結構" />
+            </div>
             <figcaption class="pc-cap">
               <span class="pc-code">TW</span>
               <span class="pc-meta"><span class="pc-country">台灣 Taiwan</span><span class="pc-type">新型專利 · 連接器及其排線結構</span></span>
@@ -1077,17 +1092,27 @@
     var track = car.querySelector('.pc-track');
     var slides = car.querySelectorAll('.pc-slide');
     var dots = car.querySelectorAll('.pc-dot');
+    var vp = car.querySelector('.pc-viewport');
     var idx = 0;
     function go(i) {
       idx = (i + slides.length) % slides.length;
-      track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+      var slideW = slides[0].offsetWidth;
+      var vpW = vp.offsetWidth;
+      var offset = (vpW / 2) - (slideW / 2) - idx * slideW;
+      track.style.transform = 'translateX(' + offset + 'px)';
       for (var n = 0; n < dots.length; n++) dots[n].classList.toggle('active', n === idx);
+      for (var s = 0; s < slides.length; s++) slides[s].classList.toggle('active', s === idx);
     }
     car.querySelector('.pc-prev').addEventListener('click', function () { go(idx - 1); });
     car.querySelector('.pc-next').addEventListener('click', function () { go(idx + 1); });
     for (var n = 0; n < dots.length; n++) {
       (function (k) { dots[k].addEventListener('click', function () { go(k); }); })(n);
     }
+    for (var s = 0; s < slides.length; s++) {
+      (function (k) { slides[k].addEventListener('click', function () { if (k !== idx) go(k); }); })(s);
+    }
+    go(0);
+    window.addEventListener('resize', function () { go(idx); });
   })();
 </script>
 
