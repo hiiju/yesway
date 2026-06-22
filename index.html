@@ -214,11 +214,24 @@
   .btn-cta:hover { background: var(--green); }
   .btn-cta .arrow { transition: transform .3s var(--easing); }
   .btn-cta:hover .arrow { transform: translateX(3px); }
+  /* Catalog button (header) — opens product catalog PDF in a new tab */
+  .btn-catalog {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 11px 16px;
+    font-size: 13.5px; font-weight: 500;
+    cursor: pointer; white-space: nowrap;
+    transition: background .25s var(--easing), color .25s var(--easing), border-color .25s var(--easing);
+  }
+  .btn-catalog:hover { background: var(--green); color: var(--paper); border-color: var(--green); }
+  .btn-catalog svg { width: 15px; height: 15px; flex-shrink: 0; transition: transform .3s var(--easing); }
+  .btn-catalog:hover svg { transform: translateY(2px); }
 
   /* Mobile navigation — CSS-only hamburger (checkbox toggle) */
   .nav-toggle { display: none; }
   .nav-cb { display: none; }
-  @media (max-width: 960px) {
+  @media (max-width: 1180px) {
     .header-track {
       grid-template-columns: 1fr auto;
       height: auto;
@@ -263,6 +276,19 @@
     .nav-cb:checked ~ .header-actions .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-cb:checked ~ .header-actions .nav-toggle span:nth-child(2) { opacity: 0; }
     .nav-cb:checked ~ .header-actions .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+  /* Slim band: horizontal nav is tight here — hide the (non-functional) lang
+     toggle, make the catalog button icon-only, and tighten nav padding so the
+     full menu fits without wrapping. Bilingual "詢價 Inquiry" CTA is preserved. */
+  @media (max-width: 1440px) {
+    .lang-switch { display: none; }
+    .btn-catalog { padding: 10px; gap: 0; }
+    .btn-catalog .bc-label { display: none; }
+    .nav a { padding: 10px 11px; }
+  }
+  @media (max-width: 600px) {
+    .btn-catalog { padding: 10px; gap: 0; }
+    .btn-catalog .bc-label { display: none; }
   }
   @media (max-width: 420px) {
     .brand img { width: 140px; }
@@ -965,12 +991,12 @@
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: drop-shadow(0 16px 36px rgba(0,0,0,.55));
+    filter: brightness(1.15) drop-shadow(0 16px 36px rgba(0,0,0,.55));
     transition: filter .35s, transform .35s;
   }
   /* Front product glows green so it reads as the highlight */
   .ps-prod.is-front .ps-prod-inner img {
-    filter: drop-shadow(0 18px 40px rgba(107,255,110,.45)) drop-shadow(0 4px 14px rgba(0,0,0,.5));
+    filter: brightness(1.15) drop-shadow(0 18px 40px rgba(107,255,110,.45)) drop-shadow(0 4px 14px rgba(0,0,0,.5));
   }
 
   .ps-prod-inner .ps-label {
@@ -988,7 +1014,7 @@
   /* Hover: extra glow on the front product */
   .ps-prod.is-front:hover .ps-prod-inner img {
     transform: scale(1.05);
-    filter: drop-shadow(0 28px 50px rgba(107,255,110,.5));
+    filter: brightness(1.15) drop-shadow(0 28px 50px rgba(107,255,110,.5));
   }
   .ps-prod.is-front:hover .ps-prod-inner .ps-label { color: var(--green); }
 
@@ -1210,62 +1236,6 @@
     color: rgba(247,246,241,.6);
   }
   .catalog-card .alt-link:hover { color: #6BFF6E; }
-
-  /* ============================================================
-     FLOATING ACTION BUTTON (PDF download — appears on scroll)
-     ============================================================ */
-  .pdf-fab {
-    position: fixed;
-    right: clamp(16px, 2.5vw, 32px);
-    bottom: clamp(16px, 2.5vw, 32px);
-    z-index: 60;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 18px 14px 14px;
-    background: var(--ink);
-    color: var(--paper);
-    border: 1px solid var(--ink);
-    font-family: 'Bricolage Grotesque','Noto Sans TC', sans-serif;
-    font-size: 13.5px;
-    font-weight: 600;
-    letter-spacing: -.005em;
-    cursor: pointer;
-    box-shadow: 0 18px 40px -16px rgba(14,20,16,.55);
-    transform: translateY(120%);
-    opacity: 0;
-    transition: transform .45s var(--easing), opacity .35s var(--easing), background .25s var(--easing);
-  }
-  .pdf-fab.visible {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  .pdf-fab:hover { background: var(--green); border-color: var(--green); }
-  .pdf-fab .fab-ico {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    background: #6BFF6E;
-    color: var(--ink);
-    display: grid; place-items: center;
-    flex-shrink: 0;
-    transition: transform .35s var(--easing);
-  }
-  .pdf-fab:hover .fab-ico { transform: translateY(2px); }
-  .pdf-fab .fab-tag {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: rgba(247,246,241,.6);
-    display: block;
-    line-height: 1;
-    margin-bottom: 3px;
-  }
-  .pdf-fab:hover .fab-tag { color: rgba(247,246,241,.85); }
-  @media (max-width: 540px) {
-    .pdf-fab { padding: 10px 14px 10px 10px; font-size: 12px; }
-    .pdf-fab .fab-ico { width: 26px; height: 26px; }
-  }
 
   /* ============================================================
      Section: Capabilities / Spirit (6 pillars)
@@ -1986,10 +1956,14 @@
       <button class="lang-switch">
         <span class="on">中</span><span>/</span><span>EN</span>
       </button>
-      <button class="btn-cta">
+      <button class="btn-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
         詢價 Inquiry
         <span class="arrow">→</span>
       </button>
+      <a class="btn-catalog" href="pdf/YesWay 32G FlatCable_CATALOUGE_V250509.pdf" target="_blank" rel="noopener" title="查看產品型錄" aria-label="開啟產品型錄 PDF">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="bc-label">查看產品型錄</span>
+      </a>
       <label for="nav-cb" class="nav-toggle" aria-label="選單 Menu"><span></span><span></span><span></span></label>
     </div>
   </div>
@@ -2007,7 +1981,7 @@
   <article class="hc-slide active" data-slide="0">
     <div class="hc-scene">
       <span class="hc-tag"><span class="num">01 ·</span> AI Server / GPU</span>
-      <img src="images/banner/Gen6_M2_Cable_AI_Server.png" alt="高速 Gen.6 M.2 Cable 應用於 AI 伺服器與 GPU 運算平台" />
+      <img src="images/banner/Gen6_M2_Cable_AI_Server.jpg" alt="高速 Gen.6 M.2 Cable 應用於 AI 伺服器與 GPU 運算平台" fetchpriority="high" decoding="async" />
     </div>
     <div class="hc-copy">
       <div class="hc-copy-inner">
@@ -2041,7 +2015,7 @@
   <article class="hc-slide" data-slide="1">
     <div class="hc-scene">
       <span class="hc-tag"><span class="num">02 ·</span> Medical / 行動醫療</span>
-      <img src="images/banner/Key_A_20M_typeC_20G_Cable_Medical.png" alt="Key A 20M 內轉外 USB Type-C 20G Cable 應用於醫療影像與病患監測" />
+      <img src="images/banner/Key_A_20M_typeC_20G_Cable_Medical.jpg" alt="Key A 20M 內轉外 USB Type-C 20G Cable 應用於醫療影像與病患監測" fetchpriority="low" decoding="async" />
     </div>
     <div class="hc-copy">
       <div class="hc-copy-inner">
@@ -2075,7 +2049,7 @@
   <article class="hc-slide" data-slide="2">
     <div class="hc-scene">
       <span class="hc-tag"><span class="num">03 ·</span> eSports / Gaming</span>
-      <img src="images/banner/PCIe_Gen5_Gaming.png" alt="PCIe Gen.5 Cable 應用於高效能電競主機與顯示卡" />
+      <img src="images/banner/PCIe_Gen5_Gaming.jpg" alt="PCIe Gen.5 Cable 應用於高效能電競主機與顯示卡" fetchpriority="low" decoding="async" />
     </div>
     <div class="hc-copy">
       <div class="hc-copy-inner">
@@ -3091,19 +3065,6 @@
   </div>
 </footer>
 
-<!-- ============================================================
-     PDF FAB (floating action button — PDF download)
-============================================================ -->
-<button class="pdf-fab" id="pdf-fab" type="button" aria-label="下載 Yes Way 產品介紹 PDF">
-  <span class="fab-ico">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-  </span>
-  <span>
-    <span class="fab-tag">CATALOG · PDF</span>
-    下載產品型錄
-  </span>
-</button>
-
 <script>
   // simple reveal-on-scroll
   const io = new IntersectionObserver((entries) => {
@@ -3186,41 +3147,15 @@
   })();
 
   // ============================================================
-  // PDF DOWNLOAD — FAB visibility + click handler (catalog + FAB share one handler)
+  // PDF DOWNLOAD — catalog section download button
   // ============================================================
   (function () {
-    const fab = document.getElementById('pdf-fab');
-    const carousel = document.getElementById('hero-carousel');
     const catalogBtn = document.getElementById('catalog-download');
-    if (!fab) return;
-
-    // Show FAB once the user has scrolled past the carousel (or 500px on small screens)
-    function updateFab() {
-      const threshold = carousel ? carousel.offsetHeight * 0.6 : 500;
-      if (window.scrollY > threshold) fab.classList.add('visible');
-      else fab.classList.remove('visible');
-    }
-    window.addEventListener('scroll', updateFab, { passive: true });
-    window.addEventListener('resize', updateFab);
-    updateFab();
-
-    // Shared download handler — replace href / fetch when real PDF is ready
-    function triggerDownload(e) {
+    if (!catalogBtn) return;
+    catalogBtn.addEventListener('click', function (e) {
       e.preventDefault();
-      // Smooth-scroll FAB clicks to the catalog section so user sees full context first
-      if (e.currentTarget === fab) {
-        const target = document.getElementById('catalog');
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          return;
-        }
-      }
-      // Download the catalog PDF
       window.location.href = 'pdf/YesWay 32G FlatCable_CATALOUGE_V250509.pdf';
-    }
-
-    fab.addEventListener('click', triggerDownload);
-    if (catalogBtn) catalogBtn.addEventListener('click', triggerDownload);
+    });
   })();
 
   /* ============================================================
@@ -3267,7 +3202,7 @@
 
     function frame() {
       if (visible && !paused && !mqMobile.matches) {
-        angle = (angle + 0.18) % 360;  // ~33s per full revolution
+        angle = (angle + 0.075) % 360;  // ~80s per full revolution (slowed so each product stays ~3-5s longer)
       }
 
       const radius = getRadius();
