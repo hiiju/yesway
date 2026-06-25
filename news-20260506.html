@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>PCIe 6.0 與 7.0 高速互聯新世代：迎接 128 GT/s 時代 — Yes Way 高位企業</title>
+<meta name="description" content="PCIe 6.0（64 GT/s）與 PCIe 7.0（128 GT/s）全面採用 PAM4 訊號技術。高位企業（Yes Way）解析 PAM4 時代的電氣要求、通道設計挑戰，以及高速纜線（CopprLink）如何成為突破關鍵。" />
+<meta name="keywords" content="PCIe 6.0, PCIe 7.0, PAM4, 128 GT/s, CopprLink, 高速纜線, 訊號完整性, 高頻 Cable Assembly, 高位企業, Yes Way" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="container top-bar-track">
+    <div class="top-bar-left">
+      <span class="pulse"></span>
+      <span>COMPUTEX 2026 / 06.02 — 06.05</span>
+      <span class="sep">/</span>
+      <span>TPE 南港展覽館 2館 1F</span>
+      <span class="sep">/</span>
+      <a href="news.html#computex-2026">攤位 Q1334C →</a>
+    </div>
+    <div class="top-bar-right">
+      <span>EST. 1992</span>
+      <span class="sep">/</span>
+      <span>MADE IN TAIWAN · 三峽</span>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="site-header">
+  <div class="container header-track">
+    <a class="brand" href="index.html">
+      <img src="images/logo/logo-yesway-green.svg" alt="Yes Way 高位企業" />
+    </a>
+    <input type="checkbox" id="nav-cb" class="nav-cb" hidden />
+    <nav><ul class="nav">
+      <li><a href="index.html">首頁</a></li>
+      <li><a href="about.html">關於高位</a></li>
+      <li class="has-sub"><a href="quality.html">品質與技術</a></li>
+      <li class="has-sub"><a href="products.html">產品介紹</a></li>
+      <li><a href="news.html" class="active">最新消息</a></li>
+      <li><a href="esg.html">ESG</a></li>
+      <li><a href="contact.html">聯絡我們</a></li>
+    </ul></nav>
+    <div class="header-actions">
+      <button class="lang-switch"><span class="on">中</span><span>/</span><span>EN</span></button>
+      <button class="btn-cta" onclick="location.href='contact.html#inquiry-form'">詢價 Inquiry <span class="arrow">→</span></button>
+      <a class="btn-catalog" href="pdf/YesWay 32G FlatCable_CATALOUGE_V250509.pdf" target="_blank" rel="noopener" title="查看產品型錄" aria-label="開啟產品型錄 PDF">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="bc-label">查看產品型錄</span>
+      </a>
+      <label for="nav-cb" class="nav-toggle" aria-label="選單 Menu"><span></span><span></span><span></span></label>
+    </div>
+  </div>
+</header>
+
+<!-- Article hero -->
+<div class="article-hero">
+  <img src="images/news/20260506.jpg" alt="PCIe 6.0 與 PCIe 7.0 高速互聯與 PAM4 訊號技術" />
+</div>
+
+<article class="article-wrap">
+  <nav class="article-breadcrumb">
+    <a href="index.html">HOME</a><span class="sep">/</span>
+    <a href="news.html">最新消息 NEWS</a><span class="sep">/</span>
+    <span>PCIe 6.0 與 7.0 新世代</span>
+  </nav>
+
+  <div class="article-meta">
+    <span class="tag">TECH</span>
+    <span>2026.05.06</span>
+    <span>·</span>
+    <span>技術文章 / INSIGHT</span>
+  </div>
+
+  <h1 class="article-title">PCIe 6.0 與 PCIe 7.0 高速互聯新世代：迎接 <em>128 GT/s</em> 時代的挑戰與機會</h1>
+
+  <p class="article-lede">
+    電子製造業正加速邁入高速互聯的新紀元。PCIe 6.0（64 GT/s）與即將到來的 PCIe 7.0（128 GT/s）已全面採用 PAM4 訊號技術，在維持自 PCIe 1.x 以來完整向下相容性的同時，為資料中心、AI 加速器、高效能運算（HPC）以及伺服器平台帶來指數級的頻寬提升。這波技術演進將大幅強化 AI 訓練與大規模運算的資料傳輸效率。
+  </p>
+
+  <div class="article-body">
+    <h2>PAM4 時代的核心電氣要求</h2>
+    <p>新一代 PCIe 規格在可靠性上設定了極高標準，以確保在高速傳輸下仍能維持穩定效能。主要重點包括：</p>
+    <ul>
+      <li>極低的位元錯誤率（BER）</li>
+      <li>傳送端與接收端總延遲增加控制在極低水準</li>
+      <li>優異的系統故障率（FIT Rate），特別適合嚴苛的伺服器應用</li>
+    </ul>
+    <p>PCIe 7.0 對通道頻寬的需求較前一代提升約兩倍，因此在 Nyquist 頻率下的 PCB 低損耗表現、訊號等化技術以及接收端補償能力都成為關鍵。規範中包含先進的傳送端等化（例如多 Tap Tx）、精準抖動控制，以及具備 CTLE、FFE 與 DFE 等組合的先進接收器架構，以因應高速傳輸下的訊號劣化。</p>
+
+    <h2>通道設計面臨的嚴峻挑戰</h2>
+    <p>轉向 PAM4 訊號雖然能在相同 Nyquist 頻率下倍增資料率，但也帶來振幅降低、訊噪比（SNR）劣化以及時序裕度縮減等挑戰。為確保訊號完整性，業界需嚴格達成 Gray Coding、Tx Precoding、高 SNDR 以及優異的線性度要求。</p>
+    <p>關鍵通道設計參數包括：</p>
+    <ul>
+      <li>高頻下的損耗預算嚴格控管</li>
+      <li>極短的 Via 殘段長度限制</li>
+      <li>連接器在高頻環境中的低損耗表現</li>
+      <li>參考時鐘抖動的大幅改善</li>
+    </ul>
+    <p>這些要求對 PCB 佈線、材料選擇以及整體系統整合提出更高標準，也凸顯出傳統板上走線在長距離高速傳輸時的限制。</p>
+
+    <h2>高速纜線成為突破關鍵</h2>
+    <p>為有效克服 PCB 損耗對通道長度的限制，PCIe 標準組織已積極推動銅纜解決方案，涵蓋內部與外部 CopprLink™ 規格，適用於 PCIe 5.0/6.0，並持續延伸至 PCIe 7.0。同時，光學 PCIe 連結標準的發展也正加速進行，以滿足更長距離、低延遲與高頻寬的應用需求。</p>
+    <p>這些纜線解決方案不僅能延長傳輸距離，更能維持優異的訊號品質，成為建構新一代 AI 與資料中心基礎設施不可或缺的技術。</p>
+    <p><strong>作為專業電腦高頻 Cable Assembly 製造商，我們長期深耕高速互聯領域，具備豐富經驗為客戶提供符合 PCIe 6.0 與 PCIe 7.0 嚴格電氣要求的客製化纜線解決方案。</strong> 我們專注於低損耗材料選用、精密阻抗控制、反射與串擾最小化，以及完整的高量產（HVM）測試驗證流程，確保每一條纜線都能在嚴苛的高速環境中穩定運作。</p>
+
+    <h2>把握下一代高速互聯商機</h2>
+    <p>PCIe 6.0 與 7.0 的規格演進，對整個產業而言既是技術挑戰，更是重要的成長契機。具備低損耗材料、高精度製程、優秀連接器整合能力以及系統級訊號完整性優化的廠商，將在這波浪潮中脫穎而出。</p>
+    <p>我們持續投入研發資源，優化高頻 Cable Assembly 的材料、結構設計與製造工藝，致力為全球資料中心與 AI 基礎建設提供可靠且高性能的互聯解決方案。無論是內部高速纜線、外部擴展互聯，還是針對特定應用的客製化產品，我們都能提供專業支援。</p>
+    <p><strong>迎接 128 GT/s 時代的到來，我們已做好準備。</strong>歡迎與我們聯繫，一起打造支援下一代 PCIe 高速互聯的頂尖解決方案，共同掌握 AI 與高效能運算的未來商機。</p>
+  </div>
+
+  <div class="article-foot">
+    <a class="article-back" href="news.html"><span class="arrow">←</span> 回到最新消息</a>
+    <a class="btn-cta" href="contact.html#inquiry-form">詢價 Inquiry <span class="arrow">→</span></a>
+  </div>
+</article>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo/logo-yesway-white.svg" alt="Yes Way" />
+        <p>高位企業有限公司<br/>Yes Way Enterprise Corporation</p>
+        <p style="margin-top:14px; font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(247,246,241,.5);letter-spacing:.06em;">
+          新北市三峽區介壽路一段318巷21號<br/>
+          T &nbsp;886-2-2673-5492<br/>
+          F &nbsp;886-2-2673-3904<br/>
+          統編 &nbsp;86973811
+        </p>
+      </div>
+      <div>
+        <h5>SITE MAP</h5>
+        <ul>
+          <li><a href="index.html">首頁</a></li>
+          <li><a href="about.html">關於高位</a></li>
+          <li><a href="quality.html">品質與技術</a></li>
+          <li><a href="products.html">產品介紹</a></li>
+          <li><a href="news.html">最新消息</a></li>
+          <li><a href="esg.html">ESG</a></li>
+          <li><a href="contact.html">聯絡我們</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>PRODUCT LINES</h5>
+        <ul>
+          <li><a href="products.html?cat=cable-assembly">Cable Assembly 線束加工</a></li>
+          <li><a href="products.html?cat=pcb-assembly">PCB Assembly 電路板組裝</a></li>
+          <li><a href="products.html?cat=ai-gpu-servers">AI / GPU Servers</a></li>
+          <li><a href="products.html?cat=server-storage-pc">Server &amp; Storage / PC</a></li>
+          <li><a href="products.html?cat=cable-diy-tooling">電纜 DIY 工具</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>CONTACT</h5>
+        <ul>
+          <li>銷售諮詢 <a href="mailto:sales@yesway.com.tw">sales@yesway.com.tw</a></li>
+          <li>生產據點：新北 · 三峽</li>
+          <li><a href="contact.html">在線詢問表單 →</a></li>
+        </ul>
+        <h5 style="margin-top:24px;">FOLLOW</h5>
+        <ul style="display:flex;gap:14px;">
+          <li><a href="#">FB</a></li>
+          <li><a href="#">IG</a></li>
+          <li><a href="#">LINE</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 YES WAY ENTP. CORP. — ALL RIGHTS RESERVED</span>
+      <div class="seo">
+        <span>COMPUTEX 2026</span><span>·</span>
+        <span>PCIe Gen6 BIRT</span><span>·</span>
+        <span>ISO 14001</span><span>·</span>
+        <span>AI Server</span><span>·</span>
+        <span>MCIO</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

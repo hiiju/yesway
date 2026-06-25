@@ -364,14 +364,38 @@
 
   .news-item {
     background: var(--paper);
-    padding: 32px 28px 28px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    min-height: 280px;
+    overflow: hidden;
     transition: background .25s var(--easing);
   }
   .news-item:hover { background: var(--paper-2); }
+  .news-item .nc-img {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--paper-2);
+  }
+  .news-item .nc-img img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 30%;
+    transition: transform .5s var(--easing);
+  }
+  .news-item:hover .nc-img img { transform: scale(1.05); }
+  /* Placeholder image block for posts without a photo yet */
+  .news-item .nc-img.ph {
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--ink) 0%, var(--green-deep) 160%);
+  }
+  .news-item .nc-img.ph span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+    color: rgba(247,246,241,.6);
+  }
+  .news-item .nc-body {
+    padding: 24px 26px 26px;
+    display: flex; flex-direction: column; gap: 14px;
+    flex: 1;
+  }
   .news-item .meta {
     display: flex; gap: 12px; align-items: center;
     font-family: 'JetBrains Mono', monospace;
@@ -412,16 +436,9 @@
     display: inline-flex; gap: 8px; align-items: center;
   }
   .news-item .read::after { content: "→"; color: var(--green); }
-
-  .news-item.empty {
-    background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 12px, var(--paper-2) 12px, var(--paper-2) 24px);
-    color: var(--steel);
-    cursor: default;
-  }
-  .news-item.empty:hover { background: repeating-linear-gradient(45deg, var(--paper), var(--paper) 12px, var(--paper-2) 12px, var(--paper-2) 24px); }
-  .news-item.empty .meta { color: var(--steel); }
-  .news-item.empty h4 { color: var(--steel); font-style: normal; }
-  .news-item.empty p { color: var(--steel); }
+  /* "暫留" (no article yet) cards — keep label but no arrow */
+  .news-item .read.na { color: var(--steel); }
+  .news-item .read.na::after { content: ""; }
 
   /* CTA */
   .cta {
@@ -549,125 +566,91 @@
 ============================================================ -->
 <section class="news-filter">
   <div class="container news-filter-track">
-    <button class="nf-chip active" data-filter="all">全部 <span class="count">3</span></button>
-    <button class="nf-chip" data-filter="exhibition">展覽 Exhibition <span class="count">1</span></button>
-    <button class="nf-chip" data-filter="tech">技術 Tech <span class="count">1</span></button>
-    <button class="nf-chip" data-filter="esg">ESG <span class="count">1</span></button>
+    <button class="nf-chip active" data-filter="all">全部 <span class="count">5</span></button>
+    <button class="nf-chip" data-filter="exhibition">展覽 Exhibition <span class="count">2</span></button>
+    <button class="nf-chip" data-filter="tech">技術 Tech <span class="count">3</span></button>
   </div>
 </section>
 
 <!-- ============================================================
-     FEATURED ARTICLE — COMPUTEX 2026
-============================================================ -->
-<section class="news-featured" id="computex-2026" data-cat="exhibition">
-  <div class="container">
-    <article class="article-card">
-      <div class="a-img">
-        <img src="images/index/computex-2026.jpg" alt="高位企業 COMPUTEX 2026 參展" />
-      </div>
-      <div class="a-body">
-        <div class="a-meta">
-          <span class="tag">EXHIBITION</span>
-          <span>2026.06.02 — 06.05</span>
-          <span>·</span>
-          <span>COMPUTEX</span>
-        </div>
-        <h2>高位企業參展 <em>COMPUTEX 2026</em><br/>展示 AI 伺服器高速傳輸解決方案</h2>
-        <p class="lede">
-          高位企業將於 2026 / 06 / 02 — 06 / 05 亮相 COMPUTEX 台北國際電腦展！
-          響應年度主題「AI Together」，我們現場展示專為 AI 伺服器與高效能運算（HPC）打造的尖端連接技術。
-        </p>
-
-        <ul class="bullets">
-          <li>
-            <strong>AI 核心傳輸</strong>
-            領先佈局 MCIO（4i/8i）、PCIe Gen5（32GT/s）與 SlimSAS（SFF-8654）高速線材加工。
-          </li>
-          <li>
-            <strong>次世代規格</strong>
-            全面支援 USB 4.0、CXL 及 SFF-TA-1033 等前瞻規格設計。
-          </li>
-          <li>
-            <strong>研發設計實力</strong>
-            提供 AI 伺服器背板 PCB 設計、轉接板開發至精密線束加工的一站式客製化 OEM/ODM 服務。
-          </li>
-          <li>
-            <strong>精密製造工藝</strong>
-            承接高難度精密線束加工，堅持高品質台灣製造標準。
-          </li>
-        </ul>
-
-        <div class="venue">
-          <div class="v-item">
-            <div class="k">地點 / Venue</div>
-            <div class="v">南港展覽館 2館 1樓</div>
-          </div>
-          <div class="v-item">
-            <div class="k">攤位 / Booth</div>
-            <div class="v">Q1334C</div>
-          </div>
-          <div class="v-item">
-            <div class="k">時間 / Hours</div>
-            <div class="v">09:30 — 17:30<br/><span class="mono" style="font-size:11px;opacity:.65;">最終日至 16:30</span></div>
-          </div>
-        </div>
-
-        <p class="lede" style="margin-top:6px;">
-          歡迎預約現場技術交流，或<a href="pdf/YesWay 32G FlatCable_CATALOUGE_V250509.pdf" style="color:inherit;text-decoration:underline;font-weight:600;">查看完整產品型錄 PDF</a>。
-        </p>
-
-        <a class="a-cta" href="mailto:sales@yesway.com.tw?subject=%5BComputex%202026%5D%20%E9%A0%90%E7%B4%84%E7%8F%BE%E5%A0%B4%E6%8A%80%E8%A1%93%E4%BA%A4%E6%B5%81%20%2F%20%E7%B4%A2%E5%8F%96%E5%9E%8B%E9%8C%84">
-          📧 sales@yesway.com.tw
-          <span>→</span>
-        </a>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- ============================================================
-     OTHER NEWS — list
+     ALL NEWS — image + text cards (click → article page)
 ============================================================ -->
 <section class="news-list-section">
   <div class="container">
     <div class="news-list-head">
       <div>
-        <span class="eyebrow">NEWS ARCHIVE</span>
-        <h3>更多<em>消息</em></h3>
+        <span class="eyebrow">ALL NEWS</span>
+        <h3>所有<em>消息</em></h3>
       </div>
-      <span class="news-list-count">— 2 篇 / TOTAL</span>
+      <span class="news-list-count">— 5 篇 / TOTAL</span>
     </div>
 
     <div class="news-grid">
 
-      <article class="news-item" data-cat="tech">
-        <div class="meta">
-          <span class="tag">TECH</span>
-          <span>2026.04.18</span>
+      <a class="news-item" data-cat="exhibition" href="news-20260602.html">
+        <div class="nc-img"><img src="images/news/20260602-1.jpg" alt="COMPUTEX 2026 高位企業展位高速傳輸線材展示" loading="lazy" /></div>
+        <div class="nc-body">
+          <div class="meta">
+            <span class="tag">EXHIBITION</span>
+            <span>2026.06.02</span>
+          </div>
+          <h4>COMPUTEX 2026 高位企業：領航高速傳輸，全球客戶目光焦點</h4>
+          <p>以 PCIe Gen.6 / Gen.5 PAM4 &amp; NRZ 與 USB 4.0/3.2 高速線材方案吸引全球專業買家駐足，展品全數符合 RoHS &amp; Halogen Free 標準。</p>
+          <span class="read">展覽報導</span>
         </div>
-        <h4>MCIO i8 線材通過 PCIe Gen6 BIRT 驗證</h4>
-        <p>新一代 64 GT/s 高速線組完成位元錯誤率 (BIRT) 測試，正式量產供應 AI 伺服器與資料中心客戶。</p>
-        <span class="read">技術文章</span>
+      </a>
+
+      <article class="news-item" id="computex-2026" data-cat="exhibition">
+        <div class="nc-img"><img src="images/index/computex-2026.jpg" alt="高位企業 COMPUTEX 2026 參展預告" loading="lazy" /></div>
+        <div class="nc-body">
+          <div class="meta">
+            <span class="tag">EXHIBITION</span>
+            <span>2026.06.02 — 06.05</span>
+          </div>
+          <h4>高位企業參展 COMPUTEX 2026：展示 AI 伺服器高速傳輸解決方案</h4>
+          <p>響應「AI Together」主題，現場展示 MCIO（4i/8i）、PCIe Gen5（32GT/s）、SlimSAS 高速線材與一站式 OEM/ODM 服務。攤位：南港展覽館 2館 1樓 Q1334C。</p>
+          <span class="read na">展覽預告</span>
+        </div>
       </article>
 
-      <article class="news-item" data-cat="esg">
-        <div class="meta">
-          <span class="tag">ESG</span>
-          <span>2026.03.10</span>
+      <a class="news-item" data-cat="tech" href="news-20260506.html">
+        <div class="nc-img"><img src="images/news/20260506.jpg" alt="PCIe 6.0 與 7.0 高速互聯與 PAM4 訊號技術" loading="lazy" /></div>
+        <div class="nc-body">
+          <div class="meta">
+            <span class="tag">TECH</span>
+            <span>2026.05.06</span>
+          </div>
+          <h4>PCIe 6.0 與 7.0 高速互聯新世代：迎接 128 GT/s 時代</h4>
+          <p>PAM4 訊號全面導入，剖析新一代電氣要求、通道設計挑戰，以及 CopprLink 高速纜線如何成為突破關鍵。</p>
+          <span class="read">技術文章</span>
         </div>
-        <h4>取得 ISO 14001 環境管理系統認證</h4>
-        <p>持續推動綠色供應鏈，落實 ESG 永續承諾，朝零廢棄製造目標邁進。</p>
-        <span class="read">永續報告</span>
-      </article>
+      </a>
 
-      <article class="news-item empty">
-        <div class="meta">
-          <span class="tag" style="background:transparent;color:var(--steel);border:1px dashed var(--hair);">COMING SOON</span>
+      <a class="news-item" data-cat="tech" href="news-20260505.html">
+        <div class="nc-img"><img src="images/news/20260505.jpg" alt="Marvell 收購 Celestial AI 光學互聯技術" loading="lazy" /></div>
+        <div class="nc-body">
+          <div class="meta">
+            <span class="tag">TECH</span>
+            <span>2026.05.05</span>
+          </div>
+          <h4>Marvell 戰略收購 Celestial AI：AI 光學互聯的重大躍進</h4>
+          <p>以光子織物（Photonic Fabric）技術推動 AI 系統從 Scale-Out 邁向深度 Scale-Up，重塑高效能運算互聯架構。</p>
+          <span class="read">技術文章</span>
         </div>
-        <h4>更多消息陸續發布中</h4>
-        <p>追蹤高位 (Yes Way) 的最新技術進展、認證里程碑與展覽動態。</p>
-        <span class="read">敬請期待</span>
-      </article>
+      </a>
+
+      <a class="news-item" data-cat="tech" href="news-20260504.html">
+        <div class="nc-img"><img src="images/news/20260504.jpg" alt="光電互聯與矽光子技術應用於 AI 基礎設施" loading="lazy" /></div>
+        <div class="nc-body">
+          <div class="meta">
+            <span class="tag">TECH</span>
+            <span>2026.05.04</span>
+          </div>
+          <h4>電子製造業觀點：光電互聯崛起，重新定義 AI 基礎設施</h4>
+          <p>光電互聯與矽光子技術成為焦點，剖析高頻 Cable Assembly 在光電混合時代的關鍵角色與轉型契機。</p>
+          <span class="read">技術文章</span>
+        </div>
+      </a>
 
     </div>
   </div>
@@ -773,10 +756,9 @@
 </footer>
 
 <script>
-  // News filter chips — toggle visibility by data-cat
+  // News filter chips — toggle card visibility by data-cat
   (function () {
     const chips = document.querySelectorAll('.nf-chip');
-    const featured = document.getElementById('computex-2026');
     const items = document.querySelectorAll('.news-item');
 
     chips.forEach(chip => {
@@ -784,17 +766,7 @@
         const f = chip.dataset.filter;
         chips.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
-
-        // Featured (Computex)
-        if (featured) {
-          featured.style.display = (f === 'all' || f === featured.dataset.cat) ? '' : 'none';
-        }
-        // List items
         items.forEach(it => {
-          if (it.classList.contains('empty')) {
-            it.style.display = (f === 'all') ? '' : 'none';
-            return;
-          }
           it.style.display = (f === 'all' || f === it.dataset.cat) ? '' : 'none';
         });
       });
