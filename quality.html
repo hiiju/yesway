@@ -712,6 +712,62 @@
   .cta-action-row .val { font-size: 17px; font-weight: 500; margin-top: 4px; }
   .cta-action-row .arrow { font-size: 22px; }
 
+  /* ============================================================
+     PM 0628 — R&D capability (Section A) + equipment showcase (Section C)
+     ============================================================ */
+  .q-rd-section { padding: clamp(64px, 8vw, 112px) 0; border-top: 1px solid var(--hair); }
+  .q-sec-head { max-width: 860px; margin-bottom: clamp(40px, 5vw, 64px); }
+  .q-sec-head .eyebrow { margin-bottom: 16px; }
+  .q-sec-head h2 { font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif; font-weight: 500; font-size: clamp(32px, 4.4vw, 56px); line-height: 1.04; letter-spacing: -.02em; margin: 0; color: var(--ink); }
+  .q-sec-head h2 em { font-style: normal; color: var(--green); font-weight: 400; }
+  .q-sec-head .q-sec-intro { margin: 22px 0 0; font-size: clamp(15.5px, 1.1vw, 17px); line-height: 1.85; color: var(--ink-2); max-width: 820px; }
+
+  .q-focus-list { display: flex; flex-direction: column; gap: clamp(40px, 5vw, 72px); }
+  .q-focus { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 64px); align-items: center; }
+  .q-focus:nth-child(even) .qf-img { order: 2; }
+  .qf-img { aspect-ratio: 3 / 2; overflow: hidden; border: 1px solid var(--hair); background: var(--paper-2); }
+  .qf-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--easing); }
+  .q-focus:hover .qf-img img { transform: scale(1.04); }
+  .qf-num { display: inline-flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; letter-spacing: .14em; color: var(--green); margin-bottom: 16px; }
+  .qf-num::before { content: ""; width: 26px; height: 1px; background: var(--green); }
+  .qf-text h3 { font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif; font-weight: 500; font-size: clamp(21px, 2.5vw, 30px); line-height: 1.25; letter-spacing: -.01em; color: var(--ink); margin: 0 0 16px; }
+  .qf-text p { font-size: clamp(15px, 1.05vw, 16.5px); line-height: 1.85; color: var(--ink-2); margin: 0; }
+
+  /* Equipment showcase */
+  .eq-section { padding: clamp(56px, 7vw, 100px) 0; border-top: 1px solid var(--hair); }
+  .eq-section.tint { background: var(--paper-2); }
+  .eq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--hair); border: 1px solid var(--hair); margin-top: clamp(32px, 4vw, 52px); }
+  @media (max-width: 920px) { .eq-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .eq-grid { grid-template-columns: 1fr; } }
+  .eq-card { background: var(--paper); display: flex; flex-direction: column; }
+  .eq-img { aspect-ratio: 4 / 3; background: #fff; display: grid; place-items: center; overflow: hidden; border-bottom: 1px solid var(--hair); }
+  .eq-img img { width: 86%; height: 86%; object-fit: contain; transition: transform .5s var(--easing); }
+  .eq-card:hover .eq-img img { transform: scale(1.05); }
+  .eq-body { padding: 22px 24px 26px; }
+  .eq-name { font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif; font-weight: 500; font-size: 18px; color: var(--ink); margin: 0 0 10px; }
+  .eq-desc { font-size: 13.5px; line-height: 1.72; color: var(--ink-2); margin: 0; }
+
+  .eq-features { display: flex; flex-direction: column; gap: clamp(18px, 2.5vw, 26px); margin-top: clamp(24px, 3vw, 36px); }
+  .eq-feature { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.5fr); gap: clamp(24px, 3.5vw, 48px); align-items: center; border: 1px solid var(--hair); border-left: 3px solid var(--green); background: var(--paper); padding: clamp(24px, 3vw, 40px); }
+  .eq-feature:nth-child(even) .eqf-img { order: 2; }
+  .eqf-img { aspect-ratio: 4 / 3; background: #fff; border: 1px solid var(--hair); display: grid; place-items: center; overflow: hidden; }
+  .eqf-img img { width: 86%; height: 86%; object-fit: contain; }
+  @media (max-width: 760px) { .eq-feature { grid-template-columns: 1fr; } .eq-feature:nth-child(even) .eqf-img { order: 0; } }
+  .eq-feature .eqf-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
+  .eq-feature h3 { font-family: 'Bricolage Grotesque','Noto Sans TC',sans-serif; font-weight: 500; font-size: clamp(20px, 2.2vw, 26px); line-height: 1.25; color: var(--ink); margin: 12px 0 16px; }
+  .eq-feature p { font-size: 14.5px; line-height: 1.8; color: var(--ink-2); margin: 0 0 14px; }
+  .eq-feature p:last-child { margin-bottom: 0; }
+  .eq-feature p strong { color: var(--ink); font-weight: 600; }
+
+  /* Clickable certification badges */
+  .cert-badges { display: flex; flex-wrap: wrap; gap: clamp(16px, 2.4vw, 26px); justify-content: center; }
+  .cert-badge { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 26px 30px; background: var(--paper); border: 1px solid var(--hair); min-width: 156px; transition: transform .3s var(--easing), border-color .3s var(--easing), box-shadow .3s var(--easing); }
+  .cert-badge:hover { transform: translateY(-3px); border-color: var(--green); box-shadow: 0 18px 36px -22px rgba(14,20,16,.4); }
+  .cert-badge img { width: 78px; height: 78px; object-fit: contain; }
+  .cert-badge .cb-label { display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--steel); }
+  .cert-badge:hover .cb-label { color: var(--green); }
+  .certs-note { text-align: center; margin: 26px 0 0; font-size: 13px; color: var(--steel); }
+
 </style>
 </head>
 
@@ -956,22 +1012,189 @@
 </section>
 
 <!-- ============================================================
-     CERTIFICATIONS BAND
+     SECTION A — R&D & engineering capability (PM 0628)
+============================================================ -->
+<section class="q-rd-section" id="rd-capability">
+  <div class="container">
+    <div class="q-sec-head">
+      <span class="eyebrow">RESEARCH &amp; ENGINEERING · 研發與技術能力</span>
+      <h2>讓速度與穩定，<em>同時成立</em></h2>
+      <p class="q-sec-intro">從精密電氣特性驗證、批次品質追溯，到敏捷研發與客製化環境耐受設計——高位以可被數據檢驗的方式，強化研發與技術能力的每一個環節。</p>
+    </div>
+    <div class="q-focus-list">
+      <article class="q-focus">
+        <div class="qf-img"><img src="images/quality/eq-electrical-verification.jpg" alt="精密電氣特性驗證 — TDR / VNA 高頻量測" loading="lazy" /></div>
+        <div class="qf-text">
+          <span class="qf-num">01</span>
+          <h3>精密電氣特性驗證，確保傳輸穩定</h3>
+          <p>採用工業級標準進行嚴格把關。透過 TDR（時域反射儀）精確偵測結構阻抗，分析潛在路徑缺陷；利用 VNA（向量網路分析儀）深入量測插入損耗（IL）、回波損耗（RL）與近端串擾（NEXT），確保在高頻環境下維持極致的訊號完整性。</p>
+        </div>
+      </article>
+      <article class="q-focus">
+        <div class="qf-img"><img src="images/quality/eq-traceability.jpg" alt="完善的批次品質追溯與 BIRT 履歷" loading="lazy" /></div>
+        <div class="qf-text">
+          <span class="qf-num">02</span>
+          <h3>完善的批次品質追溯機制</h3>
+          <p>高位落實完整的 BIRT（批次驗證機制），不僅僅是產品的品質保證，更為每一批次量產產品保留完整的品質履歷。我們確保從設計到量產，每一項交付物都具備高度的電氣穩定度與長期的系統可靠性。</p>
+        </div>
+      </article>
+      <article class="q-focus">
+        <div class="qf-img"><img src="images/quality/eq-rd-speed.jpg" alt="敏捷研發：從快速打樣到產品驗證" loading="lazy" /></div>
+        <div class="qf-text">
+          <span class="qf-num">03</span>
+          <h3>敏捷的研發速度，縮短上市時程</h3>
+          <p>憑藉多年在電子連接器領域的專業底蘊，我們持續投入高頻電路技術的創新。從原型設計到產品驗證，高位具備高效率的技術對接能力，協助客戶顯著縮短開發週期，加速產品搶佔市場先機。</p>
+        </div>
+      </article>
+      <article class="q-focus">
+        <div class="qf-img"><img src="images/quality/eq-customization.jpg" alt="客製化與高溫高震動環境耐受設計" loading="lazy" /></div>
+        <div class="qf-text">
+          <span class="qf-num">04</span>
+          <h3>高度彈性的客製化與環境耐受設計</h3>
+          <p>無論是複雜的特殊線束佈局，還是嚴格的伺服器空間限制，我們都能提供客製化解決方案。此外，我們的產品設計均考量極端運作條件，確保在高溫、高震動等嚴苛環境下，依然能保持穩定的物理結構與卓越性能。</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION C1 — Quality verification equipment
+============================================================ -->
+<section class="eq-section" id="quality-verification">
+  <div class="container">
+    <div class="q-sec-head">
+      <span class="eyebrow">QUALITY VERIFICATION · 品質驗證</span>
+      <h2>ISO 9001 認證・<em>精密驗證設備</em></h2>
+      <p class="q-sec-intro">台灣製造高速線材 OEM／ODM 品質保證。高位企業建立完整的品質驗證體系，從微觀缺陷分析到耐候耐久測試，每一台設備都守護著出貨線材的可靠性。以下四台驗證設備構成高位的品質把關基礎設施——從微米級缺陷到長時耐候，全面守護線材可靠性，確保產品在嚴苛的工業環境中長期穩定運作。</p>
+    </div>
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-ccd-microscope.png" alt="4K CCD 顯微鏡" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">4K CCD 顯微鏡</h4><p class="eq-desc">精密品質檢驗、微觀缺陷分析與尺寸量測。將極細微的導體、絕緣層或端子放大，4K 的超高解析度，確保產品在微米等級下符合嚴格的工業標準。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-salt-spray.png" alt="鹽水噴霧測試機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">鹽水噴霧測試機</h4><p class="eq-desc">人工模擬加速環境，評估線材及其金屬部件（如端子、導體、編織網）的抗腐蝕能力。能在數十至數百小時內，測出線材在極端氣候下的防鏽與耐蝕性，確保產品質量符合國際標準。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-insertion-force.png" alt="自動插拔力試驗機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">自動插拔力試驗機</h4><p class="eq-desc">評估線材與連接器（如 USB、Type-C、HDMI 等）的耐用度與物理特性。透過電腦軟體設定參數，精準測量公母端插拔時的瞬間力值與位移變化，確保線材在頻繁使用下不會損壞或接觸不良。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-2-5d-measure.png" alt="2.5D 尺寸量測機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">2.5D 尺寸量測機</h4><p class="eq-desc">結合高解析度光學鏡頭與精密位移台的非接觸式量測設備。主要用於精密檢測端子、連接器尺寸、線徑（外徑）、剝線長度及線材絕緣層厚度，確保產品符合公差要求。</p></div>
+      </div>
+    </div>
+
+    <div class="eq-features">
+      <div class="eq-feature">
+        <div class="eqf-img"><img src="images/quality/eq-vna.png" alt="向量分析儀 VNA — S 參數與 TDR 量測" loading="lazy" /></div>
+        <div class="eqf-body">
+          <span class="eqf-tag">Vector Network Analyzer</span>
+          <h3>向量分析儀（VNA）</h3>
+          <p>網路向量分析儀（VNA）是線材廠從「傳統製造」升級「高階研發」的關鍵。它透過精準量測 S 參數與時域反射（TDR），全面優化生產流程。</p>
+          <p><strong>極致品質控管：</strong>能像照 X 光般透視線材每公分的阻抗變化，精確定位「焊接過熱」或「壓接變形」等製程缺陷，有效消除通道串擾與訊號衰減。</p>
+          <p><strong>核心技術升級：</strong>擺脫盲目試錯，改以數位化數據指導模具開發與材料挑選；並能提供量產驗證報告（HVM），與客戶對接系統級的高頻補償設計。VNA 讓製程從「靠經驗」轉為「靠數據」，是企業跨入 AI 伺服器高速傳輸市場（如 PCIe 6.0／7.0）不可或缺的品質守門員。</p>
+        </div>
+      </div>
+      <div class="eq-feature">
+        <div class="eqf-img"><img src="images/quality/eq-hitachi-xrf.png" alt="Hitachi EA1000VX 桌上型 XRF 螢光分析儀" loading="lazy" /></div>
+        <div class="eqf-body">
+          <span class="eqf-tag">XRF Analyzer · Hitachi EA1000VX</span>
+          <h3>桌上型螢光分析儀 XRF</h3>
+          <p>Hitachi EA1000VX 桌上型 XRF 分析儀是線材研發、製作與測試不可或缺的品管利器。在線材產線與研發端，它能針對外皮 PVC／橡膠等高分子材料，進行高靈敏度的 RoHS 有害物質（如鉛、鎘）與無鹵素（Cl、Br）非破壞性快速篩檢。</p>
+          <p>同時，儀器配備薄膜 FP 軟體與 1mm 微區準直器，能精準量測細小芯線、銅導體及連接器端子的電鍍層厚度（如鍍金、鎳、錫）與成分比例。其獨家 HHS 專利技術能自動補正線材的圓柱或不規則形狀誤差，大幅提升測試精準度，全面兼顧線材的環保合規性與導電品質。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION C2 — Manufacturing process equipment
+============================================================ -->
+<section class="eq-section tint" id="manufacturing-process">
+  <div class="container">
+    <div class="q-sec-head">
+      <span class="eyebrow">MANUFACTURING PROCESS · 技術與製程</span>
+      <h2>從裁線到射出成型，<em>全製程自主管控</em></h2>
+      <p class="q-sec-intro">高位企業配備完整的線材加工生產設備，涵蓋裁線、剝皮、焊接、防護包覆到射出成型，全製程在台灣新北廠區自主管控。自動化設備的導入不僅提升生產精度，更確保從快速打樣到大規模量產的一致性品質，彈性應對各種規模的訂單需求。</p>
+    </div>
+    <div class="eq-grid">
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-hotbar-welding.png" alt="HotBar 落地式伺服焊接機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">HotBar／落地式伺服焊接機</h4><p class="eq-desc">透過伺服馬達精準控制下壓力，配合脈衝電流瞬間加熱融化銲錫或金屬，實現高拉力、高導電的穩定焊接。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-cutting.png" alt="裁線機（含供料座）" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">裁線機（含供料座）</h4><p class="eq-desc">線材製造與電子線束加工的核心設備，主要用於將各類電纜、排線或導線精準裁切至指定長度，並同步執行剝皮、半剝或絞線等自動化加工，大幅提升生產效率與產品質量。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-stripping.png" alt="剝線機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">剝線機</h4><p class="eq-desc">精準切斷線材並剝除絕緣外皮，確保後續端子壓接或焊接時，導體能穩定傳輸訊號與電力。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-label-printer.png" alt="工業型標籤列印機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">工業型標籤列印機</h4><p class="eq-desc">透過高解析度、高耐候的碳帶與材質，能確保標籤在惡劣環境下不脫落、不褪色，是線材品質控管與符合國際安規（如 UL、CE）的重要工具。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-uv-dispenser.png" alt="UV 點膠機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">UV 點膠機</h4><p class="eq-desc">主要用於端子台與線材焊接點的絕緣防護、連接器灌封固定，以及高速排線的補強。點膠機的精準定量功能搭配紫外線（UV）照射，能在數秒內使膠水硬化，大幅提升線束加工的生產效率與產品良率。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-plastic-dryer.png" alt="塑粒乾燥機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">塑粒乾燥機</h4><p class="eq-desc">強制去除原料中的水分，防止材料因吸濕在後續熔融擠出時產生氣泡、斷線或表面瑕疵。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-acetate-wrapping.png" alt="醋酸纏繞機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">醋酸纏繞機</h4><p class="eq-desc">將醋酸布膠帶（Acetate Cloth Tape）緊密且均勻地纏繞在各類電子線材、線束或電纜上。廣泛應用於線材製造與汽車線束加工，能提供極佳的絕緣、耐高溫與抗干擾保護。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-sleeving.png" alt="自動套網管機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">自動套網管機</h4><p class="eq-desc">自動將 PET、尼龍等編織擴充套管裁切並套入線束中，取代傳統仰賴人工剪裁與手動穿線的繁瑣流程，大幅提升品質與產能。</p></div>
+      </div>
+      <div class="eq-card">
+        <div class="eq-img"><img src="images/quality/eq-injection-molding.png" alt="立式射出成型機" loading="lazy" /></div>
+        <div class="eq-body"><h4 class="eq-name">立式射出成型機</h4><p class="eq-desc">透過將端子或線材線端預先置入模具（埋入射出），機器利用高壓將熔融的塑料注入，完成絕緣包覆與固定成型。垂直重力夾模確保線材與模具精準貼合，能有效避免溢料及包覆不均的問題。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CERTIFICATIONS BAND — clickable cert badges (PM 0628)
 ============================================================ -->
 <section class="certs-band">
   <div class="container">
     <div class="certs-band-head">
-      <span class="eyebrow no-line" style="justify-content:center; display:inline-flex;">CERTIFICATIONS · 品質認證</span>
+      <span class="eyebrow no-line" style="justify-content:center; display:inline-flex;">CERTIFICATIONS · 國際認證 / 專利保護</span>
       <h2>國際認證 / <em>專利保護</em></h2>
     </div>
-    <div class="certs-row">
-      <span class="cert-pill">UL Listed</span>
-      <span class="cert-pill">ISO 9001</span>
-      <span class="cert-pill">ISO 14001</span>
-      <span class="cert-pill">ISO 45001</span>
+    <div class="cert-badges">
+      <a class="cert-badge" href="images/quality/iso-9001-cert.jpg" target="_blank" rel="noopener">
+        <img src="images/quality/iso-9001.png" alt="ISO 9001 品質管理系統認證" />
+        <span class="cb-label">ISO 9001 · 查看證書 →</span>
+      </a>
+      <a class="cert-badge" href="images/quality/iso-14001.jpg" target="_blank" rel="noopener">
+        <img src="images/quality/iso-14001.png" alt="ISO 14001 環境管理系統認證" />
+        <span class="cb-label">ISO 14001 · 查看證書 →</span>
+      </a>
+      <a class="cert-badge" href="images/quality/iso-45001.jpg" target="_blank" rel="noopener">
+        <img src="images/quality/iso-45001.png" alt="ISO 45001 職業安全衛生管理認證" />
+        <span class="cb-label">ISO 45001 · 查看證書 →</span>
+      </a>
+      <a class="cert-badge" href="images/quality/ul-certifications.jpg" target="_blank" rel="noopener">
+        <img src="images/quality/ul-logo.png" alt="UL Listed 安規認證" />
+        <span class="cb-label">UL Listed · 查看文件 →</span>
+      </a>
+    </div>
+    <div class="certs-row" style="margin-top:28px;">
       <span class="cert-pill">RoHS</span>
       <span class="cert-pill">REACH</span>
+      <span class="cert-pill">多國發明專利</span>
     </div>
+    <p class="certs-note">點擊上方認證標章，即可開啟對應的證書文件。</p>
   </div>
 </section>
 
